@@ -10,10 +10,7 @@
     "lint": "eslint src --ext .js,.ts",
     "lint:fix": "eslint src --fix --ext .js,.ts",
     "test": "jest --config jest.config.js",
-    "publish": "npm publish"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",
