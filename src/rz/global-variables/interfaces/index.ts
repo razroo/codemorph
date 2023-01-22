@@ -1,0 +1,1 @@
+export { CodeCmsVariablesToIgnore, PowerUpVariables } from './global-variables.interface';

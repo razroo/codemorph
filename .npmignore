@@ -1,0 +1,8 @@
+.vscode
+node_modules
+.env
+.idea
+lib
+build
+package-lock.json
+yarn-lock

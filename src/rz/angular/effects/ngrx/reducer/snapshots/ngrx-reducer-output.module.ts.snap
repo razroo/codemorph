@@ -1,0 +1,12 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import * as fromBooks from "./snapshots/sample.reducer";
+
+@NgModule({
+  imports: [
+    CommonModule,
+    StoreModule.forFeature(fromTest.TEST_FEATURE_KEY, fromTest.reducer)
+  ],
+  providers: [],
+})
+export class DataAccessBooksModule { }

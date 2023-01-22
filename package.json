@@ -1,0 +1,99 @@
+{
+  "name": "@razroo/razzle",
+  "version": "1.0.0",
+  "description": "Razzle is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.(js|ts)\"",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "eslint src --fix --ext .js,.ts",
+    "test": "jest --config jest.config.js",
+    "publish": "npm publish"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/razroo/razzle"
+  },
+  "keywords": [
+    "razroo",
+    "codemod"
+  ],
+  "author": "Razroo",
+  "license": "RAZROO",
+  "bugs": {
+    "url": "https://github.com/razroo/razzle/issues"
+  },
+  "homepage": "https://github.com/razroo/razzle#readme",
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~13.0.0",
+    "@angular-devkit/build-optimizer": "~0.1300.0",
+    "@angular-devkit/build-webpack": "~0.1300.0",
+    "@angular-devkit/schematics": "~13.0.0",
+    "@angular-eslint/eslint-plugin": "~13.0.1",
+    "@angular-eslint/eslint-plugin-template": "~13.0.1",
+    "@angular-eslint/template-parser": "~13.0.1",
+    "@angular/cli": "~13.0.0",
+    "@angular/common": "^13.0.0",
+    "@angular/compiler": "^13.0.0",
+    "@angular/compiler-cli": "^13.0.0",
+    "@angular/core": "^13.0.0",
+    "@angular/forms": "^13.0.0",
+    "@angular/platform-browser": "^13.0.0",
+    "@angular/platform-browser-dynamic": "^13.0.0",
+    "@angular/router": "^13.0.0",
+    "@angular/service-worker": "^13.0.0",
+    "@angular/upgrade": "^13.0.0",
+    "@angular-devkit/architect": "~0.1300.0",
+    "@angular-devkit/core": "~13.0.0",
+    "@types/jest": "^27.5.2",
+    "@types/tinycolor2": "^1.4.3",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "babel-jest": "^27.4.6",
+    "eslint": "^7.11.0",
+    "eslint-plugin-jest": "^24.1.0",
+    "jest": "^27.0.7",
+    "ts-jest": "^27.1.5",
+    "tsup": "^6.2.3",
+    "typescript": "^4.0.3",
+    "yargs-parser": "20.0.0"
+  },
+  "dependencies": {
+    "@ctrl/tinycolor": "^3.4.1",
+    "chalk": "4.1.0",
+    "ejs": "^3.1.5",
+    "enquirer": "~2.3.6",
+    "fast-glob": "3.2.7",
+    "glob": "^8.0.3",
+    "hast-util-from-parse5": "6.0.1",
+    "hast-util-to-html": "7.1.3",
+    "ignore": "^5.0.4",
+    "json-pointer": "^0.6.2",
+    "json-to-ast": "^2.1.0",
+    "jsonc-parser": "3.0.0",
+    "jsonpath-plus": "^6.0.1",
+    "parse5": "^6.0.1",
+    "path": "^0.12.7",
+    "prettier": "^2.3.0",
+    "query-ast": "^1.0.4",
+    "rxjs": "^6.5.4",
+    "rxjs-for-await": "0.0.2",
+    "scss-parser": "^1.0.5",
+    "semver": "7.3.4",
+    "tmp": "~0.2.1",
+    "to-vfile": "^7.2.3",
+    "ts-morph": "^15.1.0",
+    "tslib": "^2.3.0",
+    "unist-util-visit": "2.0.3",
+    "unist-util-visit-parents": "3.1.1",
+    "yargs-parser": "20.0.0"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}

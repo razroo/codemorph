@@ -1,0 +1,19 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@NgModule({
+  imports: [CommonModule],
+  providers: [{
+    provide: APOLLO_OPTIONS,
+    useFactory: (httpLink: HttpLink) => {
+      return {
+        cache: new InMemoryCache(),
+        link: httpLink.create({
+          uri: environment.uri,
+        }),
+      };
+    },
+    deps: [HttpLink],
+  }]
+})
+export class RazrooNrwlAngularShellDataGrapqhlModule { }

@@ -1,0 +1,11 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TestFacade } from "./snapshots/sample.facade";
+
+@NgModule({
+  imports: [
+    CommonModule,
+  ],
+  providers: [TestFacade],
+})
+export class DataAccessBooksModule { }

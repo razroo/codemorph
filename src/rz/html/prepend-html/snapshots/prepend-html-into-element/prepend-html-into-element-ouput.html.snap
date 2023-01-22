@@ -1,0 +1,4 @@
+<mat-toolbar class="GlobalHeader" color="primary"
+  ><div>test</div>
+  <div>hello</div>
+</mat-toolbar>

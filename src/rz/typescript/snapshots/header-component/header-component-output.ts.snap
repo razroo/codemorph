@@ -1,0 +1,25 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: '<%= selector %>-header',
+  templateUrl: './<%= fileName %>-header.component.html',
+  styleUrls: ['./<%= fileName %>-header.component.scss'],
+})
+export class <%= className %>HeaderComponent implements OnInit {
+  faBell = faBell;
+  constructor() {}
+
+  ngOnInit(): void {}
+}
+
+@NgModule({
+  imports: [
+    CommonModule,
+    MatToolbarModule
+  ],
+  declarations: [<%= className %>HeaderComponent],
+  exports: [MatToolbarModule, <%= className %>HeaderComponent],
+})
+export class <%= className %>HeaderModule {}

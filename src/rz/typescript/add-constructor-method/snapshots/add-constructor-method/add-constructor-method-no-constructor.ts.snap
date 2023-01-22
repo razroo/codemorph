@@ -1,0 +1,10 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'razroo-test',
+  templateUrl: './razroo-test.component.html',
+  styleUrls: ['./razroo-test.component.scss'],
+})
+export class RazrooTestComponent implements OnInit {
+  ngOnInit(): void {}
+}

@@ -1,0 +1,5 @@
+@import "apps/<%= orgName%>/src/<%= orgName%>-styles.scss";
+.DarkMode {
+  background: #000000;
+  color: #ffffff;
+}

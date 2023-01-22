@@ -1,0 +1,76 @@
+<ng-container>
+  <!-- Filter -->
+  <ng-container *ngif="isFilterable" [matcolumndef]="this.rowActionIcon">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matinput="" (keyup)="searchTable($event)" placeholder="filter" />
+    </mat-form-field>
+  </ng-container>
+
+  <!-- Table -->
+  <ng-container *ngif="rowActionIcon?.length" [matcolumndef]="rowActionIcon">
+  </ng-container
+  ><ng-container
+    *ngfor="let tableColumn of tableColumns"
+    [matcolumndef]="tableColumn.name"
+  >
+    <!-- if sortable column header -->
+    <ng-container *ngif="tableColumn.isSortable; else notSortable">
+    </ng-container></ng-container
+  ><ng-template #notsortable=""> </ng-template>
+  <table mat-table="" [datasource]="tableDataSource" matSort>
+    <!-- action column -->
+    <tbody>
+      <tr>
+        <th mat-header-cell="" *matheadercelldef=""></th>
+        <td
+          mat-cell=""
+          *matcelldef="let element"
+          [id]="rowActionIcon"
+          (click)="emitRowAction(element)"
+        >
+          <button mat-button="">
+            <mat-icon>remove_shopping_cart</mat-icon>
+          </button>
+        </td>
+
+        <th
+          mat-header-cell=""
+          *matheadercelldef=""
+          [mat-sort-header]="tableColumn.name"
+          [arrowposition]="tableColumn.position === &#x27;right&#x27; ? &#x27;before&#x27; : &#x27;after&#x27;"
+        >
+          {{tableColumn.name}}
+        </th>
+
+        <!-- else not sortable -->
+        <th
+          mat-header-cell=""
+          *matheadercelldef=""
+          [class.text-right]="tableColumn.position == &#x27;right&#x27;"
+        >
+          {{tableColumn.name}}
+        </th>
+
+        <!-- column data -->
+        <td
+          mat-cell=""
+          *matcelldef="let element"
+          [class.text-right]="tableColumn.position == &#x27;right&#x27;"
+        >
+          {{element | dataPropertyGetter: tableColumn.dataKey}}
+        </td>
+      </tr>
+      <tr mat-header-row="" *matheaderrowdef="displayedColumns"></tr>
+      <tr mat-row="" *matrowdef="let row; columns: displayedColumns;"></tr>
+    </tbody>
+  </table>
+  <mat-paginator
+    *ngif="isPageable"
+    [pagesizeoptions]="paginationSizes"
+    [pagesize]="defaultPageSize"
+    (page)="paginateTable($event)"
+    showfirstlastbuttons=""
+  >
+  </mat-paginator
+></ng-container>

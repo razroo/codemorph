@@ -1,0 +1,2 @@
+export function pushScaffoldCommands(context, isProduction: boolean, packageJsonParams) {
+}

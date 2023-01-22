@@ -1,0 +1,24 @@
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material/table';
+import { TestDataSource, TestItem } from './test-datasource';
+
+@Component({
+  selector: 'razroo-zeta',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.scss'],
+})
+export class TestComponent implements AfterViewInit {
+  @ViewChild(MatTable) table!: MatTable<TestItem>;
+  dataSource: TestDataSource;
+
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['id', 'name'];
+
+  constructor() {
+    this.dataSource = new TestDataSource();
+  }
+
+  ngAfterViewInit(): void {
+    this.table.dataSource = this.dataSource;
+  }
+}
