@@ -1,5 +1,5 @@
-# Razzle
 ![Razzle Logo](assets/razzle-logo-small.png "Razzle - Extensible Codemod Library")
+
 Razzle is an extensible, easy to understand, easy contribute, easy to use Codemod library. Razzle-dazzle your codebase like you've never before. 
 
 # Novelty behind Razzle library 
