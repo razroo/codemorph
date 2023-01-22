@@ -1,6 +1,6 @@
 ![Razzle Logo](assets/razzle-logo-small.png "Razzle - Extensible Codemod Library")
 
-Razzle is an extensible, easy to understand, easy contribute, easy to use Codemod library. Razzle-dazzle your codebase like you've never before. 
+Razzle is an extensible, easy to understand, easy to contribute, easy to use Codemod library. Razzle-dazzle your codebase like you've never before. 
 
 # Novelty behind Razzle library 
 
@@ -21,6 +21,8 @@ What the Razzle library does that is unique, is that it creates a unified interf
   "path": 'libs/common/styles/razroo-styles.scss'
 }
 ```
+
+So your engineers can understand how it works for one programming language and use the same syntax for a different programming language. 
 
 ## Assumption Made
 Razzle is always used in an editing circumstance. There is no need to speicify that file is being editied. Razzle will update the string 
