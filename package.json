@@ -20,6 +20,9 @@
     "razroo",
     "codemod"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Razroo",
   "license": "RAZROO",
   "bugs": {
