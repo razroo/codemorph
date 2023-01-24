@@ -1,12 +1,12 @@
-![Razzle Logo](assets/razzle-logo-small.png "Razzle - Extensible Codemod Library") ![Razzle Logo](assets/razroo-certified-logo.png "Razroo Certified")
+![Codemorph Logo](assets/razzle-logo-small.png "Codemorph - Extensible Codemod Library") ![Codemorph Logo](assets/razroo-certified-logo.png "Razroo Certified")
 
-Razzle is an extensible, easy to understand, easy to contribute, easy to use **Codemod** library. Razzle-dazzle your codebase like you've never before. 
+Codemorph is an extensible, easy to understand, easy to contribute, easy to use **Codemod** library. Codemorph-dazzle your codebase like you've never before. 
 
-## Novelty behind Razzle library 
+## Novelty behind Codemorph library 
 
 ### Easy To Understand
 
-What the Razzle library does that is unique, is that it creates a unified interface across different programming languages. It uses a simple object to make modifications. e.g. 
+What the Codemorph library does that is unique, is that it creates a unified interface across different programming languages. It uses a simple object to make modifications. e.g. 
 
 #### Typescript
 ```
@@ -27,13 +27,13 @@ What the Razzle library does that is unique, is that it creates a unified interf
 So your engineers can understand how it works for one programming language and use the same syntax for a different programming language. 
 
 ### Easy To Contribute
-Razzle uses a tree of switch case statements to determine type of codemod to use. Simply specify programming language e.g. `angular` and fileType e.g. `.ts` and Codemod will take care of the rest.
+Codemorph uses a tree of switch case statements to determine type of codemod to use. Simply specify programming language e.g. `angular` and fileType e.g. `.ts` and Codemod will take care of the rest.
 
 ### Extensible
 If you want to add your own custom codemods, or add your own, you can simply plug and play to the Razroo codemod library. 
 
 ## Assumption Made
-Razzle is always used in an editing circumstance. There is no need to speicify that file is being edited. 
+Codemorph is always used in an editing circumstance. There is no need to speicify that file is being edited. 
 
 ## Benefits of such 
 1. This will be consumer facing. By allowing a singular object, we can simplify the frontend shown to users in the content management system. 
