@@ -1,6 +1,6 @@
 ![Razzle Logo](assets/razzle-logo-small.png "Razzle - Extensible Codemod Library") ![Razzle Logo](assets/razroo-certified-logo.png "Razroo Certified")
 
-Razzle is an extensible, easy to understand, easy to contribute, easy to use Codemod library. Razzle-dazzle your codebase like you've never before. 
+Razzle is an extensible, easy to understand, easy to contribute, easy to use **Codemod** library. Razzle-dazzle your codebase like you've never before. 
 
 ## Novelty behind Razzle library 
 
