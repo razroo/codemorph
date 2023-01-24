@@ -1,6 +1,6 @@
 {
   "name": "@razroo/razzle",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Razzle is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
