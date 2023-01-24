@@ -1,7 +1,7 @@
 {
-  "name": "@razzle/core",
-  "version": "1.0.3",
-  "description": "Razzle is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
+  "name": "@codemorph/core",
+  "version": "1.0.4",
+  "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
