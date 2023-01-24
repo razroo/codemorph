@@ -2,6 +2,12 @@
 
 Codemorph is an extensible, easy to understand, easy to contribute, easy to use **Codemod** library. Codemorph-dazzle your codebase like you've never before. 
 
+# How to Install Codemorph 
+
+```
+npm install @codemorph/core --save
+```
+
 ## Novelty behind Codemorph library 
 
 ### Easy To Understand
