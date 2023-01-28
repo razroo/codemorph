@@ -48,7 +48,7 @@ const fileToBeAddedTo = writeFileSync('libs/src/sample-name/sample-name.componen
 The `effects` function is the other side of the coin with regards to the codeMorph library. 
 
 Whereas the `morphCode` function mentioned above will edit a file, the `effects` function is 
-meant to be used alongside creating a new file for the first/code generation. For instance, 
+meant to be used alongside creating a new file for the first time/when generating a new code feature. For instance, 
 if you were creating a new Angular componnet, you would use the effect for angular component.
 
 ```ts
