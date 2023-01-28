@@ -10,7 +10,55 @@ npm install @codemorph/core --save
 
 # How to Use Codemorph 
 
-Todo 
+## morphCode - Modify string 
+
+The `morphCode` command will take in a string, modify it based on:
+1. `fileType` - e.g. `ts`, `html`, 
+2. array of edit objects specified in the `edits` key 
+
+```ts
+// lets assume we are updating a ts file
+import { EditInput, morphCode } from '@codemorph/core';
+
+// Codemorph works against strings and not files
+// done intentionally so can work on any platform(e.g. web, code editor, etc.)
+const fileToBeAddedTo = readFileSync('src/sample-name.component.ts').toString();
+
+const editInput: EditInput = {
+  fileType: 'ts',
+  fileName: 'sample-name.component.ts',
+  fileToBeAddedTo: fileToBeAddedTo,
+  edits: [{
+    nodeType: 'addFunction',
+    name: 'generateAngularComponent',
+    type: 'string',
+    isExported: true,
+    parameters: [{name: 'test', type: 'string'}],
+    codeBlock: `console.log('hello world ' + test)`    
+  }]
+}
+const sampleNameComponentModfified = morphCode(editInput);
+// this string is now modified. We will write modified string back to initial location
+const fileToBeAddedTo = writeFileSync('src/sample-name.component.ts', sampleNameComponentModfified);
+// file will now have modified code
+```
+
+## effects - Code modifications that happen as a side effect of xyz
+
+The `effects` function is the other side of the coin with regards to the codeMorph library. 
+
+Whereas the `morphCode` function mentioned above will edit a file, the `effects` function is 
+meant to be used alongside creating a new file for the first/code generation. For instance, 
+if you were creating a new Angular componnet, you would use the effect for angular component.
+
+```ts
+
+```
+
+
+(Due to the nature of how effects work i.e. the need to take the entire file system into account
+effects currently only work on the OS level. There are efforts from our side to make effects 
+work on web and we hope to that feature available sooner than later.)
 
 ## Novelty behind Codemorph library 
 
