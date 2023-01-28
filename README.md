@@ -22,7 +22,7 @@ import { EditInput, morphCode } from '@codemorph/core';
 
 // Codemorph works against strings and not files
 // done intentionally so can work on any platform(e.g. web, code editor, etc.)
-const fileToBeAddedTo = readFileSync('src/sample-name.component.ts').toString();
+const fileToBeAddedTo = readFileSync('libs/src/sample-name/sample-name.component.ts').toString();
 
 const editInput: EditInput = {
   fileType: 'ts',
@@ -39,7 +39,7 @@ const editInput: EditInput = {
 }
 const sampleNameComponentModfified = morphCode(editInput);
 // this string is now modified. We will write modified string back to initial location
-const fileToBeAddedTo = writeFileSync('src/sample-name.component.ts', sampleNameComponentModfified);
+const fileToBeAddedTo = writeFileSync('libs/src/sample-name/sample-name.component.ts', sampleNameComponentModfified);
 // file will now have modified code
 ```
 
@@ -52,13 +52,56 @@ meant to be used alongside creating a new file for the first/code generation. Fo
 if you were creating a new Angular componnet, you would use the effect for angular component.
 
 ```ts
+import { effects, TemplateInputParameter } from '@codemorph/core';
 
+// user-card is a sample component folder/file name
+const fullPathOfFile = 'libs/src/user-card/user-card.component.ts';
+const filePathParameter: TemplateInputParameter = {
+  name: 'nameFilePath',
+  description: 'this isnt used by effect but can be used to bake documentation into codemod',
+  // {name} curly brace here so name can be dynamic. Will use name parameter below
+  defaultValue: 'libs/src/user-card/{name}',
+  paramType: 'directive'
+};
+const coreProgrammingLanguage = 'angular';
+// used to override <%= name %> inside of file. By default razroo uses name
+// however parameters could be anything so can extend effects to however would like
+const parameters = [{
+  name: 'name',
+  description: 'name for the user-card component',
+  defaultValue: 'user-card'
+}]
+
+effects(fullPathOfFile, filePathParameter, coreProgrammingLanguage, parameters);
+// will automatically edit files (no need for readFileSync or writeFileSync)
 ```
 
+Now our effects knows based on above:
+1. Starting point of effect based on file supplied (`fullPathOfFile`)
+2. The type of effect we would like to do:
+    - `filePathParameter` - Has the paramType of `directive`
+    - `coreProgrammingLanguage` - `angular` (i.e. angular directive)
+3. What dynamic values we would like in our effects(here it is `name` which is `user-card`) 
 
-(Due to the nature of how effects work i.e. the need to take the entire file system into account
+In this instance, while different for each, it means that when we generate code 
+for an Angular Directive, the Codemorph `effects` function will automatically 
+export the directive in the closest `index.ts` file.
+
+### Notes Regarding Razroo Effects Architecture
+
+#### Currently OS level only 
+
+Due to the nature of how effects work i.e. the need to take the entire file system into account
 effects currently only work on the OS level. There are efforts from our side to make effects 
-work on web and we hope to that feature available sooner than later.)
+work on web and we hope to that feature available sooner than later.
+
+#### We use a single file path to determine effects feature location
+
+Here 
+1. Effects should be feature based and therefore bite sized. 
+2. We wanted effects to recognize the primary file of file(s) being generated. 
+Therefore we believe using the filePath as a key for where the entire 
+feature is located makes sense. (allows it to be extensible based on library/convention being used)
 
 ## Novelty behind Codemorph library 
 
