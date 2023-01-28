@@ -1,5 +1,6 @@
 import { Parameters } from "../morph";
 import { addClassToDeclarationsAndImports } from "./effects/component/component-effects";
+import { exportDirectiveFile } from "./effects/directive/directive";
 import { exportGraphqlFile } from "./effects/graphql/graphql";
 import { exportInterfaceFile } from "./effects/interface/interface";
 import { addEffectToNgModule } from "./effects/ngrx/effects/ngrx-effects";
@@ -31,9 +32,12 @@ export function angularEffects(filePathWithName: string, type: AngularTypeNames,
       break;
     case AngularTypeNames.NgrxFacade:
       addFacadeToNgModule(filePathWithName, parameters.className)
-      break;  
+      break;
     case AngularTypeNames.NgrxReducer:
       addReducerToNgModule(filePathWithName, parameters.className, parameters.constantName)
-      break;  
+      break;
+    case AngularTypeNames.Directive:
+      exportDirectiveFile(filePathWithName);
+      break;
   }
 }
