@@ -10,7 +10,7 @@ npm install @codemorph/core --save
 
 # How to Use Codemorph 
 
-## morphCode - Modify string 
+## `morphCode` - Modify string 
 
 The `morphCode` command will take in a string, modify it based on:
 1. `fileType` - e.g. `ts`, `html`, 
@@ -43,7 +43,7 @@ const fileToBeAddedTo = writeFileSync('libs/src/sample-name/sample-name.componen
 // file will now have modified code
 ```
 
-## effects - Code modifications that happen as a side effect of xyz
+## `effects` - Code modifications that happen as a side effect of xyz
 
 The `effects` function is the other side of the coin with regards to the codeMorph library. 
 
@@ -97,7 +97,7 @@ work on web and we hope to that feature available sooner than later.
 
 #### We use a single file path to determine effects feature location
 
-Here 
+Here is why:
 1. Effects should be feature based and therefore bite sized. 
 2. We wanted effects to recognize the primary file of file(s) being generated. 
 Therefore we believe using the filePath as a key for where the entire 
