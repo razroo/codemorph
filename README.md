@@ -133,12 +133,10 @@ Codemorph uses a tree of switch case statements to determine type of codemod to 
 ### Extensible
 If you want to add your own custom codemods, or add your own, you can simply plug and play to the Razroo codemod library. 
 
-## Assumption Made
-Codemorph is always used in an editing circumstance. There is no need to speicify that file is being edited. 
-
 ## Benefits of such 
 1. This will be consumer facing. By allowing a singular object, we can simplify the frontend shown to users in the content management system. 
 2. Developers don't have to dig into specifics for each programming language. They can simply keep an eye on the top level interface. 
+3. Apis of different codemod libraries can be unified under a singular interface
 
 # Further reading via Razroo blog(soon to be it's own documentation site) 
 
