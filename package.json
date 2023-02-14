@@ -3,7 +3,7 @@
   "workspaces": [
     "src/rz/angular"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
