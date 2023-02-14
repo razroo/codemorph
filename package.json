@@ -1,5 +1,8 @@
 {
   "name": "@codemorph/core",
+  "workspaces": [
+    "src/rz/angular"
+  ],
   "version": "1.0.4",
   "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
   "main": "./dist/index.js",
