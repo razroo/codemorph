@@ -8,7 +8,7 @@ describe('exportServiceFile', () => {
         writeFileSync('src/rz/angular/effects/service/index.ts', '');
     });
     it('should export service file', () => {
-        const mockFilePath = 'src/rz/angular/effects/service/user-service.ts';
+        const mockFilePath = 'src/rz/angular/effects/service/user.service.ts';
         const mockTemplateInputParameter: TemplateInputParameter = {
             defaultValue: 'libs/{name}-dialog',
             description: 'File path for name file(s)',

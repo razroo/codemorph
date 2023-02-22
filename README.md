@@ -10,7 +10,7 @@ npm install @codemorph/core --save
 
 # How to Use Codemorph 
 
-## morphCode - Modify string 
+## `morphCode` - Modify string 
 
 The `morphCode` command will take in a string, modify it based on:
 1. `fileType` - e.g. `ts`, `html`, 
@@ -43,12 +43,12 @@ const fileToBeAddedTo = writeFileSync('libs/src/sample-name/sample-name.componen
 // file will now have modified code
 ```
 
-## effects - Code modifications that happen as a side effect of xyz
+## `effects` - Code modifications that happen as a side effect of xyz
 
 The `effects` function is the other side of the coin with regards to the codeMorph library. 
 
 Whereas the `morphCode` function mentioned above will edit a file, the `effects` function is 
-meant to be used alongside creating a new file for the first/code generation. For instance, 
+meant to be used alongside creating a new file for the first time/when generating a new code feature. For instance, 
 if you were creating a new Angular componnet, you would use the effect for angular component.
 
 ```ts
@@ -97,7 +97,7 @@ work on web and we hope to that feature available sooner than later.
 
 #### We use a single file path to determine effects feature location
 
-Here 
+Here is why:
 1. Effects should be feature based and therefore bite sized. 
 2. We wanted effects to recognize the primary file of file(s) being generated. 
 Therefore we believe using the filePath as a key for where the entire 
@@ -133,12 +133,10 @@ Codemorph uses a tree of switch case statements to determine type of codemod to 
 ### Extensible
 If you want to add your own custom codemods, or add your own, you can simply plug and play to the Razroo codemod library. 
 
-## Assumption Made
-Codemorph is always used in an editing circumstance. There is no need to speicify that file is being edited. 
-
 ## Benefits of such 
 1. This will be consumer facing. By allowing a singular object, we can simplify the frontend shown to users in the content management system. 
 2. Developers don't have to dig into specifics for each programming language. They can simply keep an eye on the top level interface. 
+3. Apis of different codemod libraries can be unified under a singular interface
 
 # Further reading via Razroo blog(soon to be it's own documentation site) 
 

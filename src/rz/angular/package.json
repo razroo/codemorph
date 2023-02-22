@@ -1,0 +1,35 @@
+{
+  "name": "@codemorph/angular",
+  "workspaces": [
+    "src/rz/angular"
+  ],
+  "version": "0.0.1",
+  "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
+  "main": "../../../../dist/index.js",
+  "types": "../../../../dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.(js|ts)\"",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "eslint src --fix --ext .js,.ts",
+    "test": "jest --config jest.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/razroo/razzle"
+  },
+  "keywords": [
+    "razroo",
+    "codemod",
+    "angular"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Razroo",
+  "license": "RAZROO",
+  "bugs": {
+    "url": "https://github.com/razroo/razzle/issues"
+  },
+  "homepage": "https://github.com/razroo/razzle#readme"
+}
