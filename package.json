@@ -3,7 +3,7 @@
   "workspaces": [
     "src/rz/angular"
   ],
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -63,7 +63,9 @@
     "ts-jest": "^27.1.5",
     "tsup": "^6.2.3",
     "typescript": "^4.0.3",
-    "yargs-parser": "20.0.0"
+    "yargs-parser": "20.0.0",
+    "rxjs": "^6.5.4",
+    "rxjs-for-await": "0.0.2"
   },
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.1",
@@ -79,8 +81,6 @@
     "path": "^0.12.7",
     "prettier": "^2.3.0",
     "query-ast": "^1.0.4",
-    "rxjs": "^6.5.4",
-    "rxjs-for-await": "0.0.2",
     "scss-parser": "^1.0.5",
     "tmp": "~0.2.1",
     "ts-morph": "^17.0.1",
