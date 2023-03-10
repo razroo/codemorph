@@ -1,4 +1,4 @@
-import { existingFileNames } from './existing-file-name';
+import { existingFileNames } from './existing-file-names';
 
 describe('existingFileNames', () => {
   it('should support class existingFileNames', () => {
