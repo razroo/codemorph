@@ -66,6 +66,7 @@ export const powerUpVariablesFlatData: PowerUpVariables[] = [
       name: 'existingFileName',
       description: 'Template variable to be used for code snippets. Will use existing file name for name.',
       defaultValue: 'existingFileName',
+      system: true,
       stubValue: 'existingFileName',
       variableDependency: 'existingFileName'
     },
@@ -73,6 +74,7 @@ export const powerUpVariablesFlatData: PowerUpVariables[] = [
       name: 'existingFileClassName',
       description: 'Hyphenated to UpperCamelCase',
       defaultValue: 'existingFileName',
+      system: true,
       stubValue: 'existingFileClassName',
       variableDependency: 'existingFileName'
     },
@@ -80,6 +82,7 @@ export const powerUpVariablesFlatData: PowerUpVariables[] = [
       name: 'existingFilePropertyName',
       description: 'Hyphenated to lowerCamelCase',
       defaultValue: 'existingFilePropertyName',
+      system: true,
       stubValue: 'existingFilePropertyName',
       variableDependency: 'existingFileName'
     },
@@ -87,6 +90,7 @@ export const powerUpVariablesFlatData: PowerUpVariables[] = [
       name: 'existingFileConstantName',
       description: 'Hyphenated to CONSTANT_CASE',
       defaultValue: 'existingFileConstantName',
+      system: true,
       stubValue: 'existingFileConstantName',
       variableDependency: 'existingFileName'
     },
@@ -94,6 +98,7 @@ export const powerUpVariablesFlatData: PowerUpVariables[] = [
       name: 'existingFileTitleName',
       description: 'camelCase to Title Case',
       defaultValue: 'existingFileTitleName',
+      system: true,
       stubValue: 'existingFileTitleName',
       variableDependency: 'existingFileName'
     },

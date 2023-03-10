@@ -57,6 +57,7 @@ export const powerUpVariables: PowerUpVariables[] = [
     description: 'Template variable to be used for code snippets. Will use existing file name for name.',
     defaultValue: 'existingFileName',
     variableDependency: 'existingFileName',
+    system: true,
     variablesToImplement: [
       {
         name: 'existingFileClassName',
