@@ -6,5 +6,6 @@ export interface PowerUpVariables {
     description?: string;
     codeExample?: string;
     stubValue?: string;
+    system?: boolean;
     variableDependency: string
 }

@@ -53,6 +53,39 @@ export const powerUpVariables: PowerUpVariables[] = [
     variableDependency: 'projectName'
   },
   {
+    name: 'existingFileName',
+    description: 'Template variable to be used for code snippets. Will use existing file name for name.',
+    defaultValue: 'existingFileName',
+    variableDependency: 'existingFileName',
+    system: true,
+    variablesToImplement: [
+      {
+        name: 'existingFileClassName',
+        description: 'Hyphenated to UpperCamelCase',
+        codeExample: 'my-name to MyName',
+        variableDependency: 'existingFileName'
+      },
+      {
+        name: 'existingFilePropertyName',
+        description: 'Hyphenated to lowerCamelCase',
+        codeExample: 'my-name to myName',
+        variableDependency: 'existingFileName'
+      },
+      {
+        name: 'existingFileConstantName',
+        description: 'Hyphenated to CONSTANT_CASE',
+        codeExample: 'my-name to MY_NAME',
+        variableDependency: 'existingFileName'
+      },
+      {
+        name: 'existingFileTitleName',
+        description: 'camelCase to Title Case',
+        codeExample: 'myName to My Name',
+        variableDependency: 'existingFileName'
+      }
+    ]
+  },
+  {
     name: 'primary',
     description: 'primary color to be used within app',
     defaultValue: 'primary',
