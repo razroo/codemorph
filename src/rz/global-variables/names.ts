@@ -30,14 +30,14 @@
   /**
    * Hyphenated to UpperCamelCase
    */
-  function toClassName(str: string): string {
+  export function toClassName(str: string): string {
     return toCapitalCase(toPropertyName(str));
   }
   
   /**
    * Hyphenated to lowerCamelCase
    */
-  function toPropertyName(s: string): string {
+  export function toPropertyName(s: string): string {
     return s
       .replace(/([^a-zA-Z0-9])+(.)?/g, (_, __, chr) =>
         chr ? chr.toUpperCase() : ''
@@ -49,14 +49,14 @@
   /**
    * Hyphenated to CONSTANT_CASE
    */
-  function toConstantName(s: string): string {
+  export function toConstantName(s: string): string {
     return s.replace(/([^a-zA-Z0-9])/g, '_').toUpperCase();
   }
   
   /**
    * Upper camelCase to lowercase, hyphenated
    */
-  function toFileName(s: string): string {
+  export function toFileName(s: string): string {
     return s
       .replace(/([a-z\d])([A-Z])/g, '$1_$2')
       .toLowerCase()
@@ -66,11 +66,11 @@
   /**
    * Capitalizes the first letter of a string
    */
-  function toCapitalCase(s: string): string {
+  export function toCapitalCase(s: string): string {
     return s.charAt(0).toUpperCase() + s.substr(1);
   }
 
-  function toTitleName(s: string): string {
+  export function toTitleName(s: string): string {
     return toClassName(s).split('')
       .map(letter => 
         letter.match(/[A-Z]/)?' ' + letter : letter

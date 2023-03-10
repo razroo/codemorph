@@ -15,7 +15,7 @@ export { EditInput, EditFile, morphCode, effects, communityPaths, types } from '
 export { getCodeModParams, getCodeModOptions } from './rz/params';
 
 // global variables
-export { names, codeCmsVariablesToIgnore, powerUpVariables, powerUpVariablesFlatData } from './rz/global-variables';
+export { names, codeCmsVariablesToIgnore, powerUpVariables, powerUpVariablesFlatData, existingFileNames} from './rz/global-variables';
 
 // global variables interfaces
 export { CodeCmsVariablesToIgnore, PowerUpVariables } from './rz/global-variables/interfaces';
