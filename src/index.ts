@@ -2,7 +2,7 @@
 export { getPalette, createColorVariables } from './rz/global-variables';
 
 // export { Blah as default } from './lib'
-export { replaceTagParameters, replaceCurlyBrace } from './replace';
+export { replaceTagParameters, parseEJSCode, replaceCurlyBrace } from './replace';
 
 // general utils
 export { getVersionAndNameString, determineType, determineFilePathParameter, readPackageJson, extractProjectName,
