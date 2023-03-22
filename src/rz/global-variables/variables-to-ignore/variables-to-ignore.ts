@@ -35,6 +35,13 @@ export const powerUpVariables: PowerUpVariables[] = [
         name: 'titleName',
         description: 'camelCase to Title Case',
         codeExample: 'myName to My Name'
+      },
+      {
+        name: 'nameSchema',
+        description: 'will create a nameSchema variable that allows you to select schema values from the schema object',
+        codeExample: `<% for(let i = 0; i < nameSchema.length; i++) { %>
+          <div> <%= nameSchema[i] %> </div>
+        <% } %>`
       }
     ]
   },

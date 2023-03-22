@@ -49,6 +49,16 @@ export const powerUpVariablesFlatData: PowerUpVariables[] = [
       variableDependency: 'name'
     },
     {
+      name: 'nameSchema',
+      description: 'will create a nameSchema variable that allows you to select schema values from the schema object',
+      defaultValue: '<%= nameSchema %>',
+      stubValue: 'nameSchema',
+      codeExample: `<% for(let i = 0; i < nameSchema.length; i++) { %>
+        <div> <%= nameSchema[i] %> </div>
+      <% } %>`,
+      variableDependency: 'name'
+    },
+    {
       name: 'orgName',
       description: 'Will dyanmically get organization name',
       defaultValue: '<%= orgName %>',
