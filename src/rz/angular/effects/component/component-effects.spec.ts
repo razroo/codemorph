@@ -4,12 +4,12 @@ import { effects, Parameters } from "../../../morph";
 
 describe('Angular Component Effects', () => {
   afterEach(() => {
-    const moduleOriginal = readFileSync('effects/component/snapshots/module-original.ts.snap').toString();
-    writeFileSync('effects/component/index.ts', '');
-    writeFileSync('effects/component/sample.module.ts', moduleOriginal);
+    const moduleOriginal = readFileSync('src/rz/angular/effects/component/snapshots/module-original.ts.snap').toString();
+    writeFileSync('src/rz/angular/effects/component/index.ts', '');
+    writeFileSync('src/rz/angular/effects/component/sample.module.ts', moduleOriginal);
   });
   it('should update the closest app module file with an ngmodule export, declaration, import component, and export via optional type', () => {
-    const mockFilePath = 'effects/component/sample.component.ts';
+    const mockFilePath = 'src/rz/angular/effects/component/sample.component.ts';
     const parameters: Parameters = {
       className: 'Sample'
     };
@@ -24,12 +24,12 @@ describe('Angular Component Effects', () => {
     }
     effects(mockFilePath, mockTemplateInputParameter, 'angular', JSON.stringify(parameters));
 
-    const indexResult = readFileSync('effects/component/index.ts').toString();
-    const indexExpected = readFileSync('effects/component/snapshots/index-output.ts.snap').toString();
+    const indexResult = readFileSync('src/rz/angular/effects/component/index.ts').toString();
+    const indexExpected = readFileSync('src/rz/angular/effects/component/snapshots/index-output.ts.snap').toString();
     expect(indexResult).toEqual(indexExpected);
 
-    const moduleResult = readFileSync('effects/component/sample.module.ts').toString();
-    const moduleExpected = readFileSync('effects/component/snapshots/module-output.ts.snap').toString();
+    const moduleResult = readFileSync('src/rz/angular/effects/component/sample.module.ts').toString();
+    const moduleExpected = readFileSync('src/rz/angular/effects/component/snapshots/module-output.ts.snap').toString();
     expect(moduleResult).toEqual(moduleExpected);
   })
 });

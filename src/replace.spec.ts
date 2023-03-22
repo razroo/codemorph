@@ -1,4 +1,4 @@
-import { replaceCurlyBrace } from './replace';
+import { parseEJSCode, replaceCurlyBrace } from './replace';
 
 describe('replaceCurlyBrace', () => {
   it('should replaceCurlyBrace with respective parameters', () => {
@@ -31,6 +31,17 @@ describe('replaceCurlyBrace', () => {
     const result = replaceCurlyBrace(mockParameters, mockFileStringWithCurlyBrace);
     const expected = 'libs/common/ui/src/lib/blue-dialog/blue-dialog.component.ts';
 
+    expect(result).toEqual(expected);
+  })
+
+  it('parseEJSCode should parse for loop correctly', () => {
+    const mockParameters = {
+      colors: ['blue', 'green', 'red', 'yellow'],
+    };
+    const mockFileString = "import x from 'y';\nclass DynamicClass = {\n<% for(let i=0; i<colors.length; i++) { %>\n<%= colors[i] %>: string;\n<% } %>\n}";
+
+    const result = parseEJSCode(mockParameters as any, mockFileString);
+    const expected = "import x from 'y';\nclass DynamicClass = {\n\nblue: string;\n\ngreen: string;\n\nred: string;\n\nyellow: string;\n\n}";
     expect(result).toEqual(expected);
   })
 
