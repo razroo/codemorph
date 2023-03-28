@@ -15,21 +15,15 @@ describe('replaceCurlyBrace', () => {
     expect(result).toEqual(expected);
   });
 
-  it('should replace with curly braces if curly brace values shows up more than once', () => {
+  it('should replace with curly braces if curly brace values shows up more than once and replace value with kebab case', () => {
     const mockParameters = {
       nameFilePath:"libs/common/ui/src/lib/{name}-dialog",
-      name:"blue",
-      projectName:"razroo-angular-starter",
-      className:"Blue",
-      propertyName:"blue",
-      constantName:"BLUE",
-      fileName:"blue",
-      titleName:"Blue"
+      name:"Hello World"
     };
     const mockFileStringWithCurlyBrace = '{nameFilePath}/{name}-dialog.component.ts';
 
-    const result = replaceCurlyBrace(mockParameters, mockFileStringWithCurlyBrace);
-    const expected = 'libs/common/ui/src/lib/blue-dialog/blue-dialog.component.ts';
+    const result = replaceCurlyBrace(mockParameters, mockFileStringWithCurlyBrace, true);
+    const expected = 'libs/common/ui/src/lib/hello-world-dialog/hello-world-dialog.component.ts';
 
     expect(result).toEqual(expected);
   })
