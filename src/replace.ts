@@ -1,4 +1,5 @@
 import * as ejs from 'ejs';
+import { kebabCase } from 'lodash';
 
 export const replaceTagParameters = (
   parameters: Record<string, string>,
@@ -16,14 +17,16 @@ export const replaceTagParameters = (
 export const parseEJSCode = (
   parameters: Record<string, string>,
   toReplace: string
-) => {
+): any => {
   return ejs.render(toReplace, parameters)
 }
 
-export const replaceCurlyBrace = (mockParameters: object, mockFileStringWithCurlyBrace: string): string => {
+export const replaceCurlyBrace = (mockParameters: object, mockFileStringWithCurlyBrace: string, useKebabCase: boolean): string => {
   let result = mockFileStringWithCurlyBrace;
-  for(let key in mockParameters) {
-      result = result.replaceAll('{' + key + '}', mockParameters[key]);
+  for(const key in mockParameters) {
+    // only use kebab case if non file path
+    const valueToReplaceWith = useKebabCase && mockParameters[key].split('/').length < 2 ? kebabCase(mockParameters[key]) : mockParameters[key];
+    result = result.replaceAll('{' + key + '}', valueToReplaceWith);
   }
   return result;
 }
