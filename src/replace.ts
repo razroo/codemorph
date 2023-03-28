@@ -21,7 +21,7 @@ export const parseEJSCode = (
   return ejs.render(toReplace, parameters)
 }
 
-export const replaceCurlyBrace = (mockParameters: object, mockFileStringWithCurlyBrace: string, useKebabCase: boolean): string => {
+export const replaceCurlyBrace = (mockParameters: object, mockFileStringWithCurlyBrace: string, useKebabCase?: boolean): string => {
   let result = mockFileStringWithCurlyBrace;
   for(const key in mockParameters) {
     // only use kebab case if non file path
