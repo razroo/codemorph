@@ -41,6 +41,19 @@ describe('replace', () => {
       expect(result).toEqual(expected);
     });
 
+    it('should replace curly brace placeholders with values from mockParameters object even if one is null', () => {
+      const mockParameters = {
+        param1: 'value1',
+        param2: 123, // non-string value
+        param3: null, // non-string value
+        param4: 'value4/with/slashes' // should be kebab-cased
+      } as any;
+      const mockFileStringWithCurlyBrace = 'This is a {param1} and {param2} and {param3} and {param4}';
+      const expectedResult = 'This is a value-1 and 123 and null and value4/with/slashes';
+      const result = replaceCurlyBrace(mockParameters, mockFileStringWithCurlyBrace, true);
+      expect(result).toEqual(expectedResult);
+    });
+
     describe('parseEJSCode', () => {
       it('should replace tag parameters', () => {
         const mockParameters = {
