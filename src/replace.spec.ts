@@ -75,6 +75,28 @@ describe('replace', () => {
         const expected = "import x from 'y';\nclass DynamicClass = {\n\nblue: string;\n\ngreen: string;\n\nred: string;\n\nyellow: string;\n\n}";
         expect(result).toEqual(expected);
       });
+
+      it('parseEJSCode should parse object loop correctly', () => {
+        const mockParameters = {
+          "nameSchema":{"Stepper":{"title":"String","id":"ID","count":"Int","recipeId":"String"}}
+        }
+        const mockFileString = `<% const schema = Object.values(nameSchema)[0] %>
+          export interface <%= Object.keys(nameSchema)[0] %> {<% for (const prop in schema) { %>
+            <%= prop %>: <%= schema[prop] %>;<% } %>
+          }
+        `;
+    
+        const result = parseEJSCode(mockParameters as any, mockFileString);
+        const expected = `
+          export interface Stepper {
+            title: String;
+            id: ID;
+            count: Int;
+            recipeId: String;
+          }
+        `;
+        expect(result).toEqual(expected);
+      });
     });
   
   });
