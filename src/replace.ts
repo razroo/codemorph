@@ -28,7 +28,20 @@ export const replaceCurlyBrace = (mockParameters: Record<string, string>, mockFi
     const value = mockParameters[key];
     const isString = typeof value === 'string';
     const valueToReplaceWith = useKebabCase && isString && value.split('/').length < 2 ? kebabCase(value) : value;
-    result = result.replaceAll('{' + key + '}', valueToReplaceWith);
+    result = result.replace(new RegExp(`{${key}}`, 'g'), valueToReplaceWith);
+  }
+  const hasCurlyBrace = /{.*}/;
+  if (hasCurlyBrace.test(result)) {
+    for(const key in mockParameters) {
+      // only use kebab case if non file path
+      const value = mockParameters[key];
+      const isString = typeof value === 'string';
+      const valueToReplaceWith = useKebabCase && isString && value.split('/').length < 2 ? kebabCase(value) : value;
+      result = result.replace(new RegExp(`{${key}}`, 'g'), valueToReplaceWith);
+    }
   }
   return result;
 }
+
+
+
