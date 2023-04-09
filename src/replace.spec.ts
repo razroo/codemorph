@@ -41,6 +41,25 @@ describe('replace', () => {
       expect(result).toEqual(expected);
     });
 
+    it('should replace with curly braces if curly brace values shows up more than once and replace value with kebab case test two', () => {
+      const mockParameters = {
+        className: 'Blue',
+        constantName: 'BLUE',
+        fileName: 'blue',
+        name: 'blue',
+        nameFilePath: 'libs/data-models/src/lib/{name}',
+        propertyName: 'blue', 
+        selector: 'razroo-angular-starter',
+        titleName: 'Blue'
+      };
+      const mockFileStringWithCurlyBrace = '{nameFilePath}/{name}.mock.ts';
+  
+      const result = replaceCurlyBrace(mockParameters, mockFileStringWithCurlyBrace, true);
+      const expected = 'libs/data-models/src/lib/blue/blue.mock.ts';
+  
+      expect(result).toEqual(expected);
+    });
+
     it('should replace curly brace placeholders with values from mockParameters object even if one is null', () => {
       const mockParameters = {
         param1: 'value1',
