@@ -8,8 +8,7 @@
 
 import * as fs from 'fs';
 import { dirname, join } from 'path';
-import { sync } from 'resolve';
-
+import { sync as syncResolve } from 'resolve';
  
  export interface PackageJson {
    name: string;
@@ -47,7 +46,7 @@ import { sync } from 'resolve';
  export function findPackageJson(workspaceDir: string, packageName: string): string | undefined {
    try {
      // avoid require.resolve here, see: https://github.com/angular/angular-cli/pull/18610#issuecomment-681980185
-     const packageJsonPath = sync(`${packageName}/package.json`, { basedir: workspaceDir });
+     const packageJsonPath = syncResolve(`${packageName}/package.json`, { basedir: workspaceDir, preserveSymlinks: true });
  
      return packageJsonPath;
    } catch {
