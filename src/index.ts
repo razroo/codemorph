@@ -6,7 +6,7 @@ export { replaceTagParameters, parseEJSCode, replaceCurlyBrace } from './replace
 
 // general utils
 export { getVersionAndNameString, determineType, determineFilePathParameter, readPackageJson, extractProjectName,
-    getAllDirectoriesFromVsCodeFolder, getProjectDependencies, determineLanguagesUsed, replaceCodeModEditsTemplateVariables } from './rz/utils';
+    getAllDirectoriesFromVsCodeFolder, determineLanguagesUsed, replaceCodeModEditsTemplateVariables } from './rz/utils';
 
 // export typescript related edits
 export { EditInput, EditFile, morphCode, effects, communityPaths, types } from './rz/morph';
