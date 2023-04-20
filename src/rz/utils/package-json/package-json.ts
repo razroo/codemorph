@@ -43,17 +43,6 @@ import { sync as syncResolve } from 'resolve';
    }
  }
  
- export function findPackageJson(workspaceDir: string, packageName: string): string | undefined {
-   try {
-     // avoid require.resolve here, see: https://github.com/angular/angular-cli/pull/18610#issuecomment-681980185
-     const packageJsonPath = syncResolve(`${packageName}/package.json`, { basedir: workspaceDir, preserveSymlinks: true });
- 
-     return packageJsonPath;
-   } catch {
-     return undefined;
-   }
- }
- 
  export async function determineLanguagesUsed(packageJsonMap: Map<string, PackageTreeNode>): Promise<string[]> {
    const languagesUsedArr = [];
    if(packageJsonMap.has('@angular/core')) {
@@ -63,29 +52,5 @@ import { sync as syncResolve } from 'resolve';
      languagesUsedArr.push('react');
    }
    return languagesUsedArr;
- }
- 
- export async function getProjectDependencies(dir: string): Promise<Map<string, PackageTreeNode>> {
-   const pkg = await readPackageJson(join(dir, 'package.json'));
-   if (!pkg) {
-     throw new Error('Could not find package.json');
-   }
- 
-   const results = new Map<string, PackageTreeNode>();
-   for (const [name, version] of getAllDependencies(pkg)) {
-     const packageJsonPath = findPackageJson(dir, name);
-     if (!packageJsonPath) {
-       continue;
-     }
- 
-     results.set(name, {
-       name,
-       version,
-       path: dirname(packageJsonPath),
-       package: await readPackageJson(packageJsonPath),
-     });
-   }
- 
-   return results;
  }
  
