@@ -7,8 +7,6 @@
  */
 
 import * as fs from 'fs';
-import { dirname, join } from 'path';
-import { sync as syncResolve } from 'resolve';
  
  export interface PackageJson {
    name: string;
@@ -17,15 +15,6 @@ import { sync as syncResolve } from 'resolve';
    devDependencies?: Record<string, string>;
    peerDependencies?: Record<string, string>;
    optionalDependencies?: Record<string, string>;
- }
- 
- function getAllDependencies(pkg: PackageJson): Set<[string, string]> {
-   return new Set([
-     ...Object.entries(pkg.dependencies || []),
-     ...Object.entries(pkg.devDependencies || []),
-     ...Object.entries(pkg.peerDependencies || []),
-     ...Object.entries(pkg.optionalDependencies || []),
-   ]);
  }
  
  export interface PackageTreeNode {
