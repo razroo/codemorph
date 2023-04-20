@@ -6,9 +6,10 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
- import * as fs from 'fs';
- import { dirname, join } from 'path';
- import * as resolve from 'resolve';
+import * as fs from 'fs';
+import { dirname, join } from 'path';
+import { sync } from 'resolve';
+
  
  export interface PackageJson {
    name: string;
@@ -46,7 +47,7 @@
  export function findPackageJson(workspaceDir: string, packageName: string): string | undefined {
    try {
      // avoid require.resolve here, see: https://github.com/angular/angular-cli/pull/18610#issuecomment-681980185
-     const packageJsonPath = resolve.sync(`${packageName}/package.json`, { basedir: workspaceDir });
+     const packageJsonPath = sync(`${packageName}/package.json`, { basedir: workspaceDir });
  
      return packageJsonPath;
    } catch {
