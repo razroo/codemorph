@@ -3,7 +3,7 @@
   "workspaces": [
     "src/rz/angular"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,6 +13,10 @@
     "lint": "eslint src --ext .js,.ts",
     "lint:fix": "eslint src --fix --ext .js,.ts",
     "test": "jest --config jest.config.js"
+  },
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   },
   "repository": {
     "type": "git",
