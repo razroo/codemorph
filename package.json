@@ -5,10 +5,14 @@
   ],
   "version": "1.2.2",
   "description": "Code Morph is an extensible, easy to understand, easy contribute, easy to use Codemod library.",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./lib/cjs/types/index.d.ts",
+  "main": "./lib/cjs/index.js",
   "scripts": {
-    "build": "tsc",
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "prepack": "npm run build",
     "format": "prettier --write \"src/**/*.(js|ts)\"",
     "lint": "eslint src --ext .js,.ts",
     "lint:fix": "eslint src --fix --ext .js,.ts",
@@ -56,6 +60,7 @@
     "@angular/router": "^13.0.0",
     "@angular/service-worker": "^13.0.0",
     "@angular/upgrade": "^13.0.0",
+    "@types/glob": "^8.1.0",
     "@types/jest": "^27.5.2",
     "@types/lodash": "^4.14.192",
     "@types/resolve": "^1.20.2",
@@ -98,7 +103,19 @@
     "unist-util-visit": "2.0.3",
     "unist-util-visit-parents": "3.1.1"
   },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
   "files": [
-    "dist/**/*"
+    "lib/**/*"
   ]
 }

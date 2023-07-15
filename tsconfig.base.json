@@ -1,19 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "sourceMap": true,
-    "importHelpers": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "outDir": "build",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": false,
     "skipLibCheck": true,
-    "types": ["node", "jest"],
-    "lib": ["es2021"],
+    "checkJs": true,
+    "allowJs": true,
     "declaration": true,
-    "resolveJsonModule": true,
-    "baseUrl": ".",
-    "rootDir": "."
-  }
+    "declarationMap": true,
+    "types": ["node", "jest"],
+    "allowSyntheticDefaultImports": true
+  },
+  "files": ["./src/index.ts"]
 }
