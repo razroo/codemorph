@@ -27,7 +27,7 @@ const MIX_AMOUNTS_PRIMARY = {
     700: [false, 70],
     800: [false, 54],
     900: [false, 25]
-  };
+  } as any;
 
 const MIX_AMOUNTS_SECONDARY = {
   A100: [15, 80, 65],
@@ -56,7 +56,7 @@ export function getPalette(color: string): MaterialPalette {
 
     const accent = Object.keys(MIX_AMOUNTS_SECONDARY)
       .map(k => {
-        const [amount, sat, light] = MIX_AMOUNTS_SECONDARY[k];
+        const [amount, sat, light] = (MIX_AMOUNTS_SECONDARY as any)[k];
         return [k, new TinyColor(baseDark).mix(new TinyColor(baseTriad), amount)
           .saturate(sat).lighten(light)] as any;
       });

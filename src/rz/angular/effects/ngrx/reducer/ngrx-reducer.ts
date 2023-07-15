@@ -1,4 +1,3 @@
-import { EditInput } from 'src/rz/morph/interfaces/morph.interface';
 import { findClosestModuleFile } from "../../../../utils";
 import { createRelativePath, isTsFile } from "../../../../utils/add-export";
 import { readFileSync, writeFileSync } from 'fs';
@@ -13,7 +12,7 @@ export function addReducerToNgModule(filePathWithName: string, className: string
       const fileToBeAddedTo = readFileSync(moduleTsFile, 'utf-8').toString();
       const ReducerName = `from${className}`;
       const moduleName = `StoreModule.forFeature(${ReducerName}.${constantName}_FEATURE_KEY, ${ReducerName}.reducer)`;
-      const editInput: EditInput = {
+      const editInput: any = {
         fileType: 'ts',
         fileName: fileName,
         filePath: moduleTsFile,

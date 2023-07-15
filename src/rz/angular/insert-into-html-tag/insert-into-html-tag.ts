@@ -1,5 +1,5 @@
 
-import visit = require('unist-util-visit');
+import visit from 'unist-util-visit';
 import { createUnifiedTree } from '../morph-angular-html';
 import { EditHtmlFile } from '../interfaces/edit-html.interface';
 

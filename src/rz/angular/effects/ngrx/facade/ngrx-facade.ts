@@ -1,4 +1,4 @@
-import { EditInput } from 'src/rz/morph/interfaces/morph.interface';
+import { EditInput } from '../../../../morph/interfaces/morph.interface';
 import { findClosestModuleFile } from "../../../../utils";
 import { createRelativePath, isTsFile } from "../../../../utils/add-export";
 import { readFileSync, writeFileSync } from 'fs';
@@ -14,7 +14,7 @@ export function addFacadeToNgModule(filePathWithName: string, className: string)
       const FacadeName = `${className}Facade`;
       const editInput: EditInput = {
         fileType: 'ts',
-        fileName: fileName,
+        fileName: fileName as string,
         filePath: moduleTsFile,
         fileToBeAddedTo: fileToBeAddedTo,
         edits: [

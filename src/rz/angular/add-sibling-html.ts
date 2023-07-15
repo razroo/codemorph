@@ -1,5 +1,5 @@
-import visitParents = require('unist-util-visit-parents');
-import visit = require('unist-util-visit');
+import visitParents from 'unist-util-visit-parents';
+import visit from 'unist-util-visit';
 import { createUnifiedTree } from './morph-angular-html';
 import { EditHtmlFile } from './interfaces/edit-html.interface';
 
@@ -18,5 +18,5 @@ function combineTrees(fileToModifyTree: any, codeToAddTree: any, tagNameToInsert
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function insertCodeAfterElement(editFile: EditHtmlFile, fileToBeAddedToTree: any): any {  
   const stringToAddTree = createUnifiedTree(editFile.codeBlock as string);
-  return combineTrees(fileToBeAddedToTree, stringToAddTree, editFile.tagNameToInsert, editFile.siblingTagName);
+  return combineTrees(fileToBeAddedToTree, stringToAddTree, (editFile as any).tagNameToInsert, (editFile as any).siblingTagName);
 }

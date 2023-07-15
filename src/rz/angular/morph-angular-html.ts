@@ -1,6 +1,6 @@
 import { parse } from 'parse5';
-import fromParse5 = require('hast-util-from-parse5');
-import toHtml = require('hast-util-to-html');
+import fromParse5 from 'hast-util-from-parse5';
+import toHtml from 'hast-util-to-html';
 import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
 import { insertCodeAfterElement } from './add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';

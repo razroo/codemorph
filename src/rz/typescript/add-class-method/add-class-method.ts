@@ -10,7 +10,7 @@ export function addClassMethod(editCodeBlockInput: EditCodeBlockInput): void {
    }
    if(editCodeBlockInput.parameters) {
       const parameters = eval(editCodeBlockInput.parameters)  as unknown as {name: string, type: string}[];
-      addMethod['parameters'] = parameters
+      (addMethod as any)['parameters'] = parameters;
    }
    
    classDeclaration.addMethod({
