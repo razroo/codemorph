@@ -1,4 +1,4 @@
-import glob = require("glob");
+import * as glob from 'glob';
 
 export function findClosestModuleFile(path: string, fileNameToFind = 'module.ts'): string {
     let currentDir = path;

@@ -1,5 +1,5 @@
 import { createUnifiedTree } from '../../angular/morph-angular-html';
-import visit = require('unist-util-visit');
+import visit from 'unist-util-visit';
 import { EditHtmlFile } from "../../angular/interfaces/edit-html.interface";
 
 export function appendHtml(editHtmlFile: EditHtmlFile, fileToBeAddedToTree: any): any {

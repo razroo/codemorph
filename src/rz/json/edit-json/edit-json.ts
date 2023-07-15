@@ -1,12 +1,12 @@
 import { EditJson } from "../interfaces/json-morph.interface";
 import { JSONPath } from 'jsonpath-plus';
-import pointer = require('json-pointer');
+import * as pointer from 'json-pointer';
 
 export function editJson(editJson: EditJson, json: string): any {
   const codeBlock = eval(editJson.codeBlock);
   json = JSON.parse(json);
   //2. Set value
-  pointer.set(json, editJson.valueToModify, codeBlock);
+  pointer.set(json as any, editJson.valueToModify, codeBlock);
  
   //3. Return modified value
   return json;
@@ -20,10 +20,10 @@ export function addJsonKeyValue(editJson: EditJson, json: string): any {
   const firstJsonMatchedPointer = JsonPointer[0];
 
   //Get value of json
-  const jsonToEdit = pointer.get(json, firstJsonMatchedPointer);
+  const jsonToEdit = pointer.get(json as any, firstJsonMatchedPointer);
 
   //Set value
-  pointer.set(json, firstJsonMatchedPointer, {...jsonToEdit, ...codeBlock});
+  pointer.set(json as any, firstJsonMatchedPointer, {...jsonToEdit, ...codeBlock});
  
   //Return modified value
   return json;
