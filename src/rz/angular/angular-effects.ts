@@ -13,7 +13,7 @@ import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/type
 export function angularEffects(filePathWithName: string, type: AngularTypeNames, parameters: Parameters, optionalTypes: AngularOptionalType[]): void {
   switch (type) {
     case AngularTypeNames.Component:
-      addClassToDeclarationsAndImports(filePathWithName, parameters.className, optionalTypes);
+      addClassToDeclarationsAndImports(filePathWithName, (parameters as any).className, optionalTypes);
       break;
     case AngularTypeNames.StandaloneComponent:
       exportComponentFile(filePathWithName)
@@ -28,13 +28,13 @@ export function angularEffects(filePathWithName: string, type: AngularTypeNames,
       exportGraphqlFile(filePathWithName)
       break;
     case AngularTypeNames.NgrxEffects:
-      addEffectToNgModule(filePathWithName, parameters.className)
+      addEffectToNgModule(filePathWithName, (parameters as any).className)
       break;
     case AngularTypeNames.NgrxFacade:
-      addFacadeToNgModule(filePathWithName, parameters.className)
+      addFacadeToNgModule(filePathWithName, (parameters as any).className)
       break;
     case AngularTypeNames.NgrxReducer:
-      addReducerToNgModule(filePathWithName, parameters.className, parameters.constantName)
+      addReducerToNgModule(filePathWithName, (parameters as any).className, (parameters as any).constantName)
       break;
     case AngularTypeNames.Directive:
       exportDirectiveFile(filePathWithName);

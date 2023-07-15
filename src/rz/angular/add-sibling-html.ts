@@ -18,5 +18,5 @@ function combineTrees(fileToModifyTree: any, codeToAddTree: any, tagNameToInsert
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function insertCodeAfterElement(editFile: EditHtmlFile, fileToBeAddedToTree: any): any {  
   const stringToAddTree = createUnifiedTree(editFile.codeBlock as string);
-  return combineTrees(fileToBeAddedToTree, stringToAddTree, editFile.tagNameToInsert, editFile.siblingTagName);
+  return combineTrees(fileToBeAddedToTree, stringToAddTree, (editFile as any).tagNameToInsert, (editFile as any).siblingTagName);
 }

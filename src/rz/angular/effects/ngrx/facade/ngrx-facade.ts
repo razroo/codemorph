@@ -14,7 +14,7 @@ export function addFacadeToNgModule(filePathWithName: string, className: string)
       const FacadeName = `${className}Facade`;
       const editInput: EditInput = {
         fileType: 'ts',
-        fileName: fileName,
+        fileName: fileName as string,
         filePath: moduleTsFile,
         fileToBeAddedTo: fileToBeAddedTo,
         edits: [

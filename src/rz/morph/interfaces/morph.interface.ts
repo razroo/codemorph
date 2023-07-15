@@ -1,6 +1,6 @@
 export interface EditInput {
   fileType?: 'html' | 'ts' | string;
-  fileName: string;
+  fileName: any;
   filePath?: string;
   fileToBeAddedTo?: string | any;
   bodyText?: string;

@@ -10,7 +10,7 @@ export function addClassToDeclarationsAndImports(filePathWithName: string, class
     if(isTsFile(filePathWithName)) {
       const moduleTsFile = findClosestModuleFile(filePathWithName);
       const componentFileName = filePathWithName.split('/').pop();
-      const componentName = componentFileName.split('.')[0];
+      const componentName = (componentFileName as any).split('.')[0];
       const componentClassName = `${names(componentName).className}Component`;
       const importPath = createRelativePath(filePathWithName, moduleTsFile);
       const fileName = moduleTsFile.split('/').pop();
@@ -37,7 +37,7 @@ export function addClassToDeclarationsAndImports(filePathWithName: string, class
           }
         ]
       };
-      if(optionalTypes?.find(option => option.name === GlobalAngularOptionNames.IsExported).selected){
+      if((optionalTypes as any).find((option: any) => option.name === GlobalAngularOptionNames.IsExported).selected){
         exportTsFiles(filePathWithName);
       }
       const updatedFileToBeAddedTo = morphTypescript(editInput);
