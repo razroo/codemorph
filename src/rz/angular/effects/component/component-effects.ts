@@ -1,4 +1,4 @@
-import { EditInput } from 'src/rz/morph/interfaces/morph.interface';
+import { EditInput } from '../../../morph/interfaces/morph.interface';
 import { readFileSync, writeFileSync } from 'fs';
 import { findClosestModuleFile } from "../../../utils";
 import { createRelativePath, exportTsFiles, isTsFile } from "../../../utils/add-export";

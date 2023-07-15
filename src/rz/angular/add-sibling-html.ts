@@ -1,5 +1,5 @@
-import visitParents = require('unist-util-visit-parents');
-import visit = require('unist-util-visit');
+import visitParents from 'unist-util-visit-parents';
+import visit from 'unist-util-visit';
 import { createUnifiedTree } from './morph-angular-html';
 import { EditHtmlFile } from './interfaces/edit-html.interface';
 

@@ -1,4 +1,4 @@
-import visit = require('unist-util-visit');
+import visit from 'unist-util-visit';
 import { EditHtmlFile } from "./interfaces/edit-html.interface";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
