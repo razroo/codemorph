@@ -1,4 +1,3 @@
-import { EditInput } from 'src/rz/morph/interfaces/morph.interface';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, parse, relative} from "path";
 import { morphTypescript } from '../../typescript/morph-typescript';
@@ -21,7 +20,7 @@ export function exportTsFiles(filePathWithName: string): void {
     const indexTsFile = findNearestIndexFile(filePathWithName);
     const exportPath = createRelativePath(filePathWithName, indexTsFile);
     const fileToBeAddedTo = readFileSync(indexTsFile, 'utf-8').toString();
-    const editInput: EditInput = {
+    const editInput: any = {
       fileType: 'ts',
       fileName: 'index.ts',
       filePath: indexTsFile,

@@ -15,8 +15,8 @@ import { addToVariableObject } from "./variable-statement/variable-statement";
 // codeBeingAdded e.g. 'this.dataSource.paginator = this.paginator;'
 function insertCodeIntoClassMethod(editCodeBlockInput: EditCodeBlockInput): void {
   const classDeclaration = editCodeBlockInput.sourceFile.getClasses()[0];
-  const currentBodyText = classDeclaration.getInstanceMethod(editCodeBlockInput.nodeToInsertInto).getBodyText();
-  classDeclaration.getInstanceMethod(editCodeBlockInput.nodeToInsertInto).setBodyText(
+  const currentBodyText = classDeclaration.getInstanceMethod((editCodeBlockInput as any).nodeToInsertInto)?.getBodyText();
+  classDeclaration.getInstanceMethod((editCodeBlockInput as any).nodeToInsertInto)?.setBodyText(
     `${currentBodyText}
     ${editCodeBlockInput.codeBlock}`)
 }
@@ -26,7 +26,7 @@ function insertCodeIntoClassMethod(editCodeBlockInput: EditCodeBlockInput): void
 function insertImportToTypescriptFile(editCodeBlockInput: EditCodeBlockInput): void {
   editCodeBlockInput.sourceFile.addImportDeclaration({
     defaultImport: editCodeBlockInput.codeBlock as string,
-    moduleSpecifier: editCodeBlockInput.path,
+    moduleSpecifier: editCodeBlockInput.path as any,
   });
 }
 
