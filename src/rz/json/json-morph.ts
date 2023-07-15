@@ -7,10 +7,10 @@ export function morphJson(editJsonInput: EditJsonInput): string {
   editJsonInput.edits.forEach((editJsonValue: EditJson) => {
     switch(editJsonValue.nodeType) {
       case 'editJson': 
-        json = editJson(editJsonValue, json);
+        json = editJson(editJsonValue, json as string);
         break;
       case 'addJsonKeyValue': 
-        json = addJsonKeyValue(editJsonValue, json);
+        json = addJsonKeyValue(editJsonValue, json as string);
         break;
     }
   });

@@ -25,6 +25,8 @@ export function morphCode(editInput: any): string {
       return morphScss(editInput as EditScssInput);
     case 'json':
       return morphJson(editInput as EditJsonInput);  
+    default :
+      return ''  
   }
 }
 

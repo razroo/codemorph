@@ -40,7 +40,7 @@ function editTypescriptImport(editCodeBlockInput: EditCodeBlockInput): void {
       return namedImportsArr.length > 0;
     })
   
-  testImport[0].setModuleSpecifier(editCodeBlockInput.path);
+  testImport[0].setModuleSpecifier((editCodeBlockInput as any).path);
 }
 
 // for now the index is at 0 and will always assume to insert at beginning of file

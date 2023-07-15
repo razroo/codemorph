@@ -3,16 +3,16 @@ import { EditCodeBlockInput } from "../../interfaces/edit-typescript.interface";
 
 export function addNgModuleItem(editCodeBlockInput: EditCodeBlockInput, itemNameToAdd = 'providers'): void {
   const ngModuleClass = editCodeBlockInput.sourceFile.getClass(c => c.getText().includes('@NgModule'));
-  const ngModuleDecorator = ngModuleClass.getDecorator('NgModule');
-  const moduleArguments = ngModuleDecorator.getArguments()[0];
+  const ngModuleDecorator = (ngModuleClass as any).getDecorator('NgModule');
+  const moduleArguments = (ngModuleDecorator as any).getArguments()[0];
 
   const declarationsProp = moduleArguments.getDescendants()
-    .find(d => d.getKind() === SyntaxKind.PropertyAssignment &&
+    .find((d: any) => d.getKind() === SyntaxKind.PropertyAssignment &&
         (d.compilerNode as ts.PropertyAssignment).name.getText() === itemNameToAdd);
 
   // add object key / value if does not exist
   if(!declarationsProp) {
-    const objectToUpdate = ngModuleDecorator.getDescendants().find(d => {
+    const objectToUpdate = (ngModuleDecorator as any).getDescendants().find((d: any) => {
       return d.getKind() === SyntaxKind.ObjectLiteralExpression
     });
 
@@ -23,7 +23,7 @@ export function addNgModuleItem(editCodeBlockInput: EditCodeBlockInput, itemName
     })
   }
   else {
-    const array = declarationsProp.getFirstChildByKind(SyntaxKind.ArrayLiteralExpression);
+    const array = declarationsProp.getFirstChildByKind(SyntaxKind.ArrayLiteralExpression) as any;
     array.addElement(editCodeBlockInput.codeBlock);
   }
 }
@@ -38,15 +38,15 @@ export function addNgModuleItemToSpec(editCodeBlockInput: EditCodeBlockInput, it
     .find(d => {
       return d.getKind() === SyntaxKind.CallExpression &&
         (d.compilerNode as ts.ExpressionStatement).getText().includes("configureTestingModule")
-      });
+      }) as any;
 
   const ngModulePropItem = beforeEachStatement.getDescendants()
-    .find(d => d.getKind() === SyntaxKind.PropertyAssignment &&
+    .find((d: any) => d.getKind() === SyntaxKind.PropertyAssignment &&
         (d.compilerNode as ts.PropertyAssignment).name.getText() === itemNameToAdd);
 
   // add object key / value if does not exist
   if(!ngModulePropItem) {
-    const objectToUpdate = beforeEachStatement.getDescendants().find(d => {
+    const objectToUpdate = beforeEachStatement.getDescendants().find((d: any) => {
       return d.getKind() === SyntaxKind.ObjectLiteralExpression
     });
 
@@ -67,6 +67,6 @@ export function addNgModuleProviderToSpec(editCodeBlockInput: EditCodeBlockInput
   const providersProp = sourceFile.getDescendants()
     .find(d => d.getKind() === SyntaxKind.PropertyAssignment &&
         (d.compilerNode as ts.PropertyAssignment).name.getText() === "providers");
-  const array = providersProp.getFirstChildByKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+  const array = (providersProp as any).getFirstChildByKindOrThrow(SyntaxKind.ArrayLiteralExpression);
   array.addElement(editCodeBlockInput.codeBlock);
 }
