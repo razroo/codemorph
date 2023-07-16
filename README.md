@@ -2,6 +2,13 @@
 
 Codemorph is an extensible, easy to understand, easy to contribute, easy to use **Codemod** library. Codemorph-dazzle your codebase like you've never before. 
 
+
+# Important Note ⚠️
+
+Being that Codemorph makes use of many system-based code modifiers, even though this library is built using ESM, we find that it affects the initial bundle size for FE application.
+
+We highly recommend using this in either system applications or backend applications. However, FE applications using this library will experience optimization bailouts. It is therefore not recommended that this library is used with production-grade FE applications.
+
 # How to Install Codemorph 
 
 ```
