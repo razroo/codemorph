@@ -7,11 +7,11 @@ import { GlobalAngularOptionNames, AngularOptionalType } from '../../types/types
 import { names } from '../../../global-variables';
 import { findClosestModuleFileUsingPaths } from '../../../utils/find-module-file/find-module-file';
 
-export function fileToAddClassToDeclarationsAndImports(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string | undefined {
+export function fileToAddClassToDeclarationsAndImports(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string {
   if(isTsFile(filePathWithName)) {
     return findClosestModuleFileUsingPaths(filePathWithName, fileTree);
   } else {
-    return undefined;
+    return '';
   }
 }
 

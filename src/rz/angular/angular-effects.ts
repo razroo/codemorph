@@ -13,7 +13,7 @@ import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/type
 export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] {
   switch(type) {
     case AngularTypeNames.Component:
-      fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
+      return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
       break;
   }
 }

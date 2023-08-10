@@ -2,6 +2,8 @@ import { readFileSync, writeFileSync } from 'fs';
 import { TemplateInputParameter } from '../../../utils/interfaces/template-parameters';
 import { effects, Parameters } from "../../../morph";
 import { fileToAddClassToDeclarationsAndImports } from './component-effects';
+import { filesToAffect } from '../../../morph/morph';
+import { AngularTypeNames } from '../../types/types';
 
 describe('Angular Component Effects', () => {
   afterEach(() => {
@@ -35,8 +37,11 @@ describe('Angular Component Effects', () => {
   });
 
   it('should get the closest app module file', () => {
-    const mockFilePath = 'path/to/another/hello.component.ts';
-    const mockOptionalTypes = {};
+    const mockFilePath = 'path/to/another/src/hello.component.ts';
+    const mockParameter = {
+      optionalTypes: {},
+      type: AngularTypeNames.Component
+    } as any;
     
     const fileTree = [
       "path/to/another/src",
@@ -44,7 +49,7 @@ describe('Angular Component Effects', () => {
       "path/to/another/hello.module.ts",
       "path/to/another"
     ];
-    const fileToModify = fileToAddClassToDeclarationsAndImports(mockFilePath, fileTree, mockOptionalTypes as any);
+    const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
     expect(fileToModify).toEqual('path/to/another/hello.module.ts');
   });
 });
