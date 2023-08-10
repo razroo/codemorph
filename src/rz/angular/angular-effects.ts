@@ -14,7 +14,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
   switch(type) {
     case AngularTypeNames.Component:
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
-      break;
+    default:
+      return ''
   }
 }
 

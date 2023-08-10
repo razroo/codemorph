@@ -41,6 +41,8 @@ export function filesToAffect(filePathWithName: string, fileTree: string[], para
   switch(programmingLanguage) {
     case 'angular':
       return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
+    default:
+      return ''  
   }
 }
 
