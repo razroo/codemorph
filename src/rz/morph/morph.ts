@@ -35,6 +35,13 @@ export interface Parameters {
   constantName?: string;
 }
 
+// sister function to "effects"
+// This function happens first and then effects is called
+export function fileToAffect(fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string, parameters?: string) {
+  const parsedParemeters: Parameters = typeof parameters === 'string' ? JSON.parse(parameters) : parameters;
+}
+
+// sister function to "fileToAffect"
 // effects are called whenever a file is generated
 // such as automatically exporting file in closes index ts file
 // type respresents component, guard, pipe etc, which is specific to programming language
