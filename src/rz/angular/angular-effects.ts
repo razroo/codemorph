@@ -1,5 +1,5 @@
 import { Parameters } from "../morph";
-import { addClassToDeclarationsAndImports } from "./effects/component/component-effects";
+import { addClassToDeclarationsAndImports, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
 import { exportDirectiveFile } from "./effects/directive/directive";
 import { exportGraphqlFile } from "./effects/graphql/graphql";
 import { exportInterfaceFile } from "./effects/interface/interface";
@@ -10,10 +10,10 @@ import { exportServiceFile } from "./effects/service/service";
 import { exportComponentFile } from "./effects/standalone-component/standalone-component";
 import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/types";
 
-export function angularFilesToAffect(fileTree: string[], type: AngularTypeNames, parameters: Parameters, optionalTypes: AngularOptionalType[]) {
+export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] {
   switch(type) {
     case AngularTypeNames.Component:
-      fileToAddClassToDeclarationsAndImports(fileTree, parameters, optionalTypes);
+      fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
       break;
   }
 }

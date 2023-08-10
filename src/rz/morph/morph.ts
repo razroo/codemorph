@@ -8,7 +8,7 @@ import { morphTypescript } from '../typescript/morph-typescript';
 import { morphScss } from '../scss/morph-scss';
 import { morphJson } from '../json/json-morph';
 import { EditJsonInput } from '../json/interfaces/json-morph.interface';
-import { angularEffects } from '../angular/angular-effects';
+import { angularEffects, angularFilesToAffect } from '../angular/angular-effects';
 import { reactTypes } from '../react';
 import { TemplateInputParameter } from '../utils/interfaces/template-parameters';
 
@@ -37,8 +37,11 @@ export interface Parameters {
 
 // sister function to "effects"
 // This function happens first and then effects is called
-export function filesToAffect(fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string, parameters?: string) {
-  const parsedParemeters: Parameters = typeof parameters === 'string' ? JSON.parse(parameters) : parameters;
+export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string) {
+  switch(programmingLanguage) {
+    case 'angular':
+      return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
+  }
 }
 
 // sister function to "fileToAffect"
