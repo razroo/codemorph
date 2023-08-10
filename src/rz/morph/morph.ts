@@ -37,7 +37,7 @@ export interface Parameters {
 
 // sister function to "effects"
 // This function happens first and then effects is called
-export function fileToAffect(fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string, parameters?: string) {
+export function filesToAffect(fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string, parameters?: string) {
   const parsedParemeters: Parameters = typeof parameters === 'string' ? JSON.parse(parameters) : parameters;
 }
 

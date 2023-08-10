@@ -93,6 +93,7 @@
     "jsonc-parser": "3.0.0",
     "jsonpath-plus": "^6.0.1",
     "lodash": "^4.17.21",
+    "minimatch": "^9.0.3",
     "parse5": "^6.0.1",
     "path": "^0.12.7",
     "prettier": "^2.3.0",

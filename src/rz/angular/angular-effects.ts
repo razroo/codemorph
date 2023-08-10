@@ -10,6 +10,14 @@ import { exportServiceFile } from "./effects/service/service";
 import { exportComponentFile } from "./effects/standalone-component/standalone-component";
 import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/types";
 
+export function angularFilesToAffect(fileTree: string[], type: AngularTypeNames, parameters: Parameters, optionalTypes: AngularOptionalType[]) {
+  switch(type) {
+    case AngularTypeNames.Component:
+      fileToAddClassToDeclarationsAndImports(fileTree, parameters, optionalTypes);
+      break;
+  }
+}
+
 export function angularEffects(filePathWithName: string, type: AngularTypeNames, parameters: Parameters, optionalTypes: AngularOptionalType[]): void {
   switch (type) {
     case AngularTypeNames.Component:
