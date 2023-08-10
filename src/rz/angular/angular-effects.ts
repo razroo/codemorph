@@ -1,5 +1,5 @@
 import { Parameters } from "../morph";
-import { addClassToDeclarationsAndImports } from "./effects/component/component-effects";
+import { addClassToDeclarationsAndImports, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
 import { exportDirectiveFile } from "./effects/directive/directive";
 import { exportGraphqlFile } from "./effects/graphql/graphql";
 import { exportInterfaceFile } from "./effects/interface/interface";
@@ -9,6 +9,15 @@ import { addReducerToNgModule } from "./effects/ngrx/reducer/ngrx-reducer";
 import { exportServiceFile } from "./effects/service/service";
 import { exportComponentFile } from "./effects/standalone-component/standalone-component";
 import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/types";
+
+export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string {
+  switch(type) {
+    case AngularTypeNames.Component:
+      return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
+    default:
+      return ''
+  }
+}
 
 export function angularEffects(filePathWithName: string, type: AngularTypeNames, parameters: Parameters, optionalTypes: AngularOptionalType[]): void {
   switch (type) {

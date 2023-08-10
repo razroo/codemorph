@@ -5,6 +5,15 @@ import { createRelativePath, exportTsFiles, isTsFile } from "../../../utils/add-
 import { morphTypescript } from '../../../typescript/morph-typescript';
 import { GlobalAngularOptionNames, AngularOptionalType } from '../../types/types';
 import { names } from '../../../global-variables';
+import { findClosestModuleFileUsingPaths } from '../../../utils/find-module-file/find-module-file';
+
+export function fileToAddClassToDeclarationsAndImports(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string {
+  if(isTsFile(filePathWithName)) {
+    return findClosestModuleFileUsingPaths(filePathWithName, fileTree);
+  } else {
+    return '';
+  }
+}
 
 export function addClassToDeclarationsAndImports(filePathWithName: string, className: string, optionalTypes: AngularOptionalType[]): void {
     if(isTsFile(filePathWithName)) {

@@ -8,7 +8,7 @@ import { morphTypescript } from '../typescript/morph-typescript';
 import { morphScss } from '../scss/morph-scss';
 import { morphJson } from '../json/json-morph';
 import { EditJsonInput } from '../json/interfaces/json-morph.interface';
-import { angularEffects } from '../angular/angular-effects';
+import { angularEffects, angularFilesToAffect } from '../angular/angular-effects';
 import { reactTypes } from '../react';
 import { TemplateInputParameter } from '../utils/interfaces/template-parameters';
 
@@ -35,6 +35,18 @@ export interface Parameters {
   constantName?: string;
 }
 
+// sister function to "effects"
+// This function happens first and then effects is called
+export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string {
+  switch(programmingLanguage) {
+    case 'angular':
+      return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
+    default:
+      return ''  
+  }
+}
+
+// sister function to "fileToAffect"
 // effects are called whenever a file is generated
 // such as automatically exporting file in closes index ts file
 // type respresents component, guard, pipe etc, which is specific to programming language
