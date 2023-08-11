@@ -47,7 +47,21 @@ export function filesToAffect(filePathWithName: string, fileTree: string[], para
   }
 }
 
+// 2.0 effects api 
 // sister function to "fileToAffect"
+// effects are called whenever a file is generated
+// such as automatically exporting file in closes index ts file
+// type respresents component, guard, pipe etc, which is specific to programming language
+// allows effects to work in any environment e.g. backend, system, frontend thus standalone
+export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
+  switch(programmingLanguage) {
+    case CommunityPaths.Angular:
+      return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
+    default:
+      return []  
+  }
+}
+
 // effects are called whenever a file is generated
 // such as automatically exporting file in closes index ts file
 // type respresents component, guard, pipe etc, which is specific to programming language
@@ -57,17 +71,6 @@ export function effects(filePathWithName: string, parameter: TemplateInputParame
   switch(programmingLanguage) {
     case CommunityPaths.Angular:
       angularEffects(filePathWithName, (parameter.type) as AngularTypeNames, parsedParemeters, (parameter.optionalTypes) as any as AngularOptionalType[]);
-  }
-}
-
-// 2.0 effects api 
-// allows effects to work in any environment e.g. backend, system, frontend thus standalone
-export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
-  switch(programmingLanguage) {
-    case CommunityPaths.Angular:
-      return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
-    default:
-      return []  
   }
 }
 
