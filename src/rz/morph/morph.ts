@@ -60,12 +60,15 @@ export function effects(filePathWithName: string, parameter: TemplateInputParame
   }
 }
 
+// 2.0 effects api 
+// allows effects to work in any environment e.g. backend, system, frontend thus standalone
 export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
   switch(programmingLanguage) {
     case 'angular':
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
     default:
       return []  
+  }
 }
 
 export function types(programmingLanguage: string): any[] {
