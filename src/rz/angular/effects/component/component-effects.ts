@@ -1,4 +1,4 @@
-import { EditInput } from '../../../morph/interfaces/morph.interface';
+import { EditFileEffect, EditInput } from '../../../morph/interfaces/morph.interface';
 import { readFileSync, writeFileSync } from 'fs';
 import { findClosestModuleFile } from "../../../utils";
 import { createRelativePath, exportTsFiles, isTsFile } from "../../../utils/add-export";
@@ -13,6 +13,18 @@ export function fileToAddClassToDeclarationsAndImports(filePathWithName: string,
   } else {
     return '';
   }
+}
+
+export function componentEffects(fileEffects: EditFileEffect[]): EditFileEffect[] {
+  for(const fileEffect of fileEffects) {
+    const filePath = fileEffect.filePath;
+    if(filePath.includes('module.ts')) {
+      fileEffect.content = 'xyz';
+      console.log('filePath');
+      console.log(filePath);
+    }
+  }
+  return fileEffects;
 }
 
 export function addClassToDeclarationsAndImports(filePathWithName: string, className: string, optionalTypes: AngularOptionalType[]): void {

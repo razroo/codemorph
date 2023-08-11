@@ -1,9 +1,10 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { TemplateInputParameter } from '../../../utils/interfaces/template-parameters';
 import { effects, Parameters } from "../../../morph";
-import { fileToAddClassToDeclarationsAndImports } from './component-effects';
+import { componentEffects, fileToAddClassToDeclarationsAndImports } from './component-effects';
 import { filesToAffect } from '../../../morph/morph';
 import { AngularTypeNames } from '../../types/types';
+import { EditFileEffect } from '../../../morph/interfaces/morph.interface';
 
 describe('Angular Component Effects', () => {
   afterEach(() => {
@@ -51,5 +52,17 @@ describe('Angular Component Effects', () => {
     ];
     const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
     expect(fileToModify).toEqual('path/to/another/hello.module.ts');
+  });
+
+  it('should trigger component effects', () => {
+    const mockFileEffects: EditFileEffect[] = [{
+      filePath: 'path/to/another/hello.module.ts',
+      content: ''
+    }];
+    const result = componentEffects(mockFileEffects);
+    expect(result).toEqual([{
+      content: "xyz",
+      filePath: "path/to/another/hello.module.ts"
+    }]);
   });
 });
