@@ -55,11 +55,19 @@ describe('Angular Component Effects', () => {
   });
 
   it('should trigger component effects', () => {
+    const mockFilePath = 'path/to/another/src/hello.component.ts';
     const mockFileEffects: EditFileEffect[] = [{
       filePath: 'path/to/another/hello.module.ts',
-      content: ''
+      content: `import { NgModule } from '@angular/core';
+      import { CommonModule } from '@angular/common';
+      
+      @NgModule({
+        imports: [CommonModule],
+      })
+      export class CommonUiModule {}
+      `
     }];
-    const result = componentEffects(mockFileEffects);
+    const result = componentEffects(mockFilePath, mockFileEffects);
     expect(result).toEqual([{
       content: "xyz",
       filePath: "path/to/another/hello.module.ts"

@@ -15,11 +15,39 @@ export function fileToAddClassToDeclarationsAndImports(filePathWithName: string,
   }
 }
 
-export function componentEffects(fileEffects: EditFileEffect[]): EditFileEffect[] {
+export function componentEffects(filePathWithName: string, fileEffects: EditFileEffect[]): EditFileEffect[] {
   for(const fileEffect of fileEffects) {
     const filePath = fileEffect.filePath;
     if(filePath.includes('module.ts')) {
-      fileEffect.content = 'xyz';
+      const componentFileName = filePathWithName.split('/').pop();
+      const componentName = (componentFileName as any).split('.')[0];
+      const componentClassName = `${names(componentName).className}Component`;
+      const importPath = createRelativePath(filePathWithName, filePath);
+      const fileName = filePath.split('/').pop();
+      const fileToBeAddedTo = fileEffect.content;
+      const editInput: EditInput = {
+        fileType: 'ts',
+        fileName: fileName,
+        filePath: filePath,
+        fileToBeAddedTo: fileToBeAddedTo,
+        edits: [
+          {
+            nodeType: 'addNgModuleExport',
+            codeBlock: componentClassName,
+          },
+          {
+            nodeType: 'addNgModuleDeclaration',
+            codeBlock: componentClassName,
+          },
+          {
+            nodeType: 'import',
+            codeBlock: `{ ${componentClassName} }`,
+            path: importPath,
+          }
+        ]
+      };
+      const updatedFileToBeAddedTo = morphTypescript(editInput);
+      fileEffect.content = updatedFileToBeAddedTo;
       console.log('filePath');
       console.log(filePath);
     }
