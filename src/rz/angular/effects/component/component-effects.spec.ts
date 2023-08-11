@@ -68,8 +68,19 @@ describe('Angular Component Effects', () => {
       `
     }];
     const result = componentEffects(mockFilePath, mockFileEffects);
+    const moduleContent = `import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HelloComponent } from "./src/hello.component";
+
+@NgModule({
+  imports: [CommonModule],
+  exports: [HelloComponent],
+  declarations: [HelloComponent]
+})
+export class CommonUiModule { }
+`;
     expect(result).toEqual([{
-      content: "xyz",
+      content: moduleContent,
       filePath: "path/to/another/hello.module.ts"
     }]);
   });
