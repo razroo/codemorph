@@ -9,7 +9,7 @@ export { getVersionAndNameString, determineType, determineFilePathParameter, rea
     getAllDirectoriesFromVsCodeFolder, determineLanguagesUsed, replaceCodeModEditsTemplateVariables } from './rz/utils';
 
 // export typescript related edits
-export { EditInput, EditFile, morphCode, effects, communityPaths, types } from './rz/morph';
+export { EditInput, EditFile, morphCode, effects, standaloneEffects, filesToAffect, communityPaths, types } from './rz/morph';
 
 // export typescript related edits
 export { getCodeModParams, getCodeModOptions } from './rz/params';

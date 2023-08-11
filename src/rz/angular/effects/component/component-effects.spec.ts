@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { TemplateInputParameter } from '../../../utils/interfaces/template-parameters';
 import { effects, Parameters } from "../../../morph";
 import { componentEffects, fileToAddClassToDeclarationsAndImports } from './component-effects';
-import { filesToAffect } from '../../../morph/morph';
+import { filesToAffect, standaloneEffects } from '../../../morph/morph';
 import { AngularTypeNames } from '../../types/types';
 import { EditFileEffect } from '../../../morph/interfaces/morph.interface';
 
@@ -54,14 +54,38 @@ describe('Angular Component Effects', () => {
     expect(fileToModify).toEqual('path/to/another/hello.module.ts');
   });
 
-  it('should trigger component effects', () => {
+  it('should trigger component standalone effects codemorph', () => {
+    const programmingLanguage = 'angular';
+    const mockParameter = {
+      type: AngularTypeNames.Component
+    } as any;
     const mockFileEffects: EditFileEffect[] = [{
       filePath: 'path/to/another/hello.module.ts',
-      content: ''
+      originFilePath: 'path/to/another/src/hello.component.ts',
+      content: `import { NgModule } from '@angular/core';
+      import { CommonModule } from '@angular/common';
+      
+      @NgModule({
+        imports: [CommonModule],
+      })
+      export class CommonUiModule {}
+      `
     }];
-    const result = componentEffects(mockFileEffects);
+    const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects);
+    const moduleContent = `import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HelloComponent } from "./src/hello.component";
+
+@NgModule({
+  imports: [CommonModule],
+  exports: [HelloComponent],
+  declarations: [HelloComponent]
+})
+export class CommonUiModule { }
+`;
     expect(result).toEqual([{
-      content: "xyz",
+      content: moduleContent,
+      originFilePath: "path/to/another/src/hello.component.ts",
       filePath: "path/to/another/hello.module.ts"
     }]);
   });
