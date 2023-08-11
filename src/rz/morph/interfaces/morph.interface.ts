@@ -28,4 +28,5 @@ export interface EditFile {
 export interface EditFileEffect {
   filePath: string; 
   content: string;
+  originFilePath: string;
 }

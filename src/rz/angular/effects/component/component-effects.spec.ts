@@ -55,9 +55,9 @@ describe('Angular Component Effects', () => {
   });
 
   it('should trigger component effects', () => {
-    const mockFilePath = 'path/to/another/src/hello.component.ts';
     const mockFileEffects: EditFileEffect[] = [{
       filePath: 'path/to/another/hello.module.ts',
+      originFilePath: 'path/to/another/src/hello.component.ts',
       content: `import { NgModule } from '@angular/core';
       import { CommonModule } from '@angular/common';
       

@@ -1,5 +1,6 @@
 import { Parameters } from "../morph";
-import { addClassToDeclarationsAndImports, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
+import { EditFileEffect } from "../morph/interfaces/morph.interface";
+import { addClassToDeclarationsAndImports, componentEffects, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
 import { exportDirectiveFile } from "./effects/directive/directive";
 import { exportGraphqlFile } from "./effects/graphql/graphql";
 import { exportInterfaceFile } from "./effects/interface/interface";
@@ -16,6 +17,15 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
     default:
       return ''
+  }
+}
+
+export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: EditFileEffect[]): EditFileEffect[] {
+  switch(type) {
+    case AngularTypeNames.Component:
+      return componentEffects(fileEffects);
+    default:
+      return [];
   }
 }
 

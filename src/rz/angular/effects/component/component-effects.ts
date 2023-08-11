@@ -15,14 +15,15 @@ export function fileToAddClassToDeclarationsAndImports(filePathWithName: string,
   }
 }
 
-export function componentEffects(filePathWithName: string, fileEffects: EditFileEffect[]): EditFileEffect[] {
+export function componentEffects(fileEffects: EditFileEffect[]): EditFileEffect[] {
   for(const fileEffect of fileEffects) {
     const filePath = fileEffect.filePath;
+    const originFilePath = fileEffect.originFilePath;
     if(filePath.includes('module.ts')) {
-      const componentFileName = filePathWithName.split('/').pop();
+      const componentFileName = originFilePath.split('/').pop();
       const componentName = (componentFileName as any).split('.')[0];
       const componentClassName = `${names(componentName).className}Component`;
-      const importPath = createRelativePath(filePathWithName, filePath);
+      const importPath = createRelativePath(originFilePath, filePath);
       const fileName = filePath.split('/').pop();
       const fileToBeAddedTo = fileEffect.content;
       const editInput: EditInput = {

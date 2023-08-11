@@ -59,6 +59,12 @@ export function effects(filePathWithName: string, parameter: TemplateInputParame
   }
 }
 
+export function standaloneEffects(programmingLanguage: string) {
+  switch(programmingLanguage) {
+    case 'angular':
+      
+}
+
 export function types(programmingLanguage: string): any[] {
   switch(programmingLanguage) {
     case CommunityPaths.Angular: 
