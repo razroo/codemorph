@@ -24,3 +24,8 @@ export interface EditFile {
   parameters?: any;
   bodyText?: string;
 }
+
+export interface EditFileEffect {
+  filePath: string; 
+  content: string;
+}
