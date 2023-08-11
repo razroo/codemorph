@@ -8,9 +8,10 @@ import { morphTypescript } from '../typescript/morph-typescript';
 import { morphScss } from '../scss/morph-scss';
 import { morphJson } from '../json/json-morph';
 import { EditJsonInput } from '../json/interfaces/json-morph.interface';
-import { angularEffects, angularFilesToAffect } from '../angular/angular-effects';
+import { angularEffects, angularFilesToAffect, angularStandaloneEffects } from '../angular/angular-effects';
 import { reactTypes } from '../react';
 import { TemplateInputParameter } from '../utils/interfaces/template-parameters';
+import { EditFileEffect } from './interfaces/morph.interface';
 
 // takes in singular object and makes all edits to files 
 // used when editing a file
@@ -59,10 +60,12 @@ export function effects(filePathWithName: string, parameter: TemplateInputParame
   }
 }
 
-export function standaloneEffects(programmingLanguage: string) {
+export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
   switch(programmingLanguage) {
     case 'angular':
-      
+      return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
+    default:
+      return []  
 }
 
 export function types(programmingLanguage: string): any[] {
