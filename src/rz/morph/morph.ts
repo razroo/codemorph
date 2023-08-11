@@ -55,7 +55,7 @@ export function effects(filePathWithName: string, parameter: TemplateInputParame
   const parsedParemeters: Parameters = typeof parameters === 'string' ? JSON.parse(parameters) : parameters;
 
   switch(programmingLanguage) {
-    case 'angular':
+    case CommunityPaths.Angular:
       angularEffects(filePathWithName, (parameter.type) as AngularTypeNames, parsedParemeters, (parameter.optionalTypes) as any as AngularOptionalType[]);
   }
 }
@@ -64,7 +64,7 @@ export function effects(filePathWithName: string, parameter: TemplateInputParame
 // allows effects to work in any environment e.g. backend, system, frontend thus standalone
 export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
   switch(programmingLanguage) {
-    case 'angular':
+    case CommunityPaths.Angular:
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
     default:
       return []  
