@@ -23,16 +23,16 @@ function getModuleFile(paths: string[], globPattern: string) {
   return undefined;
 }
 
-export function findClosestModuleFileUsingPaths(filePathWithName: string, paths: string[], fileNameToFind = 'module.ts'): string {
+export function findClosestModuleFileUsingPaths(filePathWithName: string, paths: string[], fileNameToFind = 'module.ts'): string[] {
     let currentDir = filePathWithName;
     while (currentDir.length > 0) {
       const modulePath = currentDir + `/*.${fileNameToFind}`;
       const moduleFile = getModuleFile(paths, modulePath);
       if(moduleFile) {
-        return moduleFile;
+        return [moduleFile];
       }
       currentDir = currentDir.substring(0, currentDir.lastIndexOf("/"));
     } 
-    return "";
+    return [];
 }
 

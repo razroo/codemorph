@@ -51,7 +51,7 @@ describe('Angular Component Effects', () => {
       "path/to/another"
     ];
     const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
-    expect(fileToModify).toEqual('path/to/another/hello.module.ts');
+    expect(fileToModify).toEqual(['path/to/another/hello.module.ts']);
   });
 
   it('should trigger component standalone effects codemorph', () => {

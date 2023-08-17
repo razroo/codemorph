@@ -38,12 +38,12 @@ export interface Parameters {
 
 // sister function to "effects"
 // This function happens first and then effects is called
-export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string {
+export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string[] {
   switch(programmingLanguage) {
     case 'angular':
       return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
     default:
-      return ''  
+      return [];
   }
 }
 
