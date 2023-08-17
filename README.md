@@ -1,6 +1,6 @@
 ![Codemorph Logo](assets/codemorph-logo-small.png "Codemorph - Extensible Codemod Library") ![Codemorph Logo](assets/razroo-certified-logo.png "Razroo Certified")
 
-Codemorph is an extensible, easy to understand, easy to contribute, easy to use **Codemod** library. Codemorph-dazzle your codebase like you've never before. 
+Codemorph is an extensible, easy-to-understand, easy-to-contribute, easy-to-use **Codemod** library. Codemorph is platform agnostic and supports **all** programming languages.
 
 
 # Important Note ⚠️
