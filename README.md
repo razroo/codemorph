@@ -9,6 +9,8 @@ Being that Codemorph makes use of many system-based code modifiers, even though 
 
 We highly recommend using this in either system applications or backend applications. However, FE applications using this library will experience optimization bailouts. It is therefore not recommended that this library is used with production-grade FE applications.
 
+![Pass a star to your codemorph](https://github.com/razroo/codemorph/assets/8540141/29433c8a-9ce0-4202-94ce-fec8f00d3b78)
+
 # How to Install Codemorph 
 
 ```
