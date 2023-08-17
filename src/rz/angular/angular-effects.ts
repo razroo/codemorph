@@ -11,12 +11,12 @@ import { exportServiceFile } from "./effects/service/service";
 import { exportComponentFile } from "./effects/standalone-component/standalone-component";
 import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/types";
 
-export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string {
+export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] {
   switch(type) {
     case AngularTypeNames.Component:
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
     default:
-      return ''
+      return [];
   }
 }
 
