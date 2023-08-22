@@ -38,12 +38,12 @@ export interface Parameters {
 
 // sister function to "effects"
 // This function happens first and then effects is called
-export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string[] {
+export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string[] | NOT_SUPPORTED_TYPE {
   switch(programmingLanguage) {
     case 'angular':
       return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
     default:
-      return [];
+      return NOT_SUPPORTED;
   }
 }
 
@@ -53,12 +53,12 @@ export function filesToAffect(filePathWithName: string, fileTree: string[], para
 // such as automatically exporting file in closes index ts file
 // type respresents component, guard, pipe etc, which is specific to programming language
 // allows effects to work in any environment e.g. backend, system, frontend thus standalone
-export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] | NOT_SUPPORTED_TYPE {
+export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
   switch(programmingLanguage) {
     case CommunityPaths.Angular:
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
     default:
-      return NOT_SUPPORTED
+      return []
   }
 }
 

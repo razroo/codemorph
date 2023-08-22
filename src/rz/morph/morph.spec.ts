@@ -107,7 +107,25 @@ describe('morph', () => {
   });
 
   describe('NOT_SUPPORTED', () => {
-    it('should return NOT_SUPPORTED if not supported', () => {
+
+    it('should return NOT_SUPPORTED if not language supported', () => {
+      const mockFilePath = 'path/to/another/src/hello.component.ts';
+      const mockParameter = {
+        optionalTypes: {},
+        type: 'component' as any
+      } as any;
+      
+      const fileTree = [
+        "path/to/another/src",
+        "path/to/another/src/hello.component.ts",
+        "path/to/another/hello.module.ts",
+        "path/to/another"
+      ];
+      const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'felipe');
+      expect(fileToModify).toEqual(NOT_SUPPORTED);
+    });
+
+    it('should return NOT_SUPPORTED if language supported but type is not', () => {
       const mockFilePath = 'path/to/another/src/hello.component.ts';
       const mockParameter = {
         optionalTypes: {},
