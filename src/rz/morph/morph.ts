@@ -11,7 +11,7 @@ import { EditJsonInput } from '../json/interfaces/json-morph.interface';
 import { angularEffects, angularFilesToAffect, angularStandaloneEffects } from '../angular/angular-effects';
 import { reactTypes } from '../react';
 import { TemplateInputParameter } from '../utils/interfaces/template-parameters';
-import { EditFileEffect } from './interfaces/morph.interface';
+import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from './interfaces/morph.interface';
 
 // takes in singular object and makes all edits to files 
 // used when editing a file
@@ -53,12 +53,12 @@ export function filesToAffect(filePathWithName: string, fileTree: string[], para
 // such as automatically exporting file in closes index ts file
 // type respresents component, guard, pipe etc, which is specific to programming language
 // allows effects to work in any environment e.g. backend, system, frontend thus standalone
-export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
+export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] | NOT_SUPPORTED_TYPE {
   switch(programmingLanguage) {
     case CommunityPaths.Angular:
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
     default:
-      return []  
+      return NOT_SUPPORTED
   }
 }
 
