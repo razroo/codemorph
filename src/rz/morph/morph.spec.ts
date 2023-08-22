@@ -1,8 +1,8 @@
 import { EditScssInput } from './../scss/interfaces/morph-scss.interface';
 import { readFileSync, writeFileSync } from 'fs';
 import { EditHtmlFile, EditHtmlInput } from '../angular/interfaces/edit-html.interface';
-import { EditInput } from './interfaces/morph.interface';
-import { morphCode } from "./morph"; 
+import { EditInput, NOT_SUPPORTED } from './interfaces/morph.interface';
+import { filesToAffect, morphCode } from "./morph"; 
 
 describe('morph', () => {
   const siblingCodeBlock = `<mat-paginator *ngIf="isPageable"
@@ -105,6 +105,43 @@ describe('morph', () => {
 
     expect(morphCode(editScssInput as EditScssInput)).toEqual(expected);
   });
+
+  describe('NOT_SUPPORTED', () => {
+
+    it('should return NOT_SUPPORTED if not language supported', () => {
+      const mockFilePath = 'path/to/another/src/hello.component.ts';
+      const mockParameter = {
+        optionalTypes: {},
+        type: 'component' as any
+      } as any;
+      
+      const fileTree = [
+        "path/to/another/src",
+        "path/to/another/src/hello.component.ts",
+        "path/to/another/hello.module.ts",
+        "path/to/another"
+      ];
+      const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'felipe');
+      expect(fileToModify).toEqual(NOT_SUPPORTED);
+    });
+
+    it('should return NOT_SUPPORTED if language supported but type is not', () => {
+      const mockFilePath = 'path/to/another/src/hello.component.ts';
+      const mockParameter = {
+        optionalTypes: {},
+        type: 'yolo' as any
+      } as any;
+      
+      const fileTree = [
+        "path/to/another/src",
+        "path/to/another/src/hello.component.ts",
+        "path/to/another/hello.module.ts",
+        "path/to/another"
+      ];
+      const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
+      expect(fileToModify).toEqual(NOT_SUPPORTED);
+    })
+  })
 
   describe('insertIntoHtmlTag', () => {
     it('should insert html into the specified tag if parent tag is div', () => {

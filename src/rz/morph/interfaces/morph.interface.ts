@@ -7,6 +7,9 @@ export interface EditInput {
   edits: EditFile[];
 }
 
+export type NOT_SUPPORTED_TYPE = 'NOT_SUPPORTED';
+export const NOT_SUPPORTED = 'NOT_SUPPORTED';
+
 export interface EditFile { 
   nodeType?: 'import' | 'export' | 'classDeclaration' | 'classMethod' | 'addNgModuleImport' | 'addNgModuleImportToSpec' | 
   'addNgModuleProvider' | 'addNgModuleDeclaration' | 'addNgModuleProviderToSpec' | 'addToVariableObject' | 'editImport' | 'addConstructorMethod' | 

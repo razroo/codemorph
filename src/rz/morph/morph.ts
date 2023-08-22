@@ -11,7 +11,7 @@ import { EditJsonInput } from '../json/interfaces/json-morph.interface';
 import { angularEffects, angularFilesToAffect, angularStandaloneEffects } from '../angular/angular-effects';
 import { reactTypes } from '../react';
 import { TemplateInputParameter } from '../utils/interfaces/template-parameters';
-import { EditFileEffect } from './interfaces/morph.interface';
+import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from './interfaces/morph.interface';
 
 // takes in singular object and makes all edits to files 
 // used when editing a file
@@ -38,12 +38,12 @@ export interface Parameters {
 
 // sister function to "effects"
 // This function happens first and then effects is called
-export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string[] {
+export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string[] | NOT_SUPPORTED_TYPE {
   switch(programmingLanguage) {
     case 'angular':
       return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
     default:
-      return [];
+      return NOT_SUPPORTED;
   }
 }
 
@@ -58,7 +58,7 @@ export function standaloneEffects(programmingLanguage: string, parameter: Templa
     case CommunityPaths.Angular:
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
     default:
-      return []  
+      return []
   }
 }
 
