@@ -1,5 +1,5 @@
 import { Parameters } from "../morph";
-import { EditFileEffect } from "../morph/interfaces/morph.interface";
+import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from "../morph/interfaces/morph.interface";
 import { addClassToDeclarationsAndImports, componentEffects, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
 import { exportDirectiveFile } from "./effects/directive/directive";
 import { exportGraphqlFile } from "./effects/graphql/graphql";
@@ -11,12 +11,12 @@ import { exportServiceFile } from "./effects/service/service";
 import { exportComponentFile } from "./effects/standalone-component/standalone-component";
 import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/types";
 
-export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] {
+export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] | NOT_SUPPORTED_TYPE {
   switch(type) {
     case AngularTypeNames.Component:
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
     default:
-      return [];
+      return NOT_SUPPORTED;
   }
 }
 
