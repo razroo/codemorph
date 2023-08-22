@@ -1,3 +1,4 @@
+import { NOT_SUPPORTED_TYPE } from './rz/morph/interfaces/morph.interface';
 // color related items
 export { getPalette, createColorVariables } from './rz/global-variables';
 
@@ -9,7 +10,7 @@ export { getVersionAndNameString, determineType, determineFilePathParameter, rea
     getAllDirectoriesFromVsCodeFolder, determineLanguagesUsed, replaceCodeModEditsTemplateVariables } from './rz/utils';
 
 // export typescript related edits
-export { EditInput, EditFile, morphCode, effects, standaloneEffects, filesToAffect, communityPaths, types } from './rz/morph';
+export { EditInput, EditFile, morphCode, effects, standaloneEffects, filesToAffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE, communityPaths, types } from './rz/morph';
 
 // export typescript related edits
 export { getCodeModParams, getCodeModOptions } from './rz/params';
