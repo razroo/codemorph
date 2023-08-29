@@ -1,3 +1,4 @@
+import { AngularType } from './../../../lib/cjs/types/rz/angular/types/types.d';
 import { Parameters } from "../morph";
 import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from "../morph/interfaces/morph.interface";
 import { addClassToDeclarationsAndImports, componentEffects, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
@@ -10,6 +11,7 @@ import { addReducerToNgModule } from "./effects/ngrx/reducer/ngrx-reducer";
 import { exportServiceFile } from "./effects/service/service";
 import { closestIndexFileToImportTo, exportComponentFile, standaloneComponentEffects } from "./effects/standalone-component/standalone-component";
 import { AngularTypeNames, AngularOptionalType } from "./types/types";
+import { returnRootTsConfig } from './effects/library/library';
 
 export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] | NOT_SUPPORTED_TYPE {
   switch(type) {
@@ -17,6 +19,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
     case AngularTypeNames.StandaloneComponent:
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes);
+    case AngularTypeNames.Library:
+      return returnRootTsConfig(filePathWithName, fileTree, optionalTypes);
     default:
       return NOT_SUPPORTED;
   }
