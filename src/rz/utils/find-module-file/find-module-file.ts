@@ -14,7 +14,7 @@ export function findClosestModuleFile(path: string, fileNameToFind = 'module.ts'
     return "";
 }
 
-function getModuleFile(paths: string[], globPattern: string) {
+export function getFileViaMatch(paths: string[], globPattern: string): any {
   for (const item of paths) {
     if (minimatch(item, globPattern)) {
       return item;
@@ -27,7 +27,7 @@ export function findClosestModuleFileUsingPaths(filePathWithName: string, paths:
     let currentDir = filePathWithName;
     while (currentDir.length > 0) {
       const modulePath = currentDir + `/*.${fileNameToFind}`;
-      const moduleFile = getModuleFile(paths, modulePath);
+      const moduleFile = getFileViaMatch(paths, modulePath);
       if(moduleFile) {
         return [moduleFile];
       }

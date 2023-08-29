@@ -1,6 +1,6 @@
 import { TemplateInputParameter } from './../../../utils/interfaces/template-parameters';
 import { writeFileSync, readFileSync } from 'fs';
-import { effects } from "../../../morph";
+import { effects, filesToAffect } from "../../../morph";
 import { AngularTypeNames } from "../../types/types";
 
 describe('exportComponentFile', () => {
@@ -25,3 +25,22 @@ describe('exportComponentFile', () => {
     expect(result).toEqual(expected);
   });
 });
+
+describe('closestIndexFileToImportTo', () => {
+  it('should choose closest index file', () => {
+    const mockFilePath = 'path/to/another/src/hello.component.ts';
+    const mockParameter = {
+      optionalTypes: {},
+      type: AngularTypeNames.StandaloneComponent
+    } as any;
+    
+    const fileTree = [
+      "path/to/another/src",
+      "path/to/another/src/hello.component.ts",
+      "path/to/another/index.ts",
+      "path/to/another"
+    ];
+    const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
+    expect(fileToModify).toEqual(['path/to/another/index.ts']);
+  });
+})

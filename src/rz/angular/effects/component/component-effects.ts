@@ -5,11 +5,11 @@ import { createRelativePath, exportTsFiles, isTsFile } from "../../../utils/add-
 import { morphTypescript } from '../../../typescript/morph-typescript';
 import { GlobalAngularOptionNames, AngularOptionalType } from '../../types/types';
 import { names } from '../../../global-variables';
-import { findClosestModuleFileUsingPaths } from '../../../utils/find-module-file/find-module-file';
+import { findClosestFileMatchUsingPaths } from '../../../utils/find-closest-file/find-closest-file';
 
 export function fileToAddClassToDeclarationsAndImports(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string[] {
   if(isTsFile(filePathWithName)) {
-    return findClosestModuleFileUsingPaths(filePathWithName, fileTree);
+    return findClosestFileMatchUsingPaths(filePathWithName, fileTree, 'module.ts');
   } else {
     return [];
   }

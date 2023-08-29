@@ -8,13 +8,15 @@ import { addEffectToNgModule } from "./effects/ngrx/effects/ngrx-effects";
 import { addFacadeToNgModule } from "./effects/ngrx/facade/ngrx-facade";
 import { addReducerToNgModule } from "./effects/ngrx/reducer/ngrx-reducer";
 import { exportServiceFile } from "./effects/service/service";
-import { exportComponentFile } from "./effects/standalone-component/standalone-component";
-import { AngularType, AngularTypeNames, AngularOptionalType } from "./types/types";
+import { closestIndexFileToImportTo, exportComponentFile } from "./effects/standalone-component/standalone-component";
+import { AngularTypeNames, AngularOptionalType } from "./types/types";
 
 export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] | NOT_SUPPORTED_TYPE {
   switch(type) {
     case AngularTypeNames.Component:
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
+    case AngularTypeNames.StandaloneComponent:
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes);
     default:
       return NOT_SUPPORTED;
   }
@@ -24,6 +26,8 @@ export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: Ed
   switch(type) {
     case AngularTypeNames.Component:
       return componentEffects(fileEffects);
+    case AngularTypeNames.StandaloneComponent:
+      return componentEffects(fileEffects);  
     default:
       return [];
   }
