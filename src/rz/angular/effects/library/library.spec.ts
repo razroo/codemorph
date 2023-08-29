@@ -36,7 +36,7 @@ describe('Library', () => {
           "paths": {
             "@test-codegen-eleven/common/common-ui": ["libs/common/common-ui/src/index.ts"],
             "@test-codegen-eleven/home": ["libs/home/src/index.ts"],
-          }   
+          }
         }
       };
       const mockTsConfigBaseStringfied = JSON.stringify(mockTsConfigBase);
@@ -59,13 +59,7 @@ describe('Library', () => {
           filePath: 'tsconfig.base.json',
           originFilePath: 'path/to/another/src/hello.component.ts',
           content: mockExpectedMockTsConfigBaseStringified
-        },
-        {
-          filePath: 'package.json',
-          originFilePath: 'path/to/another/src/hello.component.ts',
-          content: mockStringfiedJson
         }
-
       ];
       expect(result).toEqual(expected);
     });

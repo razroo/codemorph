@@ -8,6 +8,7 @@ export function returnRootTsConfig(filePathWithName: string, fileTree: string[],
 }
 
 export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] {
+  const newFileEffects = [];  
   for(const fileEffect of fileEffects) {
     const filePath = fileEffect.filePath;
     const originFilePath = fileEffect.originFilePath;
@@ -27,14 +28,15 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
             filePath: filePath,
             fileToBeAddedTo: fileToBeAddedTo,
             edits: [{
-              nodeType: 'editJson',
-              valueToModify: '/compilerOptions/paths',
+              nodeType: 'addJsonKeyValue',
+              valueToModify: `paths`,
               codeBlock: {["@" + projectName + "/home"]: ["libs/home/src/index.ts"]}
             }]
         };
         const updatedFileToBeAddedTo = morphJson(editInput);
         fileEffect.content = updatedFileToBeAddedTo;
+        newFileEffects.push(fileEffect);
     }
   }
-  return fileEffects;
+  return newFileEffects;
 }
