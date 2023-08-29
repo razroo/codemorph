@@ -10,6 +10,7 @@ import { addReducerToNgModule } from "./effects/ngrx/reducer/ngrx-reducer";
 import { exportServiceFile } from "./effects/service/service";
 import { closestIndexFileToImportTo, exportComponentFile, standaloneComponentEffects } from "./effects/standalone-component/standalone-component";
 import { AngularTypeNames, AngularOptionalType } from "./types/types";
+import { libraryEffects, returnRootTsConfig } from './effects/library/library';
 
 export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] | NOT_SUPPORTED_TYPE {
   switch(type) {
@@ -17,17 +18,21 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return fileToAddClassToDeclarationsAndImports(filePathWithName, fileTree, optionalTypes);
     case AngularTypeNames.StandaloneComponent:
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes);
+    case AngularTypeNames.Library:
+      return returnRootTsConfig(filePathWithName, fileTree, optionalTypes);
     default:
       return NOT_SUPPORTED;
   }
 }
 
-export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: EditFileEffect[]): EditFileEffect[] {
+export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: EditFileEffect[], parameters?: any): EditFileEffect[] {
   switch(type) {
     case AngularTypeNames.Component:
       return componentEffects(fileEffects);
     case AngularTypeNames.StandaloneComponent:
       return standaloneComponentEffects(fileEffects);  
+    case AngularTypeNames.Library:
+      return libraryEffects(fileEffects, parameters);    
     default:
       return [];
   }
