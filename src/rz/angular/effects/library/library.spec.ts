@@ -21,6 +21,10 @@ describe('Library', () => {
         "name": "test-codegen-eleven",
         "version": "0.0.0"
       };
+      const mockParameters = {
+        name: 'home',
+        nameFilePath: 'libs/ui'
+      }
       const mockStringfiedJson = JSON.stringify(mockPackageJson);
       const mockTsConfigBase = {
         "compileOnSave": false,
@@ -35,7 +39,7 @@ describe('Library', () => {
         "compilerOptions": {
           "paths": {
             "@test-codegen-eleven/common/common-ui": ["libs/common/common-ui/src/index.ts"],
-            "@test-codegen-eleven/home": ["libs/home/src/index.ts"],
+            "@test-codegen-eleven/home": ["libs/ui/home/src/index.ts"],
           }
         }
       };
@@ -53,7 +57,7 @@ describe('Library', () => {
           content: mockStringfiedJson
         },
       ];
-      const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects);
+      const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects, mockParameters);
       const expected = [
         {
           filePath: 'tsconfig.base.json',

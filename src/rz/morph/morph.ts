@@ -53,10 +53,10 @@ export function filesToAffect(filePathWithName: string, fileTree: string[], para
 // such as automatically exporting file in closes index ts file
 // type respresents component, guard, pipe etc, which is specific to programming language
 // allows effects to work in any environment e.g. backend, system, frontend thus standalone
-export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[]): EditFileEffect[] {
+export function standaloneEffects(programmingLanguage: string, parameter: TemplateInputParameter, fileEffects: EditFileEffect[], parameters?: any): EditFileEffect[] {
   switch(programmingLanguage) {
     case CommunityPaths.Angular:
-      return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects)
+      return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects, parameters)
     default:
       return []
   }

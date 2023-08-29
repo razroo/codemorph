@@ -7,7 +7,8 @@ export function returnRootTsConfig(filePathWithName: string, fileTree: string[],
   return ['tsconfig.base.json', 'package.json'];  
 }
 
-export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] {
+// will use the name parameter to get name of library
+export function libraryEffects(fileEffects: EditFileEffect[], parameters: any): EditFileEffect[] {
   const newFileEffects = [];  
   for(const fileEffect of fileEffects) {
     const filePath = fileEffect.filePath;
@@ -19,6 +20,8 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
         const projectName = packageJsonParse.name;
         const fileName = filePath.split('/').pop();
         const fileToBeAddedTo = fileEffect.content;
+        const libName = parameters['name'];
+        const libPath = parameters['nameFilePath'];
         
         const editInput: any = {
             fileType: 'ts',
@@ -28,7 +31,7 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
             edits: [{
               nodeType: 'addJsonKeyValue',
               valueToModify: `paths`,
-              codeBlock: {["@" + projectName + "/home"]: ["libs/home/src/index.ts"]}
+              codeBlock: {[`@${projectName}/${libName}`]: [`${libPath}/${libName}/src/index.ts`]}
             }]
         };
         const updatedFileToBeAddedTo = morphJson(editInput);

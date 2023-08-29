@@ -26,14 +26,14 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
   }
 }
 
-export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: EditFileEffect[]): EditFileEffect[] {
+export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: EditFileEffect[], parameters?: any): EditFileEffect[] {
   switch(type) {
     case AngularTypeNames.Component:
       return componentEffects(fileEffects);
     case AngularTypeNames.StandaloneComponent:
       return standaloneComponentEffects(fileEffects);  
     case AngularTypeNames.Library:
-      return libraryEffects(fileEffects);    
+      return libraryEffects(fileEffects, parameters);    
     default:
       return [];
   }
