@@ -1,4 +1,3 @@
-import { AngularType } from './../../../lib/cjs/types/rz/angular/types/types.d';
 import { Parameters } from "../morph";
 import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from "../morph/interfaces/morph.interface";
 import { addClassToDeclarationsAndImports, componentEffects, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
