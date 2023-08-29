@@ -16,6 +16,8 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
         const packageJson = fileEffects.find(fileEffect => fileEffect.filePath === 'package.json')
         const packageJsonParse = packageJson && JSON.parse(packageJson.content);
         const projectName = packageJsonParse.name;
+        console.log('projectName');
+        console.log(projectName);
         const fileName = filePath.split('/').pop();
         const fileToBeAddedTo = fileEffect.content;
         
@@ -25,9 +27,9 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
             filePath: filePath,
             fileToBeAddedTo: fileToBeAddedTo,
             edits: [{
-            nodeType: 'addJsonKeyValue',
-            valueToModify: '/compilerOptions/paths',
-            codeBlock: {["@" + projectName + "/home"]: ["libs/home/src/index.ts"]}
+              nodeType: 'editJson',
+              valueToModify: '/compilerOptions/paths',
+              codeBlock: {["@" + projectName + "/home"]: ["libs/home/src/index.ts"]}
             }]
         };
         const updatedFileToBeAddedTo = morphJson(editInput);

@@ -17,33 +17,57 @@ describe('Library', () => {
       const mockParameter = {
         type: AngularTypeNames.Library
       } as any;
-      const mockPackageJson = `{
+      const mockPackageJson = {
         "name": "test-codegen-eleven",
-        "version": "0.0.0",
-      }`;
-      const mockTsConfigBase = `{
+        "version": "0.0.0"
+      };
+      const mockStringfiedJson = JSON.stringify(mockPackageJson);
+      const mockTsConfigBase = {
         "compileOnSave": false,
         "compilerOptions": {
           "paths": {
             "@test-codegen-eleven/common/common-ui": ["libs/common/common-ui/src/index.ts"],
           }   
         }
-      `;
+      };
+      const expectedMockTsConfigBase = {
+        "compileOnSave": false,
+        "compilerOptions": {
+          "paths": {
+            "@test-codegen-eleven/common/common-ui": ["libs/common/common-ui/src/index.ts"],
+            "@test-codegen-eleven/home": ["libs/home/src/index.ts"],
+          }   
+        }
+      };
+      const mockTsConfigBaseStringfied = JSON.stringify(mockTsConfigBase);
+      const mockExpectedMockTsConfigBaseStringified = JSON.stringify(expectedMockTsConfigBase, null, 2);
       const mockFileEffects: EditFileEffect[] = [
         {
           filePath: 'tsconfig.base.json',
           originFilePath: 'path/to/another/src/hello.component.ts',
-          content: mockTsConfigBase
+          content: mockTsConfigBaseStringfied
         },
         {
           filePath: 'package.json',
           originFilePath: 'path/to/another/src/hello.component.ts',
-          content: mockPackageJson
+          content: mockStringfiedJson
         },
       ];
       const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects);
+      const expected = [
+        {
+          filePath: 'tsconfig.base.json',
+          originFilePath: 'path/to/another/src/hello.component.ts',
+          content: mockExpectedMockTsConfigBaseStringified
+        },
+        {
+          filePath: 'package.json',
+          originFilePath: 'path/to/another/src/hello.component.ts',
+          content: mockStringfiedJson
+        }
 
-      expect(result).toEqual('');
+      ];
+      expect(result).toEqual(expected);
     });
   });
 });
