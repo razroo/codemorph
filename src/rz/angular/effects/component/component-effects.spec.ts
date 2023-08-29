@@ -1,7 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { TemplateInputParameter } from '../../../utils/interfaces/template-parameters';
 import { effects, Parameters } from "../../../morph";
-import { componentEffects, fileToAddClassToDeclarationsAndImports } from './component-effects';
 import { filesToAffect, standaloneEffects } from '../../../morph/morph';
 import { AngularTypeNames } from '../../types/types';
 import { EditFileEffect } from '../../../morph/interfaces/morph.interface';
