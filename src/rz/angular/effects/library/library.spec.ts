@@ -43,7 +43,7 @@ describe('Library', () => {
       ];
       const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects);
 
-      expect(result).toEqual([]);
+      expect(result).toEqual('');
     });
   });
 });

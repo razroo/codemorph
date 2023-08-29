@@ -1,5 +1,6 @@
 import { morphJson } from "../../../json/json-morph";
 import { EditFileEffect } from "../../../morph/interfaces/morph.interface";
+import { AngularOptionalType } from "../../types/types";
 
 // returns package json as well, so can get package json data
 export function returnRootTsConfig(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string[] {
@@ -7,10 +8,10 @@ export function returnRootTsConfig(filePathWithName: string, fileTree: string[],
 }
 
 export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] {
-    for(const fileEffect of fileEffects) {
-      const filePath = fileEffect.filePath;
-      const originFilePath = fileEffect.originFilePath;
-      if(filePath.includes('tsconfig.base.json')) {
+  for(const fileEffect of fileEffects) {
+    const filePath = fileEffect.filePath;
+    const originFilePath = fileEffect.originFilePath;
+    if(filePath.includes('tsconfig.base.json')) {
         // get project name
         const packageJson = fileEffects.find(fileEffect => fileEffect.filePath === 'package.json')
         const packageJsonParse = packageJson && JSON.parse(packageJson.content);
@@ -24,13 +25,14 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
             filePath: filePath,
             fileToBeAddedTo: fileToBeAddedTo,
             edits: [{
-              nodeType: 'addJsonKeyValue',
-              valueToModify: '/compilerOptions/paths',
-              codeBlock: {["@" + projectName + "/home"]: ["libs/home/src/index.ts"]}
+            nodeType: 'addJsonKeyValue',
+            valueToModify: '/compilerOptions/paths',
+            codeBlock: {["@" + projectName + "/home"]: ["libs/home/src/index.ts"]}
             }]
         };
         const updatedFileToBeAddedTo = morphJson(editInput);
         fileEffect.content = updatedFileToBeAddedTo;
-      }
     }
+  }
+  return fileEffects;
 }
