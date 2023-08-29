@@ -1,7 +1,8 @@
 import { TemplateInputParameter } from './../../../utils/interfaces/template-parameters';
 import { writeFileSync, readFileSync } from 'fs';
-import { effects, filesToAffect } from "../../../morph";
+import { effects, filesToAffect, standaloneEffects } from "../../../morph";
 import { AngularTypeNames } from "../../types/types";
+import { EditFileEffect } from '../../../morph/interfaces/morph.interface';
 
 describe('exportComponentFile', () => {
   afterEach(() => {
@@ -43,4 +44,26 @@ describe('closestIndexFileToImportTo', () => {
     const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
     expect(fileToModify).toEqual(['path/to/another/index.ts']);
   });
-})
+});
+
+describe('standaloneComponentEffects', () => {
+  it('should trigger standalone component effects', () => {
+    const programmingLanguage = 'angular';
+    const mockParameter = {
+      type: AngularTypeNames.StandaloneComponent
+    } as any;
+    const mockFileEffects: EditFileEffect[] = [{
+      filePath: 'path/to/another/index.ts',
+      originFilePath: 'path/to/another/src/hello.component.ts',
+      content: ``
+    }];
+    const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects);
+    const indexContent = `export * from "./src/hello.component";
+`;
+    expect(result).toEqual([{
+      content: indexContent,
+      originFilePath: "path/to/another/src/hello.component.ts",
+      filePath: 'path/to/another/index.ts'
+    }]);
+  });
+});
