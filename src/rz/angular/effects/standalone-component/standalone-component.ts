@@ -2,6 +2,7 @@ import { EditFileEffect } from "../../../morph/interfaces/morph.interface";
 import { morphTypescript } from "../../../typescript/morph-typescript";
 import { createRelativePath, exportTsFiles, isTsFile } from "../../../utils/add-export";
 import { findClosestFileUsingPaths } from "../../../utils/find-closest-file/find-closest-file";
+import { AngularOptionalType } from "../../types/types";
 
 export function exportComponentFile(filePathWithName: string): void {
   if(isTsFile(filePathWithName)) {
