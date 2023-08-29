@@ -17,8 +17,6 @@ export function libraryEffects(fileEffects: EditFileEffect[]): EditFileEffect[] 
         const packageJson = fileEffects.find(fileEffect => fileEffect.filePath === 'package.json')
         const packageJsonParse = packageJson && JSON.parse(packageJson.content);
         const projectName = packageJsonParse.name;
-        console.log('projectName');
-        console.log(projectName);
         const fileName = filePath.split('/').pop();
         const fileToBeAddedTo = fileEffect.content;
         
