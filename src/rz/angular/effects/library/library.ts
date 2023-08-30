@@ -28,7 +28,7 @@ export function libraryEffects(fileEffects: EditFileEffect[], parameters: any): 
             edits: [{
               nodeType: 'addJsonKeyValue',
               valueToModify: `paths`,
-              codeBlock: {[`@${projectName}/${libName}`]: [`${libPath}/${libName}/src/index.ts`]}
+              codeBlock: {[`@${projectName}/${libName}`]: [`${libPath}/src/index.ts`]}
             }]
         };
         const updatedFileToBeAddedTo = morphJson(editInput);
