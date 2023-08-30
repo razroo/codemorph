@@ -19,7 +19,7 @@ describe('Library', () => {
       } as any;
       const mockParameters = {
         name: 'home',
-        nameFilePath: 'libs/ui',
+        nameFilePath: 'libs/ui/home',
         projectName: 'test-codegen-eleven'
       }
       
