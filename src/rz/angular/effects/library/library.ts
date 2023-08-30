@@ -4,7 +4,7 @@ import { AngularOptionalType } from "../../types/types";
 
 // returns package json as well, so can get package json data
 export function returnRootTsConfig(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string[] {
-  return ['tsconfig.base.json', 'package.json'];  
+  return ['tsconfig.base.json'];
 }
 
 // will use the name parameter to get name of library
@@ -14,10 +14,7 @@ export function libraryEffects(fileEffects: EditFileEffect[], parameters: any): 
     const filePath = fileEffect.filePath;
     const originFilePath = fileEffect.originFilePath;
     if(filePath.includes('tsconfig.base.json')) {
-        // get project name
-        const packageJson = fileEffects.find(fileEffect => fileEffect.filePath === 'package.json')
-        const packageJsonParse = packageJson && JSON.parse(packageJson.content);
-        const projectName = packageJsonParse.name;
+        const projectName = parameters['projectName'];
         const fileName = filePath.split('/').pop();
         const fileToBeAddedTo = fileEffect.content;
         const libName = parameters['name'];
