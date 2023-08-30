@@ -7,7 +7,7 @@ describe('Library', () => {
   describe('returnRootTsConfig', () => {
     it('should return the root tsconfig to modify as well as package json to get project name from', () => {
       const result = returnRootTsConfig('', [], []);
-      expect(result).toEqual(['tsconfig.base.json', 'package.json']);
+      expect(result).toEqual(['tsconfig.base.json']);
     });  
   });
 
@@ -17,15 +17,12 @@ describe('Library', () => {
       const mockParameter = {
         type: AngularTypeNames.Library
       } as any;
-      const mockPackageJson = {
-        "name": "test-codegen-eleven",
-        "version": "0.0.0"
-      };
       const mockParameters = {
         name: 'home',
-        nameFilePath: 'libs/ui'
+        nameFilePath: 'libs/ui',
+        projectName: 'test-codegen-eleven'
       }
-      const mockStringfiedJson = JSON.stringify(mockPackageJson);
+      
       const mockTsConfigBase = {
         "compileOnSave": false,
         "compilerOptions": {
@@ -50,12 +47,7 @@ describe('Library', () => {
           filePath: 'tsconfig.base.json',
           originFilePath: 'path/to/another/src/hello.component.ts',
           content: mockTsConfigBaseStringfied
-        },
-        {
-          filePath: 'package.json',
-          originFilePath: 'path/to/another/src/hello.component.ts',
-          content: mockStringfiedJson
-        },
+        }
       ];
       const result = standaloneEffects(programmingLanguage, mockParameter, mockFileEffects, mockParameters);
       const expected = [
