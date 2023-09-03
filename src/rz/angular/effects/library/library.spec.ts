@@ -36,7 +36,7 @@ describe('Library', () => {
         "compilerOptions": {
           "paths": {
             "@test-codegen-eleven/common/common-ui": ["libs/common/common-ui/src/index.ts"],
-            "@test-codegen-eleven/home": ["libs/ui/home/src/index.ts"],
+            "@test-codegen-eleven/ui/home": ["libs/ui/home/src/index.ts"],
           }
         }
       };
