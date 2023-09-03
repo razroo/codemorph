@@ -7,7 +7,7 @@ import { exportInterfaceFile } from "./effects/interface/interface";
 import { addEffectToNgModule } from "./effects/ngrx/effects/ngrx-effects";
 import { addFacadeToNgModule } from "./effects/ngrx/facade/ngrx-facade";
 import { addReducerToNgModule } from "./effects/ngrx/reducer/ngrx-reducer";
-import { exportServiceFile } from "./effects/service/service";
+import { exportServiceFile, serviceEffects } from "./effects/service/service";
 import { closestIndexFileToImportTo, exportComponentFile, standaloneComponentEffects } from "./effects/standalone-component/standalone-component";
 import { AngularTypeNames, AngularOptionalType } from "./types/types";
 import { libraryEffects, returnRootTsConfig } from './effects/library/library';
@@ -20,6 +20,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes);
     case AngularTypeNames.Library:
       return returnRootTsConfig(filePathWithName, fileTree, optionalTypes);
+    case AngularTypeNames.Service: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     default:
       return NOT_SUPPORTED;
   }
@@ -30,7 +32,9 @@ export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: Ed
     case AngularTypeNames.Component:
       return componentEffects(fileEffects);
     case AngularTypeNames.StandaloneComponent:
-      return standaloneComponentEffects(fileEffects);  
+      return standaloneComponentEffects(fileEffects);
+    case AngularTypeNames.Service:
+      return serviceEffects(fileEffects);
     case AngularTypeNames.Library:
       return libraryEffects(fileEffects, parameters);    
     default:
