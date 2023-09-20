@@ -1,4 +1,3 @@
-import { NOT_SUPPORTED_TYPE } from './rz/morph/interfaces/morph.interface';
 // color related items
 export { getPalette, createColorVariables } from './rz/global-variables';
 
