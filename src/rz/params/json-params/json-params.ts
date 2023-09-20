@@ -8,7 +8,7 @@ export function getJsonParameters(optionName: string): any {
               name: 'valueToModify',
               inputType: 'text',
               description: 'Json key to modify.',
-              codeExample: 'fileReplacements'
+              codeExample: '/targets/build/configurations/production/fileReplacements'
             },
             {
               name: 'codeBlock',  
