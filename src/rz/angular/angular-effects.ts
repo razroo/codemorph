@@ -1,7 +1,7 @@
 import { Parameters } from "../morph";
 import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from "../morph/interfaces/morph.interface";
 import { addClassToDeclarationsAndImports, componentEffects, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
-import { exportDirectiveFile } from "./effects/directive/directive";
+import { directiveEffects, exportDirectiveFile } from "./effects/directive/directive";
 import { exportGraphqlFile } from "./effects/graphql/graphql";
 import { exportInterfaceFile } from "./effects/interface/interface";
 import { addEffectToNgModule } from "./effects/ngrx/effects/ngrx-effects";
@@ -25,6 +25,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     case AngularTypeNames.Pipe: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
+    case AngularTypeNames.Directive: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     default:
       return NOT_SUPPORTED;
   }
@@ -38,6 +40,8 @@ export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: Ed
       return standaloneComponentEffects(fileEffects);
     case AngularTypeNames.Service:
       return serviceEffects(fileEffects);
+    case AngularTypeNames.Directive:
+      return directiveEffects(fileEffects);
     case AngularTypeNames.Pipe:
       return pipeEffects(fileEffects);
     case AngularTypeNames.Library:
