@@ -2,8 +2,8 @@ import { Parameters } from "../morph";
 import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from "../morph/interfaces/morph.interface";
 import { addClassToDeclarationsAndImports, componentEffects, fileToAddClassToDeclarationsAndImports } from "./effects/component/component-effects";
 import { exportDirectiveFile } from "./effects/directive/directive";
-import { exportGraphqlFile } from "./effects/graphql/graphql";
-import { exportInterfaceFile } from "./effects/interface/interface";
+import { exportGraphqlFile, graphqlEffects } from "./effects/graphql/graphql";
+import { exportInterfaceFile, interfaceEffects } from "./effects/interface/interface";
 import { addEffectToNgModule } from "./effects/ngrx/effects/ngrx-effects";
 import { addFacadeToNgModule } from "./effects/ngrx/facade/ngrx-facade";
 import { addReducerToNgModule } from "./effects/ngrx/reducer/ngrx-reducer";
@@ -25,6 +25,10 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     case AngularTypeNames.Pipe: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
+    case AngularTypeNames.Interface: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
+    case AngularTypeNames.Graphql: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     default:
       return NOT_SUPPORTED;
   }
@@ -42,6 +46,10 @@ export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: Ed
       return pipeEffects(fileEffects);
     case AngularTypeNames.Library:
       return libraryEffects(fileEffects, parameters);    
+    case AngularTypeNames.Interface:
+      return interfaceEffects(fileEffects);    
+    case AngularTypeNames.Graphql:
+      return graphqlEffects(fileEffects);    
     default:
       return [];
   }
