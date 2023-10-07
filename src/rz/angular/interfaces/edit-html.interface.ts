@@ -5,9 +5,9 @@ export interface EditHtmlInput {
 }
 
 export interface EditHtmlFile {
-  nodeType: 'editHtmlTag' | 'addSiblingHtml' | 'insertIntoHtmlTag' | 
-  'deleteHtmlElement' | 'prependHtml' | 'appendHtml';
-  codeBlock: string | any[];
+  nodeType: 'editHtmlTag' | 'addSiblingHtml' | 'insertIntoHtmlTag' | 'addPropertyToHtmlTag'
+  | 'deleteHtmlElement' | 'prependHtml' | 'appendHtml';
+  codeBlock: string | any[] | any;
   tagNameToInsert?: string;
   tagNameToInsertInto?: string;
   tagNameToModify?: string;

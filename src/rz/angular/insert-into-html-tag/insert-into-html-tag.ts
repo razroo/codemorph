@@ -3,7 +3,6 @@ import visit from 'unist-util-visit';
 import { createUnifiedTree } from '../morph-angular-html';
 import { EditHtmlFile } from '../interfaces/edit-html.interface';
 
-
 // will insert code into an html block
 export function insertIntoHtmlTag(editFile: EditHtmlFile, fileToBeModified: any): any {
   const codeToAddTree = createUnifiedTree(editFile.codeBlock as string);
