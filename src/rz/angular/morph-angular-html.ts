@@ -10,6 +10,7 @@ import * as parserHtml from 'prettier/parser-html';
 import { deleteHtmlElement } from '../html/delete-html-element/delete-html-element';
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
+import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 
 function convertToAngularHtmlAndPrettify(tree: any) {
   const transformedTreeInHtml = toHtml(tree)
@@ -43,6 +44,9 @@ export function morphHtml(editHtmlInput: EditHtmlInput): string {
         break;
       case 'insertIntoHtmlTag':   
         fileToBeAddedToTree = insertIntoHtmlTag(edit, fileToBeAddedToTree);
+        break;
+      case 'addPropertyToHtmlTag':   
+        fileToBeAddedToTree = addPropertyToHtmlTag(edit, fileToBeAddedToTree);
         break;
     case 'deleteHtmlElement':   
         fileToBeAddedToTree = deleteHtmlElement(edit, fileToBeAddedToTree);

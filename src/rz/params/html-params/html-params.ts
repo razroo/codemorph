@@ -59,6 +59,24 @@ export function getHtmlParameters(optionName: string): any {
               codeExample: 'mat-toolbar'
             }
           ]
+        };
+      case 'addPropertyToHtmlTag':
+        return {
+          nodeType: 'addPropertyToHtmlTag',
+          inputs: [
+            {
+              name: 'codeBlock',
+              inputType: 'code',
+              description: 'Code that will be inserted into html as property.',
+              codeExample: `{'(sideNavToggle)': 'sideNavToggle()'}`
+            },
+            {
+              name: 'tagNameToInsertInto',
+              inputType: 'text',
+              description: 'Tag name of html we will be inserting properties into.',
+              codeExample: 'global-header'
+            }
+          ]
         }
       case 'deleteHtmlElement':
         return {
@@ -114,6 +132,6 @@ export function getHtmlParameters(optionName: string): any {
   }
 
   export function getHtmlOptions(): string[] {
-    return ['editHtmlTag', 'addSiblingHtml', 'insertIntoHtmlTag', 'deleteHtmlElement', 'prependHtml', 
+    return ['editHtmlTag', 'addSiblingHtml', 'insertIntoHtmlTag', 'addPropertyToHtmlTag', 'deleteHtmlElement', 'prependHtml', 
     'appendHtml'];
   }
