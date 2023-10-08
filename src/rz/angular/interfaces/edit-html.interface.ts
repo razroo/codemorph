@@ -12,4 +12,5 @@ export interface EditHtmlFile {
   tagNameToInsertInto?: string;
   tagNameToModify?: string;
   siblingTagName?: string;
+  className?: string;
 }
