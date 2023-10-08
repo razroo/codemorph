@@ -11,7 +11,8 @@ describe('insertIntoHtmlTag', () => {
       const insertIntoHtmlTag: EditHtmlFile = {
         nodeType: 'insertIntoHtmlTag',
         codeBlock: codeBlock,
-        tagNameToInsertInto: 'div'
+        tagNameToInsertInto: 'div',
+        className: 'container'
       };
 
       const editHtmlInput: EditHtmlInput = {
