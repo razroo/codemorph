@@ -24,7 +24,10 @@ describe('insertIntoHtmlTag', () => {
       };
 
       const expected = `<div class="wrapper">
-<div class="container">Your component goes here <div>new div content</div></div>
+  <div class="container">
+    Your component goes here
+    <div>new div content</div>
+  </div>
 </div>
 `;
       const newHtmlString = morphCode(editHtmlInput);
