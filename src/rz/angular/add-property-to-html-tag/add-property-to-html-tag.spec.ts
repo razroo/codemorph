@@ -6,9 +6,7 @@ describe('addPropertyToHtmlTag', () => {
     const fileToBeAddedTo = `<div>
 <devgen-eureka-seven-global-header> </devgen-eureka-seven-global-header>
 </div>`;
-    const codeBlock = {
-      '(sideNavToggle)': 'sideNavToggle()'
-    };
+    const codeBlock = '{"(sideNavToggle)": "sideNavToggle()"}';
 
     const insertIntoHtmlTag: EditHtmlFile = {
        nodeType: 'addPropertyToHtmlTag',
