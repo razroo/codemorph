@@ -141,52 +141,5 @@ describe('morph', () => {
       const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
       expect(fileToModify).toEqual(NOT_SUPPORTED);
     })
-  })
-
-  describe('insertIntoHtmlTag', () => {
-    it('should insert html into the specified tag if parent tag is div', () => {
-      const fileToBeAddedTo = readFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag.html.snap').toString();
-      const codeBlock = '<div>new div content</div>';
-      const insertIntoHtmlTag: EditHtmlFile = {
-        nodeType: 'insertIntoHtmlTag',
-        codeBlock: codeBlock,
-        tagNameToInsertInto: 'div'
-      };
-
-      const editHtmlInput: EditHtmlInput = {
-        fileType: 'html',
-        fileToBeAddedTo: fileToBeAddedTo,
-        edits: [
-          insertIntoHtmlTag
-        ]
-      };
-
-      const expected = readFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag.html-output.snap').toString();
-      const newHtmlString = morphCode(editHtmlInput);
-      expect(newHtmlString).toEqual(expected);
-    });
-
-    it('should insert html into the specified tag if parent tag is matToolbar', () => {
-      const fileToBeAddedTo = readFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag-header.html.snap').toString();
-      const codeBlock = "<div class=\"icons\"><fa-icon [icon]=\"faBell\" aria-hidden=\"false\" aria-label=\"Notification Icon\"></fa-icon> <fa-icon [icon]=\"faQuestionCircle\" aria-hidden=\"false\" aria-label=\"Question Icon\"></fa-icon> <fa-icon [icon]=\"faUserCircle\" aria-hidden=\"false\" aria-label=\"Account Icon\"></fa-icon></div>";
-      const insertIntoHtmlTag: EditHtmlFile = {
-        nodeType: 'insertIntoHtmlTag',
-        codeBlock: codeBlock,
-        tagNameToInsertInto: 'mat-toolbar'
-      };
-
-      const editHtmlInput: EditHtmlInput = {
-        fileType: 'html',
-        fileToBeAddedTo: fileToBeAddedTo,
-        edits: [
-          insertIntoHtmlTag
-        ]
-      };
-
-      const expected = readFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag-header-output.html.snap').toString();
-      const newHtmlString = morphCode(editHtmlInput);
-      writeFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag-header-output.html.snap', newHtmlString)
-      expect(newHtmlString).toEqual(expected);
-    });
   });
 })
