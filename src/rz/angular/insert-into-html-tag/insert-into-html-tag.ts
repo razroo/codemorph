@@ -10,7 +10,7 @@ export function insertIntoHtmlTag(editFile: EditHtmlFile, fileToBeModified: any)
   
   visit(fileToBeModified, {type: 'element', tagName: editFile.tagNameToInsertInto}, (node: any, index) => {
     visit(codeToAddTree, {type: 'element', tagName: 'body'}, (nodeOfCodeToAdd: any, index) => {
-      if(!node.properties.className || node.properties.className === '' || node.properties.className?.includes(editFile.className)) {
+      if(!editFile.className || editFile.className === '' || node.properties.className?.includes(editFile.className)) {
         if(counter === 0) {
           node.children.push(nodeOfCodeToAdd.children[0]);
           counter++;
