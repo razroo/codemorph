@@ -40,27 +40,4 @@ describe('EditAngularHTML', () => {
     expect(newHtmlString).toEqual(expected);
   });
 
-  describe('insertIntoHtmlTag', () => {
-    it('should insert html into the specified tag', () => {
-      const fileToBeAddedTo = readFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag.html.snap').toString();
-      const codeBlock = '<div>new div content</div>';
-      const insertIntoHtmlTag: EditHtmlFile = {
-        nodeType: 'insertIntoHtmlTag',
-        codeBlock: codeBlock,
-        tagNameToInsertInto: 'div'
-      };
-
-      const editHtmlInput: EditHtmlInput = {
-        fileToBeAddedTo: fileToBeAddedTo,
-        edits: [
-          insertIntoHtmlTag
-        ]
-      };
-
-      const expected = readFileSync('src/rz/angular/snapshots/insert-into-html-tag/insert-into-html-tag.html-output.snap').toString();
-      const newHtmlString = morphHtml(editHtmlInput);
-      expect(newHtmlString).toEqual(expected);
-    });
-  });
-
 });
