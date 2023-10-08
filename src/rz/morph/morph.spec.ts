@@ -1,6 +1,6 @@
 import { EditScssInput } from './../scss/interfaces/morph-scss.interface';
-import { readFileSync, writeFileSync } from 'fs';
-import { EditHtmlFile, EditHtmlInput } from '../angular/interfaces/edit-html.interface';
+import { readFileSync } from 'fs';
+import { EditHtmlFile } from '../angular/interfaces/edit-html.interface';
 import { EditInput, NOT_SUPPORTED } from './interfaces/morph.interface';
 import { filesToAffect, morphCode } from "./morph"; 
 
