@@ -31,6 +31,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     case AngularTypeNames.Directive: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
+    case AngularTypeNames.Module: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     default:
       return NOT_SUPPORTED;
   }
