@@ -12,6 +12,7 @@ import { closestIndexFileToImportTo, exportComponentFile, standaloneComponentEff
 import { AngularTypeNames, AngularOptionalType } from "./types/types";
 import { libraryEffects, returnRootTsConfig } from './effects/library/library';
 import { exportPipeFile, pipeEffects } from "./effects/pipe/pipe";
+import { moduleEffects } from "./effects/module/module";
 
 export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] | NOT_SUPPORTED_TYPE {
   switch(type) {
@@ -30,6 +31,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
     case AngularTypeNames.Graphql: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     case AngularTypeNames.Directive: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
+    case AngularTypeNames.Module: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     default:
       return NOT_SUPPORTED;
@@ -54,6 +57,8 @@ export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: Ed
       return interfaceEffects(fileEffects);    
     case AngularTypeNames.Graphql:
       return graphqlEffects(fileEffects);    
+    case AngularTypeNames.Module:
+      return moduleEffects(fileEffects);    
     default:
       return [];
   }
