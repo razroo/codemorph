@@ -57,7 +57,6 @@ describe('addPropertyToHtmlTag', () => {
       const result = morphCode(editInput);
       const expected = `<div></div>
 <div class="Toolbar__Icons" *ngIf="authenticated"></div>
-
 `;
     expect(result).toEqual(expected);
   });
