@@ -9,12 +9,14 @@ export function addPropertyToHtmlTag(editFile: EditHtmlFile, fileToBeModified: a
   let firstMatchFound = false;
   visit(fileToBeModified, { type: 'element', tagName: editFile.tagNameToInsertInto }, (node: any, index) => {
     // Check if the tag is the one you want to modify
-    if (!firstMatchFound && node.tagName === editFile.tagNameToInsertInto) {
-      node.properties = {
-        ...(node.properties || {}),
-        ...codeBlock
-      };
-      firstMatchFound = true;
+    if(!editFile.className || editFile.className === '' || node.properties.className?.includes(editFile.className)) {
+      if (!firstMatchFound && node.tagName === editFile.tagNameToInsertInto) {
+        node.properties = {
+          ...(node.properties || {}),
+          ...codeBlock
+        };
+        firstMatchFound = true;
+      }
     }
   });
   
