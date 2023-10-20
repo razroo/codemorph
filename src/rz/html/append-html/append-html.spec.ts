@@ -4,7 +4,7 @@ import { morphHtml } from '../../angular/morph-angular-html';
 
 describe('appendHtml' , () => {
   it('should append an html element', () => {
-    const fileToBeAddedTo = readFileSync('src/rz/html/append-html/snapshots/append-html.html.snap').toString();
+    const fileToBeAddedTo = `<div></div>`
 
     const editHtmlInput: EditHtmlInput = {
         fileToBeAddedTo: fileToBeAddedTo,
@@ -16,7 +16,9 @@ describe('appendHtml' , () => {
         ]
     };
 
-    const expected = readFileSync('src/rz/html/append-html/snapshots/append-html-output.html.snap').toString();
+    const expected = `<div></div>
+<razroo-angular-starter-global-header></razroo-angular-starter-global-header>
+`
     const newHtmlString = morphHtml(editHtmlInput);
     expect(newHtmlString).toEqual(expected);
   });
