@@ -11,17 +11,22 @@ import { deleteHtmlElement } from '../html/delete-html-element/delete-html-eleme
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
+import { camelCase } from 'lodash';
 
 function convertToAngularHtmlAndPrettify(tree: any) {
   const transformedTreeInHtml = toHtml(tree)
   .replace('<body>','').replace('</body>','')
   .replace('<html>','').replace('</html>','')
   .replace('<head>','').replace('</head>','');
-  
-  return prettier.format(transformedTreeInHtml, {
+
+  const formattedCode = prettier.format(transformedTreeInHtml, {
     parser: "html",
     plugins: [parserHtml]
   });
+  // right now just using regex to tidy up lowercased directives
+  const angularFormmatedCode = formattedCode.replace(/ngif/g, 'ngIf').replace(/ngfor/g, 'ngFor');
+
+  return angularFormmatedCode;  
 }
 
 export function createUnifiedTree(htmlString: string | any): any {

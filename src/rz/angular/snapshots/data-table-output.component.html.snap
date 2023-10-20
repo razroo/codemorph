@@ -1,6 +1,6 @@
 <ng-container>
   <!-- Filter -->
-  <ng-container *ngif="isFilterable" [matcolumndef]="this.rowActionIcon">
+  <ng-container *ngIf="isFilterable" [matcolumndef]="this.rowActionIcon">
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matinput="" (keyup)="searchTable($event)" placeholder="filter" />
@@ -8,14 +8,14 @@
   </ng-container>
 
   <!-- Table -->
-  <ng-container *ngif="rowActionIcon?.length" [matcolumndef]="rowActionIcon">
+  <ng-container *ngIf="rowActionIcon?.length" [matcolumndef]="rowActionIcon">
   </ng-container
   ><ng-container
-    *ngfor="let tableColumn of tableColumns"
+    *ngFor="let tableColumn of tableColumns"
     [matcolumndef]="tableColumn.name"
   >
     <!-- if sortable column header -->
-    <ng-container *ngif="tableColumn.isSortable; else notSortable">
+    <ng-container *ngIf="tableColumn.isSortable; else notSortable">
     </ng-container></ng-container
   ><ng-template #notsortable=""> </ng-template>
   <table mat-table="" [datasource]="tableDataSource" matSort>
@@ -66,7 +66,7 @@
     </tbody>
   </table>
   <mat-paginator
-    *ngif="isPageable"
+    *ngIf="isPageable"
     [pagesizeoptions]="paginationSizes"
     [pagesize]="defaultPageSize"
     (page)="paginateTable($event)"
