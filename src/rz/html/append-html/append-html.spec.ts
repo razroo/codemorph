@@ -24,7 +24,10 @@ describe('appendHtml' , () => {
   });
 
   it('should append html code inside of passed in optional element', () => {
-    const fileToBeAddedTo = readFileSync('src/rz/html/append-html/snapshots/append-html-into-element/append-html-into-element.html.snap').toString();
+    const fileToBeAddedTo = `<mat-toolbar class="GlobalHeader" color="primary">
+<div>hello</div>
+</mat-toolbar>
+`
 
     const editHtmlInput: EditHtmlInput = {
         fileToBeAddedTo: fileToBeAddedTo,
@@ -37,7 +40,11 @@ describe('appendHtml' , () => {
         ]
     };
 
-    const expected = readFileSync('src/rz/html/append-html/snapshots/append-html-into-element/append-html-into-element-output.html.snap').toString();
+    const expected = `<mat-toolbar class="GlobalHeader" color="primary">
+  <div>hello</div>
+  <div>test</div></mat-toolbar
+>
+`;
     const newHtmlString = morphHtml(editHtmlInput);
     expect(newHtmlString).toEqual(expected);
   });
