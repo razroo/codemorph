@@ -32,4 +32,33 @@ describe('addPropertyToHtmlTag', () => {
 `;
     expect(result).toEqual(expected);
   });
+
+  it('should add a property to an html tag and use the class name to determine which element', () => {
+      const fileToBeAddedTo = `<div></div>
+<div class="Toolbar__Icons"></div>
+`;
+      const codeBlock = '{"*ngIf": "authenticated"}';
+  
+      const insertIntoHtmlTag: EditHtmlFile = {
+         nodeType: 'addPropertyToHtmlTag',
+         codeBlock: codeBlock,
+         tagNameToInsertInto: 'div',
+         className: 'Toolbar__Icons'
+      };
+  
+      const editInput = {
+        fileType: 'html',
+        fileToBeAddedTo: fileToBeAddedTo,
+        edits: [
+          insertIntoHtmlTag
+        ]
+      };
+  
+      const result = morphCode(editInput);
+      const expected = `<div></div>
+<div class="Toolbar__Icons" *ngIf="authenticated"></div>
+
+  `;
+    expect(result).toEqual(expected);
+  });
 });
