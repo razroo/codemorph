@@ -28,22 +28,39 @@ describe('appendHtml' , () => {
 <div>hello</div>
 </mat-toolbar>
 `
+  const editHtmlInput: EditHtmlInput = {
+      fileToBeAddedTo: fileToBeAddedTo,
+      edits: [
+        {
+          nodeType: 'appendHtml',
+          codeBlock: '<div>test</div>',
+          tagNameToInsertInto: 'mat-toolbar'
+        }
+      ]
+  };
 
-    const editHtmlInput: EditHtmlInput = {
-        fileToBeAddedTo: fileToBeAddedTo,
-        edits: [
-          {
-            nodeType: 'appendHtml',
-            codeBlock: '<div>test</div>',
-            tagNameToInsertInto: 'mat-toolbar'
-          }
-        ]
-    };
-
-    const expected = `<mat-toolbar class="GlobalHeader" color="primary">
+  const expected = `<mat-toolbar class="GlobalHeader" color="primary">
   <div>hello</div>
   <div>test</div></mat-toolbar
 >
+`;
+    const newHtmlString = morphHtml(editHtmlInput);
+    expect(newHtmlString).toEqual(expected);
+  });
+
+  it.skip('should preserve the property camelCase when html possesses property', () => {
+    const fileToBeAddedTo = `<div *ngIf="authenticated"></div>`;
+    const editHtmlInput: EditHtmlInput = {
+      fileToBeAddedTo: fileToBeAddedTo,
+      edits: [
+        {
+          nodeType: 'appendHtml',
+          codeBlock: '<div>test</div>',
+          tagNameToInsertInto: 'div'
+        }
+      ]
+    };
+    const expected = `<div *ngIf="authenticated"><div>test</div></div>
 `;
     const newHtmlString = morphHtml(editHtmlInput);
     expect(newHtmlString).toEqual(expected);

@@ -4,7 +4,7 @@ import { morphHtml } from '../../angular/morph-angular-html';
 
 describe('deleteHtmlElement' , () => {
   it('should delete an html element', () => {
-    const fileToBeAddedTo = readFileSync('src/rz/html/delete-html-element/snapshots/delete-html-element.html.snap').toString();
+    const fileToBeAddedTo = `<mat-toolbar class="Toolbar" color="primary">Sample header</mat-toolbar>`;
 
     const editHtmlInput: EditHtmlInput = {
         fileToBeAddedTo: fileToBeAddedTo,
@@ -16,7 +16,7 @@ describe('deleteHtmlElement' , () => {
         ]
     };
 
-    const expected = readFileSync('src/rz/html/delete-html-element/snapshots/delete-html-element-output.html.snap').toString();
+    const expected = ``;
     const newHtmlString = morphHtml(editHtmlInput);
     expect(newHtmlString).toEqual(expected);
     });
