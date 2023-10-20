@@ -47,8 +47,8 @@ describe('appendHtml' , () => {
     expect(newHtmlString).toEqual(expected);
   });
 
-  it.skip('should preserve the property camelCase when html possesses property', () => {
-    const fileToBeAddedTo = `<div *ngIf="authenticated"></div>`;
+  it('should preserve the property camelCase when html possesses property', () => {
+    const fileToBeAddedTo = `<div *ngIf="authenticated">text</div>`;
     const editHtmlInput: EditHtmlInput = {
       fileToBeAddedTo: fileToBeAddedTo,
       edits: [

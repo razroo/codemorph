@@ -1,21 +1,22 @@
-import { createUnifiedTree } from '../../angular/morph-angular-html';
-import visit from 'unist-util-visit';
+import { createJsDom } from '../../angular/morph-angular-html';
 import { EditHtmlFile } from "../../angular/interfaces/edit-html.interface";
 
-export function appendHtml(editHtmlFile: EditHtmlFile, fileToBeAddedToTree: any): any {
-  let counter = 0;
-  let elementToReturn: any;
+export function appendHtml(editHtmlFile: EditHtmlFile, htmlDom: any): any {
+  const document = htmlDom.window.document;
 
-  const element = editHtmlFile.tagNameToInsertInto ? {type: 'element', tagName: editHtmlFile.tagNameToInsertInto} : {type: 'element', tagName: 'body'};
+  console.log(document)
+  
+  const elementToReturn = editHtmlFile.tagNameToInsertInto
+    ? document.createElement(editHtmlFile.tagNameToInsertInto)
+    : document.body;
 
-  visit(fileToBeAddedToTree, element, (htmlElement: any) => {
-    const codeToAddTree = createUnifiedTree(editHtmlFile.codeBlock as string);
-    if(counter === 0) {
-      htmlElement.children.push(codeToAddTree);
-      elementToReturn = editHtmlFile.tagNameToInsertInto ? htmlElement : htmlElement.children;
-      counter++;
-    }
-  });
+  // const codeToAddTree = createJsDom(editHtmlFile.codeBlock).body;
 
-  return elementToReturn;
+  // elementToReturn.body.ste
+  // elementToReturn.body.appendChild(codeToAddTree);
+
+  // Serialize the modified DOM back into an HTML string
+  const updatedHtmlString = htmlDom.serialize();
+
+  return updatedHtmlString;
 }
