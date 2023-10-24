@@ -4,6 +4,9 @@ module.exports = {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest'
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!(angular-html-parser)/)"
+  ],
   globals: {
     'ts-jest': {
       diagnostics: false,
