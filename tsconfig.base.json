@@ -9,7 +9,8 @@
     "declaration": true,
     "declarationMap": true,
     "types": ["node", "jest"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
+  
   "files": ["./src/index.ts"]
 }

@@ -1,5 +1,3 @@
-import { parse } from 'parse5';
-import fromParse5 from 'hast-util-from-parse5';
 import toHtml from 'hast-util-to-html';
 import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
 import { insertCodeAfterElement } from './add-sibling-html';
@@ -12,6 +10,14 @@ import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 import { camelCase } from 'lodash';
+
+// let angularParse: any;
+let hastParse: any;
+
+(async function () {
+  // angularParse = (await import('angular-html-parser')).parse
+  hastParse = (await import('hast-util-from-html')).default
+})();
 
 function convertToAngularHtmlAndPrettify(tree: any) {
   const transformedTreeInHtml = toHtml(tree)
@@ -30,8 +36,18 @@ function convertToAngularHtmlAndPrettify(tree: any) {
 }
 
 export function createUnifiedTree(htmlString: string | any): any {
-  const p5ast = parse(String(htmlString), {sourceCodeLocationInfo: true});
-  return fromParse5(p5ast);
+  // const p5ast = angularParse(htmlString, {
+  //   sourceCodeLocationInfo: true
+  // });
+
+  // console.log('p5ast');
+  // console.log(p5ast);
+
+  // Post-process the AST to change tag and attribute names
+
+  // const serailizedHtml = serialize(p5ast);
+  // console.log(serailizedHtml);
+  return hastParse(htmlString);
 }
 
 
