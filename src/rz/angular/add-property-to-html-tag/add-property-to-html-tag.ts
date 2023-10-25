@@ -9,19 +9,21 @@ export function addPropertyToHtmlTag(editFile: EditHtmlFile, astNode: any): any 
   const codeBlockKey = Object.keys(codeBlock)[0];
   const codeBlockValue = codeBlock[codeBlockKey];
   
-  visit(astNode.rootNodes[0], { type: 'element', name: editFile.tagNameToInsertInto }, (node: any, index) => {
-    // Check if the tag is the one you want to modify
-    if(!editFile.className || editFile.className === '' || node.properties.className?.includes(editFile.className)) {
-      if (!firstMatchFound && node.name === editFile.tagNameToInsertInto) {
-        node.attrs = [
-          ...node.attrs,
-          {type: 'attribute', name: codeBlockKey, value: codeBlockValue}
-        ]
-        firstMatchFound = true;
+  astNode.rootNodes.forEach((node: any) => {
+    visit(node, { type: 'element', name: editFile.tagNameToInsertInto }, (node: any, index) => {
+      // Check if the tag is the one you want to modify
+      if(!editFile.className || editFile.className === '' || node.attrs.find((attr: any) => attr.value === editFile.className)) {
+        if (!firstMatchFound && node.name === editFile.tagNameToInsertInto) {
+          node.attrs = [
+            ...node.attrs,
+            {type: 'attribute', name: codeBlockKey, value: codeBlockValue}
+          ]
+          firstMatchFound = true;
+        }
       }
-    }
+    });
   });
-  
+
   return astNode;
 }
   
