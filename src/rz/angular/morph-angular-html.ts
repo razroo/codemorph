@@ -10,6 +10,7 @@ import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 import { astToHtml } from './ast-to-html/ast-to-html';
+import {parse as angularHtmlParse} from 'angular-html-parser';
 
 async function convertToAngularHtmlAndPrettify(htmlAst: any) {
   const htmlString = astToHtml(htmlAst.rootNodes);
@@ -20,7 +21,6 @@ async function convertToAngularHtmlAndPrettify(htmlAst: any) {
 }
 
 export async function parseHtml(htmlString: string | any): Promise<any> {
-  const angularHtmlParse = (await import('angular-html-parser')).parse;
   return angularHtmlParse(htmlString);
 }
 

@@ -16,7 +16,7 @@
     "format": "prettier --write \"src/**/*.(js|ts)\"",
     "lint": "eslint src --ext .js,.ts",
     "lint:fix": "eslint src --fix --ext .js,.ts",
-    "test": "jest --config jest.config.js"
+    "test": "jest --runInBand --config jest.config.js"
   },
   "engines": {
     "npm": ">=8.0.0",
@@ -83,7 +83,7 @@
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.1",
     "@types/ejs": "^3.1.2",
-    "angular-html-parser": "^4.0.1",
+    "angular-html-parser": "1.8.0",
     "ejs": "^3.1.9",
     "fast-glob": "3.2.7",
     "glob": "^8.0.3",
