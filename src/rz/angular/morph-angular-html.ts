@@ -17,7 +17,7 @@ let angularHtmlParse: any;
   angularHtmlParse = (await import('angular-html-parser')).parse
 })();
 
-function convertToAngularHtmlAndPrettify(htmlAst: any) {
+function convertToAngularHtmlAndPrettify(htmlAst: any): string {
   const htmlString = astToHtml(htmlAst.rootNodes);
   return prettier.format(htmlString, {
     parser: "html",
