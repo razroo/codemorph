@@ -12,13 +12,6 @@ import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 import { astToHtml } from './ast-to-html/ast-to-html';
 
-// let angularParse: any;
-let angularHtmlParse: any;
-
-(async function () {
-  angularHtmlParse = (await import('angular-html-parser')).parse;
-})();
-
 async function convertToAngularHtmlAndPrettify(htmlAst: any) {
   const htmlString = astToHtml(htmlAst.rootNodes);
 
@@ -27,7 +20,8 @@ async function convertToAngularHtmlAndPrettify(htmlAst: any) {
   });
 }
 
-export function parseHtml(htmlString: string | any): any {
+export async function parseHtml(htmlString: string | any): Promise<any> {
+  const angularHtmlParse = (await import('angular-html-parser')).parse;
   return angularHtmlParse(htmlString);
 }
 
@@ -38,9 +32,9 @@ export function createUnifiedTree(htmlString: string | any): any {
 
 // fileToBeAddedToTree is top level
 export async function morphHtml(editHtmlInput: EditHtmlInput): Promise<string> {
-  let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
+  let fileToBeAddedToTree = await parseHtml(editHtmlInput.fileToBeAddedTo);
 
-  editHtmlInput.edits.forEach((edit: EditHtmlFile) => {
+  editHtmlInput.edits.forEach(async(edit: EditHtmlFile) => {
     switch (edit.nodeType) {
       case 'editHtmlTag': 
         fileToBeAddedToTree = updateHtmlTag(edit, fileToBeAddedToTree);
@@ -49,7 +43,7 @@ export async function morphHtml(editHtmlInput: EditHtmlInput): Promise<string> {
         fileToBeAddedToTree = insertCodeAfterElement(edit, fileToBeAddedToTree);
         break;
       case 'insertIntoHtmlTag':   
-        fileToBeAddedToTree = insertIntoHtmlTag(edit, fileToBeAddedToTree);
+        fileToBeAddedToTree = await insertIntoHtmlTag(edit, fileToBeAddedToTree);
         break;
       case 'addPropertyToHtmlTag':   
         fileToBeAddedToTree = addPropertyToHtmlTag(edit, fileToBeAddedToTree);

@@ -4,9 +4,9 @@ import { parseHtml } from '../morph-angular-html';
 import { EditHtmlFile } from '../interfaces/edit-html.interface';
 
 // will insert code into an html block
-export function insertIntoHtmlTag(editFile: EditHtmlFile, astNode: any): any {
+export async function insertIntoHtmlTag(editFile: EditHtmlFile, astNode: any): Promise<any> {
   let counter = 0;
-  const codeToAddTree = parseHtml(editFile.codeBlock as string);
+  const codeToAddTree = await parseHtml(editFile.codeBlock as string);
   astNode.rootNodes.forEach((node: any) => {
     visit(node, {type: 'element', name: editFile.tagNameToInsertInto}, (node: any, index) => {
       if(!editFile.className || editFile.className === '' || node.attrs.find((attr: any) => attr.value === editFile.className)) {
