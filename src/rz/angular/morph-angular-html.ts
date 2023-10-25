@@ -41,10 +41,10 @@ export function morphHtml(editHtmlInput: EditHtmlInput): string {
         fileToBeAddedToTree = insertCodeAfterElement(edit, fileToBeAddedToTree);
         break;
       case 'insertIntoHtmlTag':   
-        fileToBeAddedToTree = await insertIntoHtmlTag(edit, fileToBeAddedToTree);
+        fileToBeAddedToTree = insertIntoHtmlTag(edit, fileToBeAddedToTree);
         break;
       case 'addPropertyToHtmlTag':   
-        fileToBeAddedToTree = await addPropertyToHtmlTag(edit, fileToBeAddedToTree);
+        fileToBeAddedToTree = addPropertyToHtmlTag(edit, fileToBeAddedToTree);
         break;
     case 'deleteHtmlElement':   
         fileToBeAddedToTree = deleteHtmlElement(edit, fileToBeAddedToTree);

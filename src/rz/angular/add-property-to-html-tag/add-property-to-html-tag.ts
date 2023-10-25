@@ -3,7 +3,7 @@ import visit from 'unist-util-visit';
 import { EditHtmlFile } from '../interfaces/edit-html.interface';
 
 // will insert code into an html block
-export async function addPropertyToHtmlTag(editFile: EditHtmlFile, astNode: any): any {
+export function addPropertyToHtmlTag(editFile: EditHtmlFile, astNode: any): any {
   const codeBlock = typeof editFile.codeBlock === 'string' ? JSON.parse(editFile.codeBlock) : editFile.codeBlock;
   let firstMatchFound = false;
   const codeBlockKey = Object.keys(codeBlock)[0];
