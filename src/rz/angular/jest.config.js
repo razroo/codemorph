@@ -2,7 +2,7 @@ module.exports = {
   preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   transform: {
-    '^.+\\.(t|j)s$': ['ts-jest', {useESM: true}]
+    '^.+\\.(t|j)s$': ['ts-jest', {useESM: true, diagnostics: false}]
   },
   transformIgnorePatterns: [
     "node_modules/(?!(angular-html-parser)/)"
