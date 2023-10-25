@@ -21,7 +21,7 @@ let angularHtmlParse: any;
 })();
 
 function convertToAngularHtmlAndPrettify(htmlAst: any) {
-  const htmlString = astToHtml(htmlAst);
+  const htmlString = astToHtml(htmlAst.rootNodes);
 
   return prettier.format(htmlString, {
     parser: "html",
@@ -38,19 +38,9 @@ export function createUnifiedTree(htmlString: string | any): any {
   return fromParse5(p5ast);
 }
 
-// Function to convert the modified rootNodes back to an HTML string
-// function rootNodesToHTML(rootNodes: Element[]): string {
-//   return rootNodes.map((node: any) => node.toString()).join('');
-// }
-
 // fileToBeAddedToTree is top level
 export function morphHtml(editHtmlInput: EditHtmlInput): string {
   let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
-
-  const htmlCode = astToHtml(fileToBeAddedToTree.rootNodes);
-
-  console.log('htmlCode');
-  console.log(htmlCode);
 
   editHtmlInput.edits.forEach((edit: EditHtmlFile) => {
     switch (edit.nodeType) {
