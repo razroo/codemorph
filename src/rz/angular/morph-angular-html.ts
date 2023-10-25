@@ -11,7 +11,7 @@ import { deleteHtmlElement } from '../html/delete-html-element/delete-html-eleme
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
-import { camelCase } from 'lodash';
+import posthtml from 'posthtml';
 
 function convertToAngularHtmlAndPrettify(tree: any) {
   const transformedTreeInHtml = toHtml(tree)
@@ -32,6 +32,14 @@ function convertToAngularHtmlAndPrettify(tree: any) {
 export function createUnifiedTree(htmlString: string | any): any {
   const p5ast = parse(String(htmlString), {sourceCodeLocationInfo: true});
   return fromParse5(p5ast);
+}
+
+function customPlugin(tree: any) {
+  tree.match({ tag: 'devgen-eureka-seven-global-header' }, (node: any) => {
+    // Add the attribute to the matched element
+    node.attrs = { '(sideNavToggle)': 'sideNavToggle()' };
+    return node;
+  });
 }
 
 
