@@ -1,18 +1,19 @@
-import {
-    Attribute,
-    CDATA,
-    Comment,
-    DocType,
-    Element,
-    Node,
-    Text,
-  } from "angular-html-parser/lib/compiler/src/ml_parser/ast";
+// types commented out for esm purposes
+// import {
+//     Attribute,
+//     CDATA,
+//     Comment,
+//     DocType,
+//     Element,
+//     Node,
+//     Text,
+//   } from "angular-html-parser/lib/compiler/src/ml_parser/ast";
 
-export function astToHtml(rootNodes: Node[]): string {
+export function astToHtml(rootNodes: any): string {
   return rootNodes.map(nodeToString).join("");
 }
   
-  function nodeToString(node: Node): string {
+  function nodeToString(node: any): string {
     switch (node.type) {
       case "element":
         return elementToString(node);
@@ -28,23 +29,23 @@ export function astToHtml(rootNodes: Node[]): string {
         return commentToString(node);
     }
   }
-  function elementToString(node: Element): string {
+  function elementToString(node: any): string {
     return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}</${
       node.name
     }>`;
   }
-  function textToString(node: Text): string {
+  function textToString(node: any): string {
     return node.value;
   }
-  function cdataToString(node: CDATA): string {
+  function cdataToString(node: any): string {
     return `<![CDATA[${node.value}]]>`;
   }
-  function attributeToString(node: Attribute): string {
+  function attributeToString(node: any): string {
     return ` ${node.name}="${node.value}"`;
   }
-  function docTypeToString(node: DocType): string {
+  function docTypeToString(node: any): string {
     return `<!DOCTYPE ${node.value}>`;
   }
-  function commentToString(node: Comment): string {
+  function commentToString(node: any): string {
     return `<!-- ${node.value} -->`;
   }
