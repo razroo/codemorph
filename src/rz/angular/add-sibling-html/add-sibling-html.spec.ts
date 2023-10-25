@@ -6,7 +6,7 @@ describe('addSiblingHtml', () => {
     const fileToBeAddedTo = `<div>
 <devgen-header> </devgen-header>
 </div>`;
-    const siblingCodeBlock = '<devgen-footer></<devgen-footer>'
+    const siblingCodeBlock = '<devgen-footer></devgen-footer>'
     const addSiblingHtml: EditHtmlFile = {
         nodeType: 'addSiblingHtml',
         codeBlock: siblingCodeBlock,
@@ -23,10 +23,10 @@ describe('addSiblingHtml', () => {
     };
   
     const expected = `<div>
-<devgen-header> </devgen-header>
-<devgen-footer> </devgen-footer>
-</div>`;
-  
+  <devgen-header> </devgen-header>
+  <devgen-footer></devgen-footer>
+</div>
+`;
     const newHtmlString = morphCode(editHtmlInput);
   
     expect(newHtmlString).toEqual(expected);
