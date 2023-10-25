@@ -1,7 +1,7 @@
 import { parse } from 'parse5';
 import fromParse5 from 'hast-util-from-parse5';
 import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
-import { insertCodeAfterElement } from './add-sibling-html';
+import { insertCodeAfterElement } from './add-sibling-html/add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';
 import { updateHtmlTag } from './update-html-tag';
 import { deleteHtmlElement } from '../html/delete-html-element/delete-html-element';
