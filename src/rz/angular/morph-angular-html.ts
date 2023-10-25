@@ -10,14 +10,13 @@ import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 import { astToHtml } from './ast-to-html/ast-to-html';
 import {parse as angularHtmlParse} from 'angular-html-parser';
-// import * as prettier from 'prettier';
+import * as prettier from 'prettier';
 
-async function convertToAngularHtmlAndPrettify(htmlAst: any) {
+function convertToAngularHtmlAndPrettify(htmlAst: any) {
   const htmlString = astToHtml(htmlAst.rootNodes);
-  return htmlString;
-  // return await prettier.format(htmlString, {
-  //   parser: "html",
-  // });
+  return prettier.format(htmlString, {
+    parser: "html",
+  });
 }
 
 export async function parseHtml(htmlString: string | any): Promise<any> {
@@ -30,8 +29,8 @@ export function createUnifiedTree(htmlString: string | any): any {
 }
 
 // fileToBeAddedToTree is top level
-export async function morphHtml(editHtmlInput: EditHtmlInput): Promise<string> {
-  let fileToBeAddedToTree = await parseHtml(editHtmlInput.fileToBeAddedTo);
+export function morphHtml(editHtmlInput: EditHtmlInput): string {
+  let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
 
   editHtmlInput.edits.forEach(async(edit: EditHtmlFile) => {
     switch (edit.nodeType) {
@@ -58,5 +57,5 @@ export async function morphHtml(editHtmlInput: EditHtmlInput): Promise<string> {
     }
   });
   
-  return await convertToAngularHtmlAndPrettify(fileToBeAddedToTree)
+  return convertToAngularHtmlAndPrettify(fileToBeAddedToTree)
 }

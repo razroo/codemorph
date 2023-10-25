@@ -15,10 +15,10 @@ import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from './interfaces/
 
 // takes in singular object and makes all edits to files 
 // used when editing a file
-export async function morphCode(editInput: any): Promise<string> {
+export function morphCode(editInput: any): string {
   switch(editInput.fileType) {
     case 'html':
-      return await morphHtml(editInput as EditHtmlInput)
+      return morphHtml(editInput as EditHtmlInput)
     case 'ts':
     case 'spec.ts':
       return morphTypescript(editInput);  
