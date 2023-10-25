@@ -10,7 +10,7 @@ describe('addSiblingHtml', () => {
     const addSiblingHtml: EditHtmlFile = {
         nodeType: 'addSiblingHtml',
         codeBlock: siblingCodeBlock,
-        tagNameToInsert: 'mat-paginator',
+        tagNameToInsert: 'devgen-footer',
         siblingTagName: 'devgen-header'
     };
     

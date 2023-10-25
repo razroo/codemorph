@@ -10,7 +10,11 @@ import { EditHtmlFile } from '../interfaces/edit-html.interface';
   // this is a unique function
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function insertCodeAfterElement(editFile: EditHtmlFile, astNode: any): any {  
-  console.log('astNode');
-  console.log(astNode);
+  astNode.rootNodes.forEach((node: any) => {
+    visit(node, { type: 'element', name: editFile.siblingTagName }, (node: any, index) => {
+      console.log('node');
+      console.log(node);
+    });
+  });
   return astNode; 
 }
