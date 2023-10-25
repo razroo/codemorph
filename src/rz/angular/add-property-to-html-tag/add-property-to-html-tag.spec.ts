@@ -25,7 +25,10 @@ describe('addPropertyToHtmlTag', () => {
 
     const result = morphCode(editInput);
     const expected = `<div>
-  <devgen-eureka-seven-global-header (toggleHeader)="toggleHeader()" (sideNavToggle)="sideNavToggle()">
+  <devgen-eureka-seven-global-header
+    (toggleHeader)="toggleHeader()"
+    (sideNavToggle)="sideNavToggle()"
+  >
   </devgen-eureka-seven-global-header>
   <devgen-eureka-seven-global-header> </devgen-eureka-seven-global-header>
 </div>
