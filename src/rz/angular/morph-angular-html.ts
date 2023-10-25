@@ -1,4 +1,4 @@
-import { parse } from 'parse5';
+import { parse, serialize } from 'parse5';
 import fromParse5 from 'hast-util-from-parse5';
 import toHtml from 'hast-util-to-html';
 import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
@@ -12,13 +12,20 @@ import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 
-function convertToAngularHtmlAndPrettify(tree: any) {
-  const transformedTreeInHtml = toHtml(tree)
-  .replace('<body>','').replace('</body>','')
-  .replace('<html>','').replace('</html>','')
-  .replace('<head>','').replace('</head>','');
+// let angularParse: any;
+let angularHtmlParse: any;
 
-  const formattedCode = prettier.format(transformedTreeInHtml, {
+(async function () {
+  angularHtmlParse = (await import('angular-html-parser')).parse;
+})();
+
+function convertToAngularHtmlAndPrettify(htmlString: any) {
+  // const transformedTreeInHtml = toHtml(tree)
+  // .replace('<body>','').replace('</body>','')
+  // .replace('<html>','').replace('</html>','')
+  // .replace('<head>','').replace('</head>','');
+
+  const formattedCode = prettier.format(htmlString, {
     parser: "html",
     plugins: [parserHtml]
   });
@@ -28,15 +35,31 @@ function convertToAngularHtmlAndPrettify(tree: any) {
   return angularFormmatedCode;  
 }
 
+export function parseHtml(htmlString: string | any): any {
+  return angularHtmlParse(htmlString);
+}
+
 export function createUnifiedTree(htmlString: string | any): any {
   const p5ast = parse(String(htmlString), {sourceCodeLocationInfo: true});
   return fromParse5(p5ast);
 }
 
+// Function to convert the modified rootNodes back to an HTML string
+// function rootNodesToHTML(rootNodes: Element[]): string {
+//   return rootNodes.map((node: any) => node.toString()).join('');
+// }
 
 // fileToBeAddedToTree is top level
 export function morphHtml(editHtmlInput: EditHtmlInput): string {
-  let fileToBeAddedToTree = createUnifiedTree(editHtmlInput.fileToBeAddedTo);  
+  let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
+
+  fileToBeAddedToTree.match({ tag: "div" }, node => {
+    node.content[0] = 'hello';
+    return node;
+  });
+
+  console.log('editHtmlInput.fileToBeAddedTo');
+  console.log(editHtmlInput.fileToBeAddedTo);
 
   editHtmlInput.edits.forEach((edit: EditHtmlFile) => {
     switch (edit.nodeType) {
@@ -61,7 +84,10 @@ export function morphHtml(editHtmlInput: EditHtmlInput): string {
     case 'appendHtml':
         fileToBeAddedToTree = appendHtml(edit, fileToBeAddedToTree);
     }
-  })
+  });
 
-  return convertToAngularHtmlAndPrettify(fileToBeAddedToTree);  
+  console.log('editHtmlInput.fileToBeAddedTo');
+  console.log(editHtmlInput.fileToBeAddedTo);
+  return editHtmlInput.fileToBeAddedTo;
+  // return convertToAngularHtmlAndPrettify(fileToBeAddedToTree);  
 }
