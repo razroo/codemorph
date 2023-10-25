@@ -5,7 +5,6 @@ import { insertCodeAfterElement } from './add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';
 import { updateHtmlTag } from './update-html-tag';
 import * as prettier from 'prettier';
-import {parse as angularHtmlParse} from 'angular-html-parser';
 import { deleteHtmlElement } from '../html/delete-html-element/delete-html-element';
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
@@ -21,6 +20,7 @@ async function convertToAngularHtmlAndPrettify(htmlAst: any) {
 }
 
 export async function parseHtml(htmlString: string | any): Promise<any> {
+  const angularHtmlParse = (await import('angular-html-parser')).parse;
   return angularHtmlParse(htmlString);
 }
 
