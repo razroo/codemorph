@@ -11,6 +11,7 @@ import { deleteHtmlElement } from '../html/delete-html-element/delete-html-eleme
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
+import { astToHtml } from './ast-to-html/ast-to-html';
 
 // let angularParse: any;
 let angularHtmlParse: any;
@@ -19,20 +20,13 @@ let angularHtmlParse: any;
   angularHtmlParse = (await import('angular-html-parser')).parse;
 })();
 
-function convertToAngularHtmlAndPrettify(htmlString: any) {
-  // const transformedTreeInHtml = toHtml(tree)
-  // .replace('<body>','').replace('</body>','')
-  // .replace('<html>','').replace('</html>','')
-  // .replace('<head>','').replace('</head>','');
+function convertToAngularHtmlAndPrettify(htmlAst: any) {
+  const htmlString = astToHtml(htmlAst);
 
-  const formattedCode = prettier.format(htmlString, {
+  return prettier.format(htmlString, {
     parser: "html",
     plugins: [parserHtml]
   });
-  // right now just using regex to tidy up lowercased directives
-  const angularFormmatedCode = formattedCode.replace(/ngif/g, 'ngIf').replace(/ngfor/g, 'ngFor');
-
-  return angularFormmatedCode;  
 }
 
 export function parseHtml(htmlString: string | any): any {
@@ -53,13 +47,10 @@ export function createUnifiedTree(htmlString: string | any): any {
 export function morphHtml(editHtmlInput: EditHtmlInput): string {
   let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
 
-  fileToBeAddedToTree.match({ tag: "div" }, node => {
-    node.content[0] = 'hello';
-    return node;
-  });
+  const htmlCode = astToHtml(fileToBeAddedToTree.rootNodes);
 
-  console.log('editHtmlInput.fileToBeAddedTo');
-  console.log(editHtmlInput.fileToBeAddedTo);
+  console.log('htmlCode');
+  console.log(htmlCode);
 
   editHtmlInput.edits.forEach((edit: EditHtmlFile) => {
     switch (edit.nodeType) {
@@ -86,8 +77,5 @@ export function morphHtml(editHtmlInput: EditHtmlInput): string {
     }
   });
 
-  console.log('editHtmlInput.fileToBeAddedTo');
-  console.log(editHtmlInput.fileToBeAddedTo);
-  return editHtmlInput.fileToBeAddedTo;
-  // return convertToAngularHtmlAndPrettify(fileToBeAddedToTree);  
+  return convertToAngularHtmlAndPrettify(fileToBeAddedToTree);  
 }
