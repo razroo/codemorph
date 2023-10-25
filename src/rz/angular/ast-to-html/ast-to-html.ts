@@ -9,7 +9,7 @@
 //     Text,
 //   } from "angular-html-parser/lib/compiler/src/ml_parser/ast";
 
-export function astToHtml(rootNodes: any): string {
+export function astToHtml(rootNodes: any): any {
   return rootNodes.map(nodeToString).join("");
 }
   
@@ -27,9 +27,11 @@ export function astToHtml(rootNodes: any): string {
         return docTypeToString(node);
       case "comment":
         return commentToString(node);
+      default:  
+        return ''
     }
   }
-  function elementToString(node: any): string {
+  function elementToString(node: any): any {
     return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}</${
       node.name
     }>`;
