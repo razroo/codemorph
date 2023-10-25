@@ -8,6 +8,7 @@ module.exports = {
       babelConfig: 'babel.config.json'
   }],
   },
+  transformIgnorePatterns: ["node_modules/(?!(angular-html-parser)/)"],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(t|j)s$',
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
   globals: {
