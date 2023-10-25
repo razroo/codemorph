@@ -4,20 +4,20 @@ import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
 import { insertCodeAfterElement } from './add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';
 import { updateHtmlTag } from './update-html-tag';
-import * as prettier from 'prettier';
 import { deleteHtmlElement } from '../html/delete-html-element/delete-html-element';
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 import { astToHtml } from './ast-to-html/ast-to-html';
 import {parse as angularHtmlParse} from 'angular-html-parser';
+// import * as prettier from 'prettier';
 
 async function convertToAngularHtmlAndPrettify(htmlAst: any) {
   const htmlString = astToHtml(htmlAst.rootNodes);
-
-  return await prettier.format(htmlString, {
-    parser: "html",
-  });
+  return htmlString;
+  // return await prettier.format(htmlString, {
+  //   parser: "html",
+  // });
 }
 
 export async function parseHtml(htmlString: string | any): Promise<any> {
@@ -45,7 +45,7 @@ export async function morphHtml(editHtmlInput: EditHtmlInput): Promise<string> {
         fileToBeAddedToTree = await insertIntoHtmlTag(edit, fileToBeAddedToTree);
         break;
       case 'addPropertyToHtmlTag':   
-        fileToBeAddedToTree = addPropertyToHtmlTag(edit, fileToBeAddedToTree);
+        fileToBeAddedToTree = await addPropertyToHtmlTag(edit, fileToBeAddedToTree);
         break;
     case 'deleteHtmlElement':   
         fileToBeAddedToTree = deleteHtmlElement(edit, fileToBeAddedToTree);

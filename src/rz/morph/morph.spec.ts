@@ -56,33 +56,33 @@ describe('morph', () => {
         ]
     }
 ];
-  it('should morph the html file', () => {  
+  it('should morph the html file', async() => {  
     const fileToBeAddedTo = readFileSync('src/rz/angular/snapshots/data-table.component.html.snap').toString();
 
     const editInput = {
       ...morphMock[0],
       fileToBeAddedTo,
     }
-    const editedCode = morphCode(editInput as EditInput);
+    const editedCode = await morphCode(editInput as EditInput);
     const expected = String(readFileSync('src/rz/angular/snapshots/data-table-output.component.html.snap'));
 
     expect(editedCode).toEqual(expected);
   });
 
-  it('should morph the ts file', () => {  
+  it('should morph the ts file', async() => {  
     const fileToBeAddedTo = String(readFileSync('src/rz/typescript/snapshots/data-table.component.ts.snap'));
 
     const editInput = {
       ...morphMock[1],
       fileToBeAddedTo,
     }
-    const editedCode = morphCode(editInput as EditInput);
+    const editedCode = await morphCode(editInput as EditInput);
     const expected = String(readFileSync('src/rz/typescript/snapshots/data-table-output.component.ts.snap'));
 
     expect(editedCode).toEqual(expected);
   });
 
-  it('should morph the scss file', () => {
+  it('should morph the scss file', async() => {
     const fileToBeAddedTo = readFileSync('src/rz/scss/snapshots/themes.scss.snap').toString();
     const codeBlock = `.LightMode {
         background: #ffffff;
@@ -103,7 +103,7 @@ describe('morph', () => {
 
     const expected = readFileSync('src/rz/scss/snapshots/themes-output.scss.snap').toString();
 
-    expect(morphCode(editScssInput as EditScssInput)).toEqual(expected);
+    expect(await morphCode(editScssInput as EditScssInput)).toEqual(expected);
   });
 
   describe('NOT_SUPPORTED', () => {
@@ -125,7 +125,7 @@ describe('morph', () => {
       expect(fileToModify).toEqual(NOT_SUPPORTED);
     });
 
-    it('should return NOT_SUPPORTED if language supported but type is not', () => {
+    it('should return NOT_SUPPORTED if language supported but type is not', async() => {
       const mockFilePath = 'path/to/another/src/hello.component.ts';
       const mockParameter = {
         optionalTypes: {},
