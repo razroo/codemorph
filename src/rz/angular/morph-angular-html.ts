@@ -5,7 +5,7 @@ import { insertCodeAfterElement } from './add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';
 import { updateHtmlTag } from './update-html-tag';
 import * as prettier from 'prettier';
-import * as parserHtml from 'prettier/parser-html';
+
 import { deleteHtmlElement } from '../html/delete-html-element/delete-html-element';
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
@@ -19,12 +19,11 @@ let angularHtmlParse: any;
   angularHtmlParse = (await import('angular-html-parser')).parse;
 })();
 
-function convertToAngularHtmlAndPrettify(htmlAst: any) {
+async function convertToAngularHtmlAndPrettify(htmlAst: any) {
   const htmlString = astToHtml(htmlAst.rootNodes);
 
-  return prettier.format(htmlString, {
+  return await prettier.format(htmlString, {
     parser: "html",
-    plugins: [parserHtml]
   });
 }
 
@@ -38,7 +37,7 @@ export function createUnifiedTree(htmlString: string | any): any {
 }
 
 // fileToBeAddedToTree is top level
-export function morphHtml(editHtmlInput: EditHtmlInput): string {
+export async function morphHtml(editHtmlInput: EditHtmlInput): Promise<string> {
   let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
 
   editHtmlInput.edits.forEach((edit: EditHtmlFile) => {
@@ -65,6 +64,6 @@ export function morphHtml(editHtmlInput: EditHtmlInput): string {
         fileToBeAddedToTree = appendHtml(edit, fileToBeAddedToTree);
     }
   });
-
-  return convertToAngularHtmlAndPrettify(fileToBeAddedToTree);  
+  
+  return await convertToAngularHtmlAndPrettify(fileToBeAddedToTree)
 }

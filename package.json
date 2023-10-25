@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/razroo/razzle"
+    "url": "https://github.com/razroo/codemorph"
   },
   "keywords": [
     "razroo",
@@ -36,9 +36,9 @@
   "author": "Razroo",
   "license": "RAZROO",
   "bugs": {
-    "url": "https://github.com/razroo/razzle/issues"
+    "url": "https://github.com/razroo/codemorph/issues"
   },
-  "homepage": "https://github.com/razroo/razzle#readme",
+  "homepage": "https://github.com/razroo/codemorph#readme",
   "devDependencies": {
     "@angular-devkit/architect": "~0.1300.0",
     "@angular-devkit/build-angular": "~13.0.0",
@@ -99,7 +99,7 @@
     "minimatch": "^9.0.3",
     "parse5": "^6.0.1",
     "path": "^0.12.7",
-    "prettier": "^2.3.0",
+    "prettier": "^3.0.3",
     "query-ast": "^1.0.4",
     "resolve": "^1.22.2",
     "scss-parser": "^1.0.5",
