@@ -9,8 +9,25 @@ import {
 } from "angular-html-parser/lib/compiler/src/ml_parser/ast";
 
 export function astToHtml(rootNodes: Node[]): string {
-return rootNodes.map(nodeToString).join("");
+  return rootNodes.map(nodeToString).join("");
 }
+
+const voidElements = [
+  "area",
+  "base",
+  "br",
+  "col",
+  "embed",
+  "hr",
+  "img",
+  "input",
+  "link",
+  "meta",
+  "param",
+  "source",
+  "track",
+  "wbr"
+];
 
 function nodeToString(node: Node): string {
   switch (node.type) {
@@ -29,9 +46,14 @@ function nodeToString(node: Node): string {
   }
 }
 function elementToString(node: Element): string {
-  return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}</${
-    node.name
-  }>`;
+  if(voidElements.includes(node.name)) {
+    return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}/>`;
+  } else {
+    return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}</${
+      node.name
+    }>`;
+  }
+  
 }
 function textToString(node: Text): string {
   return node.value;

@@ -1,5 +1,3 @@
-import { parse } from 'parse5';
-import fromParse5 from 'hast-util-from-parse5';
 import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
 import { insertCodeAfterElement } from './add-sibling-html/add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';
@@ -10,6 +8,7 @@ import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
 import { astToHtml } from './ast-to-html/ast-to-html';
 import * as prettier from 'prettier';
+import * as parserHtml from 'prettier/parser-html';
 
 // hack to allow esm to load
 let angularHtmlParse: any;
@@ -21,16 +20,12 @@ export function convertToAngularHtmlAndPrettify(htmlAst: any): string {
   const htmlString = astToHtml(htmlAst.rootNodes);
   return prettier.format(htmlString, {
     parser: "html",
+    plugins: [parserHtml]
   });
 }
 
 export function parseHtml(htmlString: string | any): any {
   return angularHtmlParse(htmlString);
-}
-
-export function createUnifiedTree(htmlString: string | any): any {
-  const p5ast = parse(String(htmlString), {sourceCodeLocationInfo: true});
-  return fromParse5(p5ast);
 }
 
 // fileToBeAddedToTree is top level
