@@ -29,7 +29,7 @@ const voidElements = [
   "wbr"
 ];
 
-function nodeToString(node: any): string {
+function nodeToString(node: any): any {
   switch (node.type) {
     case "element":
       return elementToString(node);
