@@ -9,10 +9,11 @@
   "main": "./lib/cjs/index.js",
   "scripts": {
     "clean": "rm -rf ./lib",
+    "babel": "babel",
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run babel:build",
     "build:esm": "tsc -p ./tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
-    "babel:build": "babel lib/cjs --out-dir lib/cjs",
+    "babel:build": "npm run babel -- lib/cjs --out-dir lib/cjs",
     "prepack": "npm run build",
     "format": "prettier --write \"src/**/*.(js|ts)\"",
     "lint": "eslint src --ext .js,.ts",
