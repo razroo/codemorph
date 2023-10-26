@@ -55,7 +55,7 @@ function elementToString(node: any): string {
   }
   
 }
-function textToString(node: Text): string {
+function textToString(node: any): string {
   return node.value;
 }
 function cdataToString(node: any): string {
