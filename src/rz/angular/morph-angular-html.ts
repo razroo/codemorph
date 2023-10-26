@@ -9,13 +9,7 @@ import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to
 import { astToHtml } from './ast-to-html/ast-to-html';
 import * as prettier from 'prettier';
 import * as parserHtml from 'prettier/parser-html';
-
-// hack to allow esm to load
-let angularHtmlParse: any;
-(async function () {
-  const module = await import('angular-html-parser');
-  angularHtmlParse = module.parse
-})();
+import {parse as angularHtmlParse} from 'angular-html-parser';
 
 export function convertToAngularHtmlAndPrettify(htmlAst: any): string {
   const htmlString = astToHtml(htmlAst.rootNodes);
