@@ -62,8 +62,13 @@ function cdataToString(node: CDATA): string {
   return `<![CDATA[${node.value}]]>`;
 }
 function attributeToString(node: Attribute): string {
-  return ` ${node.name}="${node.value}"`;
+  if(node.value) {
+    return ` ${node.name}="${node.value}"`;
+  } else {
+    return ` ${node.name}`;
+  }
 }
+
 function docTypeToString(node: DocType): string {
   return `<!DOCTYPE ${node.value}>`;
 }
