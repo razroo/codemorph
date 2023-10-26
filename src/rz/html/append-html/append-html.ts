@@ -1,21 +1,26 @@
-import { createUnifiedTree } from '../../angular/morph-angular-html';
+import { parseHtml } from '../../angular/morph-angular-html';
 import visit from 'unist-util-visit';
 import { EditHtmlFile } from "../../angular/interfaces/edit-html.interface";
 
-export function appendHtml(editHtmlFile: EditHtmlFile, fileToBeAddedToTree: any): any {
+export function appendHtml(editHtmlFile: EditHtmlFile, astNode: any): any {
   let counter = 0;
-  let elementToReturn: any;
 
-  const element = editHtmlFile.tagNameToInsertInto ? {type: 'element', tagName: editHtmlFile.tagNameToInsertInto} : {type: 'element', tagName: 'body'};
+  const codeToAddTree = parseHtml(editHtmlFile.codeBlock);
+  const element = {type: 'element', name: editHtmlFile.tagNameToInsertInto};
 
-  visit(fileToBeAddedToTree, element, (htmlElement: any) => {
-    const codeToAddTree = createUnifiedTree(editHtmlFile.codeBlock as string);
-    if(counter === 0) {
-      htmlElement.children.push(codeToAddTree);
-      elementToReturn = editHtmlFile.tagNameToInsertInto ? htmlElement : htmlElement.children;
-      counter++;
-    }
+  if(!editHtmlFile.tagNameToInsertInto){
+    astNode.rootNodes.push(codeToAddTree.rootNodes[0]);
+    return astNode;
+  }
+
+  astNode.rootNodes.forEach((node: any) => {
+    visit(node, element, (htmlElement: any) => {
+      if(counter === 0) {
+        node.children.push(codeToAddTree.rootNodes[0]);
+        counter++;
+      }
+    });
   });
 
-  return elementToReturn;
+  return astNode;
 }

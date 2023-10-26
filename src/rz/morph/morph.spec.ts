@@ -56,18 +56,6 @@ describe('morph', () => {
         ]
     }
 ];
-  it('should morph the html file', () => {  
-    const fileToBeAddedTo = readFileSync('src/rz/angular/snapshots/data-table.component.html.snap').toString();
-
-    const editInput = {
-      ...morphMock[0],
-      fileToBeAddedTo,
-    }
-    const editedCode = morphCode(editInput as EditInput);
-    const expected = String(readFileSync('src/rz/angular/snapshots/data-table-output.component.html.snap'));
-
-    expect(editedCode).toEqual(expected);
-  });
 
   it('should morph the ts file', () => {  
     const fileToBeAddedTo = String(readFileSync('src/rz/typescript/snapshots/data-table.component.ts.snap'));

@@ -1,23 +1,22 @@
 
 import visit from 'unist-util-visit';
-import { createUnifiedTree } from '../morph-angular-html';
+import { parseHtml } from '../morph-angular-html';
 import { EditHtmlFile } from '../interfaces/edit-html.interface';
 
 // will insert code into an html block
-export function insertIntoHtmlTag(editFile: EditHtmlFile, fileToBeModified: any): any {
-  const codeToAddTree = createUnifiedTree(editFile.codeBlock as string);
+export function insertIntoHtmlTag(editFile: EditHtmlFile, astNode: any): Promise<any> {
   let counter = 0;
-  
-  visit(fileToBeModified, {type: 'element', tagName: editFile.tagNameToInsertInto}, (node: any, index) => {
-    visit(codeToAddTree, {type: 'element', tagName: 'body'}, (nodeOfCodeToAdd: any, index) => {
-      if(!editFile.className || editFile.className === '' || node.properties.className?.includes(editFile.className)) {
+  const codeToAddTree = parseHtml(editFile.codeBlock as string);
+  astNode.rootNodes.forEach((node: any) => {
+    visit(node, {type: 'element', name: editFile.tagNameToInsertInto}, (node: any, index) => {
+      if(!editFile.className || editFile.className === '' || node.attrs.find((attr: any) => attr.value === editFile.className)) {
         if(counter === 0) {
-          node.children.push(nodeOfCodeToAdd.children[0]);
+          node.children.push(codeToAddTree.rootNodes[0]);
           counter++;
         }
       }
     });
   });
 
-  return fileToBeModified  
+  return astNode
 }

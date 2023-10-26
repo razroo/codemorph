@@ -1,45 +1,38 @@
-import { parse } from 'parse5';
-import fromParse5 from 'hast-util-from-parse5';
-import toHtml from 'hast-util-to-html';
 import { EditHtmlFile, EditHtmlInput } from './interfaces/edit-html.interface';
-import { insertCodeAfterElement } from './add-sibling-html';
+import { insertCodeAfterElement } from './add-sibling-html/add-sibling-html';
 import { insertIntoHtmlTag } from './insert-into-html-tag/insert-into-html-tag';
 import { updateHtmlTag } from './update-html-tag';
-import * as prettier from 'prettier';
-import * as parserHtml from 'prettier/parser-html';
 import { deleteHtmlElement } from '../html/delete-html-element/delete-html-element';
 import { prependHtml } from '../html/prepend-html/prepend-html';
 import { appendHtml } from '../html/append-html/append-html';
 import { addPropertyToHtmlTag } from './add-property-to-html-tag/add-property-to-html-tag';
-import { camelCase } from 'lodash';
+import { astToHtml } from './ast-to-html/ast-to-html';
+import * as prettier from 'prettier';
+import * as parserHtml from 'prettier/parser-html';
 
-function convertToAngularHtmlAndPrettify(tree: any) {
-  const transformedTreeInHtml = toHtml(tree)
-  .replace('<body>','').replace('</body>','')
-  .replace('<html>','').replace('</html>','')
-  .replace('<head>','').replace('</head>','');
+// hack to allow esm to load
+let angularHtmlParse: any;
+(async function () {
+  angularHtmlParse = (await import('angular-html-parser')).parse
+})();
 
-  const formattedCode = prettier.format(transformedTreeInHtml, {
+export function convertToAngularHtmlAndPrettify(htmlAst: any): string {
+  const htmlString = astToHtml(htmlAst.rootNodes);
+  return prettier.format(htmlString, {
     parser: "html",
     plugins: [parserHtml]
   });
-  // right now just using regex to tidy up lowercased directives
-  const angularFormmatedCode = formattedCode.replace(/ngif/g, 'ngIf').replace(/ngfor/g, 'ngFor');
-
-  return angularFormmatedCode;  
 }
 
-export function createUnifiedTree(htmlString: string | any): any {
-  const p5ast = parse(String(htmlString), {sourceCodeLocationInfo: true});
-  return fromParse5(p5ast);
+export function parseHtml(htmlString: string | any): any {
+  return angularHtmlParse(htmlString);
 }
-
 
 // fileToBeAddedToTree is top level
 export function morphHtml(editHtmlInput: EditHtmlInput): string {
-  let fileToBeAddedToTree = createUnifiedTree(editHtmlInput.fileToBeAddedTo);  
+  let fileToBeAddedToTree = parseHtml(editHtmlInput.fileToBeAddedTo);
 
-  editHtmlInput.edits.forEach((edit: EditHtmlFile) => {
+  editHtmlInput.edits.forEach(async(edit: EditHtmlFile) => {
     switch (edit.nodeType) {
       case 'editHtmlTag': 
         fileToBeAddedToTree = updateHtmlTag(edit, fileToBeAddedToTree);
@@ -62,7 +55,7 @@ export function morphHtml(editHtmlInput: EditHtmlInput): string {
     case 'appendHtml':
         fileToBeAddedToTree = appendHtml(edit, fileToBeAddedToTree);
     }
-  })
-
-  return convertToAngularHtmlAndPrettify(fileToBeAddedToTree);  
+  });
+  
+  return convertToAngularHtmlAndPrettify(fileToBeAddedToTree)
 }

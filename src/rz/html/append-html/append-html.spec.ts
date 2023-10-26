@@ -1,5 +1,4 @@
 import { EditHtmlInput } from '../../angular/interfaces/edit-html.interface';
-import { readFileSync } from 'fs';
 import { morphHtml } from '../../angular/morph-angular-html';
 
 describe('appendHtml' , () => {
