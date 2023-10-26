@@ -1,14 +1,14 @@
-import {
-  Attribute,
-  CDATA,
-  Comment,
-  DocType,
-  Element,
-  Node,
-  Text,
-} from "angular-html-parser/lib/compiler/src/ml_parser/ast";
+// import {
+//   Attribute,
+//   CDATA,
+//   Comment,
+//   DocType,
+//   Element,
+//   Node,
+//   Text,
+// } from "angular-html-parser/lib/compiler/src/ml_parser/ast";
 
-export function astToHtml(rootNodes: Node[]): string {
+export function astToHtml(rootNodes: any[]): string {
   return rootNodes.map(nodeToString).join("");
 }
 
@@ -29,7 +29,7 @@ const voidElements = [
   "wbr"
 ];
 
-function nodeToString(node: Node): string {
+function nodeToString(node: any): string {
   switch (node.type) {
     case "element":
       return elementToString(node);
@@ -45,7 +45,7 @@ function nodeToString(node: Node): string {
       return commentToString(node);
   }
 }
-function elementToString(node: Element): string {
+function elementToString(node: any): string {
   if(voidElements.includes(node.name)) {
     return `<${node.name}${astToHtml(node.attrs)} >`;
   } else {
@@ -58,10 +58,10 @@ function elementToString(node: Element): string {
 function textToString(node: Text): string {
   return node.value;
 }
-function cdataToString(node: CDATA): string {
+function cdataToString(node: any): string {
   return `<![CDATA[${node.value}]]>`;
 }
-function attributeToString(node: Attribute): string {
+function attributeToString(node: any): string {
   if(node.value) {
     return ` ${node.name}="${node.value}"`;
   } else {
@@ -69,9 +69,9 @@ function attributeToString(node: Attribute): string {
   }
 }
 
-function docTypeToString(node: DocType): string {
+function docTypeToString(node: any): string {
   return `<!DOCTYPE ${node.value}>`;
 }
-function commentToString(node: Comment): string {
+function commentToString(node: any): string {
   return `<!-- ${node.value} -->`;
 }
