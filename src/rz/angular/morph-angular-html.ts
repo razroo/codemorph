@@ -13,7 +13,8 @@ import * as parserHtml from 'prettier/parser-html';
 // hack to allow esm to load
 let angularHtmlParse: any;
 (async function () {
-  angularHtmlParse = (await import('angular-html-parser')).parse
+  const module = await import('angular-html-parser');
+  angularHtmlParse = module.parse
 })();
 
 export function convertToAngularHtmlAndPrettify(htmlAst: any): string {
