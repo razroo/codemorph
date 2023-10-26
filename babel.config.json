@@ -1,11 +1,13 @@
 {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "useBuiltIns": "entry",
-          "corejs": "3.22"
-        }
-      ]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        },
+        "modules": "commonjs"
+      }
     ]
-  }
+  ]
+}
