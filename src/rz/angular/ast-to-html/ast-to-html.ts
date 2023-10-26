@@ -47,7 +47,7 @@ function nodeToString(node: Node): string {
 }
 function elementToString(node: Element): string {
   if(voidElements.includes(node.name)) {
-    return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}/>`;
+    return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}>`;
   } else {
     return `<${node.name}${astToHtml(node.attrs)}>${astToHtml(node.children)}</${
       node.name
