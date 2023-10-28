@@ -7,7 +7,7 @@ export function addFunction(editCodeBlockInput: EditCodeBlockInput): void {
       name: editCodeBlockInput.name,
       returnType: editCodeBlockInput.type,
       statements: editCodeBlockInput.codeBlock,
-      isExported: editCodeBlockInput.isExported,
-      parameters: editCodeBlockInput.parameters
+      isExported: editCodeBlockInput.isExported ? editCodeBlockInput.isExported : true,
+      parameters: typeof editCodeBlockInput.parameters === 'string' ? JSON.parse(editCodeBlockInput.parameters) : editCodeBlockInput.parameters
     });
 }
