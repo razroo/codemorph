@@ -10,6 +10,7 @@ import { addNgModuleImport } from "./angular-typescript/add-ngmodule-import/ngmo
 import { addNgModuleItem, addNgModuleItemToSpec } from "./angular-typescript/add-ngmodule-item/add-ngmodule-item";
 import { EditCodeBlockInput } from "./interfaces/edit-typescript.interface";
 import { addToVariableObject } from "./variable-statement/variable-statement";
+import { addVariableStatement } from "./add-variable-statement/add-variable-statement";
 
 // methodToInsertInto e.g. 'ngAfterViewInit'
 // codeBeingAdded e.g. 'this.dataSource.paginator = this.paginator;'
@@ -124,6 +125,9 @@ export function morphTypescript(editTypescriptInput: EditInput): string {
         break;
       case 'addClassMethod':
         addClassMethod(editWithSourceFile)
+        break;
+      case 'addVariableStatement':
+        addVariableStatement(editWithSourceFile)
         break;
     }
   });
