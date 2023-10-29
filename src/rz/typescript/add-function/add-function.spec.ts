@@ -2,17 +2,8 @@ import { EditInput } from './../../morph/interfaces/morph.interface';
 import { morphTypescript } from '../morph-typescript';
 describe('addFunction', () => {
   it('should add a function to a ts file', () => {
-    const fileToBeAddedTo = `import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-export function pushScaffoldCommands(context, isProduction: boolean, packageJsonParams) {
-}
-
-@NgModule({
-  imports: [CommonModule],
-})
-export class DataGraphqlModule { }
-`;
+    const fileToBeAddedTo = `export function pushScaffoldCommands(context, isProduction: boolean, packageJsonParams) {
+}`;
 
     const editTypescriptInput: EditInput = {
         fileToBeAddedTo: fileToBeAddedTo,
