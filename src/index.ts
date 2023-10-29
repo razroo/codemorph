@@ -11,9 +11,6 @@ export { getVersionAndNameString, determineType, determineFilePathParameter, rea
 // export typescript related edits
 export { EditInput, EditFile, morphCode, effects, standaloneEffects, filesToAffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE, communityPaths, types } from './rz/morph';
 
-// export typescript related edits
-export { getCodeModParams, getCodeModOptions } from './rz/params';
-
 // global variables
 export { names, codeCmsVariablesToIgnore, powerUpVariables, powerUpVariablesFlatData, existingFileNames} from './rz/global-variables';
 
