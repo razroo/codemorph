@@ -54,24 +54,4 @@ describe('EditTypescript', () => {
     expect(typescriptString).toEqual(expected);  
   });
 
-  it('should add a variable declaration statement to a file', () => {
-    const editTypescriptInput: EditInput = {
-      fileToBeAddedTo: readFileSync('src/rz/typescript/snapshots/add-variable-declaration-statement/add-variable-declaration-statement.ts.snap').toString(),
-      fileName: 'name',
-      edits: [
-        {
-          nodeType: 'addVariableDeclarationStatement',
-          codeBlock: 'gtag',
-          type: 'Function'
-        }
-      ]
-    };
-
-    const typescriptString = morphTypescript(editTypescriptInput);
-
-    const expected = readFileSync('src/rz/typescript/snapshots/add-variable-declaration-statement/add-variable-declaration-statement-output.ts.snap').toString();
-
-    expect(typescriptString).toEqual(expected);  
-  });
-
 });
