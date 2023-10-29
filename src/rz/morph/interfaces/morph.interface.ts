@@ -13,7 +13,7 @@ export const NOT_SUPPORTED = 'NOT_SUPPORTED';
 export interface EditFile { 
   nodeType?: 'import' | 'export' | 'classDeclaration' | 'classMethod' | 'addNgModuleImport' | 'addNgModuleImportToSpec' | 
   'addNgModuleProvider' | 'addNgModuleDeclaration' | 'addNgModuleProviderToSpec' | 'addToVariableObject' | 'editImport' | 'addConstructorMethod' | 
-  'addVariableDeclarationStatement' | 'addClassMethod' | 'addImportsToExisting' | 'addNgModuleExport' | 'addFunction';
+  'addVariableDeclarationStatement' | 'addClassMethod' | 'addImportsToExisting' | 'addNgModuleExport' | 'addFunction' | 'addVariableStatement';
   codeBlock: string | any | any[];
   isExported?: boolean;
   nodeToInsertInto?: string;
