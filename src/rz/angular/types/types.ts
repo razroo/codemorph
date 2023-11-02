@@ -15,6 +15,7 @@ export enum AngularTypeNames {
   NgrxFacade = 'ngrx-facade',
   NgrxReducer = 'ngrx-reducer',
   Pipe = 'pipe',
+  StandalonePipe = 'standalone-pipe',
   Resolver = 'resolver',
   Service = 'service',
   ServiceWorker = 'service-worker',

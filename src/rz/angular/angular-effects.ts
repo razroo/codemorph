@@ -13,6 +13,7 @@ import { AngularTypeNames, AngularOptionalType } from "./types/types";
 import { libraryEffects, returnRootTsConfig } from './effects/library/library';
 import { exportPipeFile, pipeEffects } from "./effects/pipe/pipe";
 import { moduleEffects } from "./effects/module/module";
+import { standalonePipeEffects } from "./effects/standalone-pipe/standalone-pipe";
 
 export function angularFilesToAffect(filePathWithName: string, fileTree: string[], type: AngularTypeNames, optionalTypes: AngularOptionalType[]): string[] | NOT_SUPPORTED_TYPE {
   switch(type) {
@@ -26,6 +27,8 @@ export function angularFilesToAffect(filePathWithName: string, fileTree: string[
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     case AngularTypeNames.Pipe: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
+    case AngularTypeNames.StandalonePipe: 
+      return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes);
     case AngularTypeNames.Interface: 
       return closestIndexFileToImportTo(filePathWithName, fileTree, optionalTypes)
     case AngularTypeNames.Graphql: 
@@ -51,6 +54,8 @@ export function angularStandaloneEffects(type: AngularTypeNames, fileEffects: Ed
       return directiveEffects(fileEffects);
     case AngularTypeNames.Pipe:
       return pipeEffects(fileEffects);
+    case AngularTypeNames.StandalonePipe:
+      return standalonePipeEffects(fileEffects);
     case AngularTypeNames.Library:
       return libraryEffects(fileEffects, parameters);    
     case AngularTypeNames.Interface:
@@ -76,6 +81,9 @@ export function angularEffects(filePathWithName: string, type: AngularTypeNames,
       exportServiceFile(filePathWithName);
       break;
     case AngularTypeNames.Pipe: 
+      exportPipeFile(filePathWithName);
+      break;
+    case AngularTypeNames.StandalonePipe: 
       exportPipeFile(filePathWithName);
       break;
     case AngularTypeNames.Interface:
