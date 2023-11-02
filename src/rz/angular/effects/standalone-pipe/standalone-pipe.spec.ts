@@ -23,7 +23,8 @@ describe('exportPipeFile', () => {
   
       effects(mockFilePath, mockTemplateInputParameter, 'angular');
       const result = readFileSync('src/rz/angular/effects/standalone-pipe/index.ts').toString();
-      const expected = readFileSync('src/rz/angular/effects/standalone-pipe/snapshots/index-output.ts.snap').toString();
+      const expected = `export * from "./standalone-pipe";
+`
       expect(result).toEqual(expected);
     });
 });
