@@ -6,7 +6,7 @@ export function returnRootTsConfig(filePathWithName: string, fileTree: string[],
 }
 
 // will use the name parameter to get name of library
-export function libraryEffects(fileEffects: EditFileEffect[], parameters: any): EditFileEffect[] {
+export function nextJsLibraryEffects(fileEffects: EditFileEffect[], parameters: any): EditFileEffect[] {
     const newFileEffects = [];  
     for(const fileEffect of fileEffects) {
       const filePath = fileEffect.filePath;
