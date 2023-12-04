@@ -7,7 +7,7 @@ export enum GlobalNextjsOptionNames {
   IsExported = 'isExported'
 }
 
-export interface AngularOptionalType {
+export interface NextjsOptionalType {
   name: GlobalNextjsOptionNames, 
   selected: boolean 
 }
