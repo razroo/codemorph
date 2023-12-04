@@ -57,6 +57,8 @@ export function standaloneEffects(programmingLanguage: string, parameter: Templa
   switch(programmingLanguage) {
     case CommunityPaths.Angular:
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects, parameters)
+    case CommunityPaths.Nextjs:
+      return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects, parameters)
     default:
       return []
   }
