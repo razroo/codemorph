@@ -1,6 +1,7 @@
 export enum CommunityPaths {
   Angular = 'angular',
   React = 'react',
+  Nextjs = 'nextjs',
   Aws = 'aws',
   Azure = 'azure',
   Gcp = 'gcp',
@@ -18,6 +19,10 @@ export const supportedCommunityPaths = [
   {
     id: 'angular',
     displayName: 'Angular',
+  },
+  {
+    id: 'nextjs',
+    displayName: 'Nextjs',
   },
   {
     id: 'react',
