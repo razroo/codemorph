@@ -1,8 +1,9 @@
 import { morphJson } from "../../../json/json-morph";
 import { EditFileEffect } from "../../../morph/interfaces/morph.interface";
+import { NextjsOptionalType } from "../../types/nextjs-types";
 
 // returns package json as well, so can get package json data
-export function returnRootTsConfig(filePathWithName: string, fileTree: string[], optionalTypes: AngularOptionalType[]): string[] {
+export function returnRootTsConfig(filePathWithName: string, fileTree: string[], optionalTypes: NextjsOptionalType[]): string[] {
   return ['tsconfig.base.json'];
 }
 
