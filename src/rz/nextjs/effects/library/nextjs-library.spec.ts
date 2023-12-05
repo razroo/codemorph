@@ -1,14 +1,26 @@
-import { standaloneEffects } from "../../../morph";
+import { filesToAffect, standaloneEffects } from "../../../morph";
 import { EditFileEffect } from "../../../morph/interfaces/morph.interface";
 import { NextjsTypeNames } from "../../types/nextjs-types";
 import { returnRootTsConfig } from "./nextjs-library";
 
 describe('Nextjs Library', () => {
   describe('returnRootTsConfig', () => {
-    it('should return the root tsconfig to modify as well as package json to get project name from', () => {
-      const result = returnRootTsConfig('', [], []);
-      expect(result).toEqual(['tsconfig.base.json']);
-    });  
+    it('should choose closest index file', () => {
+      const mockFilePath = 'path/to/another/src/hello.service.ts';
+      const mockParameter = {
+          optionalTypes: {},
+          type: NextjsTypeNames.Library
+      } as any;
+      
+      const fileTree = [
+          "path/to/another/src",
+          "path/to/another/src/hello.component.ts",
+          "path/to/another/index.ts",
+          "path/to/another"
+      ];
+      const fileToModify = filesToAffect(mockFilePath, fileTree, mockParameter, 'angular');
+      expect(fileToModify).toEqual(['tsconfig.base.json']);
+    });
   });
 
   describe('libraryEffects', () => {
