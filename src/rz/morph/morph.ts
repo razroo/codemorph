@@ -12,6 +12,8 @@ import { angularEffects, angularFilesToAffect, angularStandaloneEffects } from '
 import { reactTypes } from '../react';
 import { TemplateInputParameter } from '../utils/interfaces/template-parameters';
 import { EditFileEffect, NOT_SUPPORTED, NOT_SUPPORTED_TYPE } from './interfaces/morph.interface';
+import { nextjsStandaloneEffects } from '../nextjs/effects/nextjs-effects';
+import { NextjsTypeNames } from '../nextjs/types/nextjs-types';
 
 // takes in singular object and makes all edits to files 
 // used when editing a file
@@ -40,8 +42,10 @@ export interface Parameters {
 // This function happens first and then effects is called
 export function filesToAffect(filePathWithName: string, fileTree: string[], parameter: TemplateInputParameter, programmingLanguage: string): string[] | NOT_SUPPORTED_TYPE {
   switch(programmingLanguage) {
-    case 'angular':
+    case CommunityPaths.Angular:
       return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);
+    case 'angular':
+      return angularFilesToAffect(filePathWithName, fileTree, (parameter.type) as AngularTypeNames, (parameter.optionalTypes) as any as AngularOptionalType[]);  
     default:
       return NOT_SUPPORTED;
   }
@@ -57,6 +61,8 @@ export function standaloneEffects(programmingLanguage: string, parameter: Templa
   switch(programmingLanguage) {
     case CommunityPaths.Angular:
       return angularStandaloneEffects((parameter.type) as AngularTypeNames, fileEffects, parameters)
+    case CommunityPaths.Nextjs:
+      return nextjsStandaloneEffects((parameter.type) as NextjsTypeNames, fileEffects, parameters)
     default:
       return []
   }

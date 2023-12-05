@@ -12,12 +12,10 @@ export function libraryEffects(fileEffects: EditFileEffect[], parameters: any): 
   const newFileEffects = [];  
   for(const fileEffect of fileEffects) {
     const filePath = fileEffect.filePath;
-    const originFilePath = fileEffect.originFilePath;
     if(filePath.includes('tsconfig.base.json')) {
         const projectName = parameters['projectName'];
         const fileName = filePath.split('/').pop();
         const fileToBeAddedTo = fileEffect.content;
-        const libName = parameters['name'];
         const libPath = parameters['nameFilePath'];
         const libPathMinusLibFolder = libPath.replace('libs/', '');
         
