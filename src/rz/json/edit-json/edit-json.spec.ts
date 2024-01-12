@@ -2,16 +2,27 @@ import { readFileSync } from 'fs';
 import { EditJson } from './../interfaces/json-morph.interface';
 import { editJson, addJsonKeyValue } from './edit-json';
 describe('editJson', () => {
-  it('should edit json and return value', () => {
-    const mockJson = readFileSync('src/rz/json/snapshots/project.json.snap').toString();
+  it('should modify nested json and return a string value', () => {
+    const mockJson = {
+      "scripts": {
+        "build": "ng build",
+        "test": "hello"
+      }
+    };
+    const stringifiedMockJson = JSON.stringify(mockJson);
   
     const mockEditJson: EditJson = {
       nodeType: 'editJson',
-      valueToModify: '/targets/build/configurations/production/fileReplacements',
-      codeBlock: '[{replace: "libs/common/environments/src/lib/environment.ts", with: "libs/common/environments/src/lib/environment.prod.ts"}]'
+      valueToModify: '/scripts/build',
+      codeBlock: "nx build:two"
     }
-    const modifiedJson = editJson(mockEditJson, mockJson);
-    const expected = JSON.parse(readFileSync('src/rz/json/snapshots/project-output.json.snap').toString());
+    const modifiedJson = editJson(mockEditJson, stringifiedMockJson);
+    const expected = {
+      scripts: {
+        build: "nx build:two",
+        test: "hello"
+      }
+    };
 
     expect(modifiedJson).toEqual(expected);
   });
