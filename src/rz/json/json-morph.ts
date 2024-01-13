@@ -1,5 +1,6 @@
 import { EditJson, EditJsonInput } from './interfaces/json-morph.interface';
-import { addJsonKeyValue, editJson } from './edit-json/edit-json';
+import { editJson } from './edit-json/edit-json';
+import { addJsonKeyValue } from './add-json/add-json';
 
 export function morphJson(editJsonInput: EditJsonInput): string {
   let json = editJsonInput.fileToBeAddedTo;
