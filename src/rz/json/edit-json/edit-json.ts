@@ -3,7 +3,7 @@ import * as pointer from 'json-pointer';
 
 export function editJson(editJson: EditJson, json: string): any {
   const codeBlock = parseJsonOrString(editJson.codeBlock);
-  json = JSON.parse(json);
+  json = typeof json === 'string' ? JSON.parse(json) : json;
   //2. Set value
   pointer.set(json as any, editJson.valueToModify, codeBlock);
  

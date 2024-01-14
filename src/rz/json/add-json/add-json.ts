@@ -5,7 +5,7 @@ import * as pointer from 'json-pointer';
 export function addJsonKeyValue(editJson: EditJson, json: string): any {
     // double json parse hack to make sure /n are removed from string
     const codeBlock = typeof editJson.codeBlock === 'string' ? JSON.parse(JSON.parse(JSON.stringify(editJson.codeBlock))) : editJson.codeBlock;
-    json = JSON.parse(json);
+    json = typeof json === 'string' ? JSON.parse(json) : json;
     //Get Pointer
     const JsonPointer = JSONPath({path: `$..${editJson.valueToModify}`, json, resultType: 'pointer'});
     const firstJsonMatchedPointer = JsonPointer[0];
