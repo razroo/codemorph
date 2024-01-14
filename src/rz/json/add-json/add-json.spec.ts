@@ -107,6 +107,14 @@ describe('addJson', () => {
       const modifiedJson = morphCode(editInput);
       const expected = {
         "test": "123",
+        "contributes": {
+          "menus": {
+            "data": "test"
+          }
+        },
+        "scripts": {
+          "test": "npm run test"
+        },
         "targets": {
           "server": {
             "executor": "@angular-devkit/build-angular:server"
